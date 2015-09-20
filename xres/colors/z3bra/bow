@@ -1,0 +1,29 @@
+*background:#eeeeee
+*foreground:#888888
+
+*color0:    #eeeeee
+*color1:    #004477
+*color2:    #004477
+*color3:    #004477
+*color4:    #004477
+*color5:    #004477
+*color6:    #004477
+*color7:    #666666
+
+*color8:    #888888
+*color9:    #2288cc
+*color10:   #2288cc
+*color11:   #2288cc
+*color12:   #2288cc
+*color13:   #2288cc
+*color14:   #2288cc
+*color15:   #111111
+
+URxvt*highlightColor:       #aaaaaa
+URxvt*highlightTextColor:   #000000
+
+URxvt*cursorColor:  #333333
+
+URxvt*colorIT:      #666666
+URxvt*colorBD:      #aaaaaa
+URxvt*colorUL:      #000000

@@ -1,0 +1,12 @@
+
+#
+#aliases
+#
+
+alias v=vim
+alias ra=ranger 
+alias pacu="sudo pacman -Syu"
+alias paci="sudo pacman -S" 
+alias aup="yaurt -Syu"
+alias aui="yaourt"
+alias q=exit

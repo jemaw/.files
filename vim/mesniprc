@@ -1,0 +1,11 @@
+" vi:syntax=vim
+
+let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py' " you complete me conf
+let g:ycm_key_list_select_completion = ['<TAB>', '<Down>','<C-j>']
+let g:ycm_key_list_previous_completion = ['<S-TAB>', '<Up>','<C-k>']
+let g:UltiSnipsExpandTrigger="<c-l>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+
+autocmd CompleteDone * pclose

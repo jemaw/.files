@@ -1,0 +1,20 @@
+! vi:syntax=xdefaults
+
+#define cjb_font     Terminess Powerline 
+#define cjb_fontsize 14 
+
+!#include </home/jean/.xres/colors>
+!#include </home/jean/.xres/urxvt>
+#include </home/jean/.xres/xft>
+#include </home/jean/.xres/urxvt>
+!#include </home/jean/.xres/base16-xresources/base16-tomorrow.dark.256.xresources>
+!#include </home/jean/.xres/colors/dotshare/butter>
+!#include </home/jean/.xres/colors/termsexy/hund>
+#include </home/jean/.xres/colors/crayolo/fury>
+#include </home/jean/.xres/colors/crayolo/xresource>
+
+
+!#include </home/jean/.xres/colors/gruvbox256>
+!#include </home/jean/.xres/colors/z3bra/wine>
+
+Xcursor.size: 16

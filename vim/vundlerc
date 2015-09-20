@@ -1,0 +1,39 @@
+" vi:syntax=vim
+
+set nocompatible
+filetype off                  " required
+
+ 
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+Plugin 'gmarik/Vundle.vim'
+
+Plugin 'itchyny/lightline.vim'
+
+"Plugin 'vim-scripts/CSApprox'
+Plugin 'morhetz/gruvbox'
+Plugin 'chriskempson/base16-vim'
+Plugin 'sheerun/vim-wombat-scheme'
+Plugin 'NLKNguyen/papercolor-theme'
+
+
+Plugin 'octol/vim-cpp-enhanced-highlight'
+Plugin 'scrooloose/syntastic'
+"Plugin 'scrooloose/nerdtree'
+"Plugin 'Yggdroot/indentline'
+
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
+
+"Plugin 'Rip-Rip/clang_complete'
+"Plugin 'ervandew/supertab'
+"Plugin 'Shougo/neocomplete'
+"Plugin 'Shougo/neosnippet'
+"Plugin 'Shougo/neosnippet-snippets'
+"Plugin 'junegunn/vim-easy-align'
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+

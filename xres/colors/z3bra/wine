@@ -1,0 +1,30 @@
+*background:#161616
+*foreground:#888888
+
+*color0:    #323232
+*color1:    #443232
+*color2:    #324432
+*color3:    #444432
+*color4:    #323244
+*color5:    #443244
+*color6:    #324444
+*color7:    #888888
+
+*color8:    #444444
+*color9:    #cc6464
+*color10:   #80cc64
+*color11:   #cccc64
+*color12:   #6480cc
+*color13:   #8064cc
+*color14:   #64cccc
+*color15:   #cccccc
+
+*highlightColor:            #443232
+*highlightTextColor:        #cc6464
+
+URxvt*cursorColor:          #443232
+
+! Colored man pages
+URxvt.colorIT:              #cccccc
+URxvt.colorBD:              #ede265
+URxvt.colorUL:              #ffffff
