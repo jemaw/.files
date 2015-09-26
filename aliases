@@ -10,3 +10,5 @@ alias paci="sudo pacman -S"
 alias aup="yaurt -Syu"
 alias aui="yaourt"
 alias q=exit
+alias xres="xrdb merge ~/.Xresources"
+alias tekshot="screenfetch -o 'upload=1;uploadLoc=teknik;screenshot=1'"

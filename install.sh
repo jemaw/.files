@@ -7,7 +7,7 @@ then
 	mkdir ~/.dotfiles_old
 fi
 #array with files and directorys:
-declare -a files=("vim" "xres" "weechat/weechat.conf" "bash_profile" "bashrc" "aliases" "vimrc" "xinitrc" "Xresources" "zlogin" "zprofile" "zshrc")
+declare -a files=("vim" "xres" "vimperator" "weechat/weechat.conf" "vimperatorrc" "bash_profile" "bashrc" "aliases" "vimrc" "xinitrc" "Xresources" "zlogin" "zprofile" "zshrc")
 
 for i in "${files[@]}"
 do

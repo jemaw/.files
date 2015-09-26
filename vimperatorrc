@@ -1,0 +1,7 @@
+colorscheme indigo
+
+nnoremap <S-j> gT
+nnoremap <S-k> gt
+
+
+let g:smooziee_scroll_amount="80"

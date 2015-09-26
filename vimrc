@@ -1,7 +1,8 @@
 source ~/.vim/vundlerc
 "source ~/.vim/statuslinerc
 source ~/.vim/mesniprc
-source ~/.vim/lightlinerc
+"source ~/.vim/lightlinerc
+source ~/.vim/lightlinesourcerer.vim
 
 
 
