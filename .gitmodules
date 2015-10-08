@@ -13,9 +13,9 @@
 [submodule "vim/bundle/gruvbox"]
 	path = vim/bundle/gruvbox
 	url = https://github.com/morhetz/gruvbox
-[submodule "vim/bundle/lightline.vim"]
-	path = vim/bundle/lightline.vim
-	url = https://github.com/itchyny/lightline.vim
+#[submodule "vim/bundle/lightline.vim"]
+#	path = vim/bundle/lightline.vim
+#	url = https://github.com/itchyny/lightline.vim
 [submodule "vim/bundle/papercolor-theme"]
 	path = vim/bundle/papercolor-theme
 	url = https://github.com/NLKNguyen/papercolor-theme
