@@ -16,12 +16,14 @@ Plugin 'morhetz/gruvbox'
 Plugin 'chriskempson/base16-vim'
 Plugin 'sheerun/vim-wombat-scheme'
 Plugin 'NLKNguyen/papercolor-theme'
-
+Plugin 'nanotech/jellybeans.vim'
 
 Plugin 'octol/vim-cpp-enhanced-highlight'
 Plugin 'scrooloose/syntastic'
 "Plugin 'scrooloose/nerdtree'
 "Plugin 'Yggdroot/indentline'
+
+Plugin 'kien/ctrlp.vim'
 
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'SirVer/ultisnips'

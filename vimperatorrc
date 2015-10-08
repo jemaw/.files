@@ -1,7 +1,20 @@
-colorscheme indigo
+colorscheme twily
 
+set titlestring=
 nnoremap <S-j> gT
 nnoremap <S-k> gt
+set hintchars=jfkdlsah
 
+let g:smooziee_scroll_amount="150"
 
-let g:smooziee_scroll_amount="80"
+map <silent> <C-F8> :js toggle_bottombar()<CR>
+
+:js << EOF
+function toggle_bottombar() {
+    var bb = document.getElementById('liberator-bottombar');
+    if (!bb)
+        return;
+    bb.style.height = (bb.style.height == '') ? '0px' : '';
+    bb.style.overflow = (bb.style.height == '') ? '' : 'hidden';
+    }
+EOF

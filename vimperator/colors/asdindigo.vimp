@@ -1,3 +1,4 @@
+
 " ==VimperatorColorSchema==
 " name: indigo
 " author: mashiro
@@ -18,8 +19,7 @@ hi Enabled              color: #d0ffd0;
 hi Disabled             color: red;
 
 hi Normal               color: #d0d0d0; background: #1c1c1c; font-size: 12px;
-"hi ErrorMsg             color: #ffffff; background: #440000; font-size: 12px;
-hi ErrorMsg             color: #ffffff; background: #1c1c1c; font-size: 12px;
+hi ErrorMsg             color: #ffffff; background: #440000; font-size: 12px;
 hi InfoMsg              color: #d0d0d0; background: #1c1c1c; font-size: 12px;
 hi ModeMsg              color: #d0d0d0; background: #1c1c1c; font-size: 12px;
 hi MoreMsg              color: #d0ffd0; background: #1c1c1c; font-size: 12px;

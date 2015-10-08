@@ -20,6 +20,7 @@ xset -dpms &
 xset s off &
 #xset m 0 0 & #übergangslösungen
 redshift -l 48.139:11.566 &
+numlockx on &
 exec awesome
 
 

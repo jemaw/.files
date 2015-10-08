@@ -23,7 +23,9 @@ set number
 syntax on
 set background=dark
 "let base16colorspace=256  " Access colors present in 256 colorspace
+let g:hybrid_use_Xresources=1
 colorscheme noctu2
+
 "set t_md=       "disable bold font
 
 "cindent options:
@@ -51,8 +53,13 @@ nnoremap <CR> :noh<CR><CR>
 
 let mapleader = "\<Space>"  " leaderkey
 
-map <Leader>f :NERDTreeToggle<CR>
+"map <Leader>f :NERDTreeToggle<CR>
 
+"tabs and buffers
+set hidden
+nnoremap <tab> ^^
 nnoremap <C-j> gT
 nnoremap <C-k> gt
+
+
 

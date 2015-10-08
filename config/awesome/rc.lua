@@ -66,8 +66,8 @@ editor     = os.getenv("EDITOR") or "nano" or "vi"
 editor_cmd = terminal .. " -e " .. editor
 
 -- user defined
-browser    = "chromium"
-browser2   = "iron"
+browser    = "firefox"
+browser2   = "chromium"
 gui_editor = "gvim"
 graphics   = "gimp"
 
@@ -121,7 +121,7 @@ red    = "#EB8F8F"
 green  = "#8FEB8F"
 
 -- Textclock
-mytextclock = awful.widget.textclock("<span font='Tamsyn 5'> </span>%H:%M ")
+mytextclock = awful.widget.textclock("<span font='Terminus 5'> </span>%H:%M ")
 
 -- Calendar
 lain.widgets.calendar:attach(mytextclock)
@@ -138,7 +138,7 @@ mailwidget = lain.widgets.imap({
         count = ""
 
         if mailcount > 0 then
-            mail = "<span font='Tamsyn 5'> </span>Mail "
+            mail = "<span font='Terminus 5'> </span>Mail "
             count = mailcount .. " "
         end
 
@@ -153,11 +153,11 @@ mpdwidget = lain.widgets.mpd({
     settings = function()
         if mpd_now.state == "play" then
             title = mpd_now.title
-            artist  = " - " .. mpd_now.artist  .. markup("#333333", " |<span font='Tamsyn 3'> </span>")
+            artist  = " - " .. mpd_now.artist  .. markup("#333333", " |<span font='Terminus 3'> </span>")
             mpdicon:set_image(beautiful.play)
         elseif mpd_now.state == "pause" then
             title = "mpd "
-            artist  = "paused" .. markup("#333333", " |<span font='Tamsyn 3'> </span>")
+            artist  = "paused" .. markup("#333333", " |<span font='Terminus 3'> </span>")
             mpdicon:set_image(beautiful.pause)
         else
             title  = ""
@@ -278,8 +278,8 @@ myweather = lain.widgets.weather({
 
 -- Separators
 spr = wibox.widget.textbox(' ')
-small_spr = wibox.widget.textbox('<span font="Tamsyn 4"> </span>')
-bar_spr = wibox.widget.textbox('<span font="Tamsyn 3"> </span>' .. markup("#333333", "|") .. '<span font="Tamsyn 3"> </span>')
+small_spr = wibox.widget.textbox('<span font="Terminus 4"> </span>')
+bar_spr = wibox.widget.textbox('<span font="Terminus 3"> </span>' .. markup("#333333", "|") .. '<span font="Terminus 3"> </span>')
 
 -- Create a wibox for each screen and add it
 mywibox = {}

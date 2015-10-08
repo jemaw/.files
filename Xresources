@@ -1,20 +1,24 @@
 ! vi:syntax=xdefaults
 
-!#define cjb_font     Terminess Powerline 
-#define cjb_font     CtrlD 
-#define cjb_fontsize 16 
+#define cjb_font     Terminess Powerline 
+!#define cjb_font     Hack  
+!#define cjb_font     gohufont 
+!#define cjb_font     envypn 
+!#define cjb_font     tamzen 
+#define cjb_fontsize 14 
 
 !#include </home/jean/.xres/colors>
 !#include </home/jean/.xres/urxvt>
 #include </home/jean/.xres/xft>
 #include </home/jean/.xres/urxvt>
-!#include </home/jean/.xres/base16-xresources/base16-tomorrow.dark.256.xresources>
-!#include </home/jean/.xres/colors/dotshare/butter>
-!#include </home/jean/.xres/colors/termsexy/hund>
-!#include </home/jean/.xres/colors/copycat/copland>
-!#include </home/jean/.xres/colors/z3bra/coconut>
-#include </home/jean/.xres/colors/crayolo/fury>
-#include </home/jean/.xres/colors/crayolo/xresource>
+!#include </home/jean/.xres/base16-xresources/base16-codeschool.light.256.xresources>
+!#include </home/jean/.xres/colors/dotshare/relic>
+!#include </home/jean/.xres/colors/termsexy/s3ro-modified>
+!#include </home/jean/.xres/colors/gruvbox256>
+!#include </home/jean/.xres/colors/gruvboxdark>
+!#include </home/jean/.xres/colors/z3bra/smear>
+#include </home/jean/.xres/colors/dmod>
+!#include </home/jean/.xres/colors/crayolo/xresource>
 
 
 !#include </home/jean/.xres/colors/gruvbox256>
