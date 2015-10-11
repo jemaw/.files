@@ -1,6 +1,6 @@
 ! vi:syntax=xdefaults
 
-#define cjb_font     Terminess Powerline 
+#define cjb_font     Terminus 
 !#define cjb_font     Hack  
 !#define cjb_font     gohufont 
 !#define cjb_font     envypn 
@@ -18,6 +18,8 @@
 !#include </home/jean/.xres/colors/gruvboxdark>
 !#include </home/jean/.xres/colors/z3bra/smear>
 #include </home/jean/.xres/colors/dmod>
+!#include </home/jean/.xres/colors/gray>
+!#include </home/jean/.xres/colors/crayolo/branch>
 !#include </home/jean/.xres/colors/crayolo/xresource>
 
 

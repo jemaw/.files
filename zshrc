@@ -5,22 +5,30 @@ source $HOME/.aliases
 HISTFILE=~/.zhistory
 HISTSIZE=2000
 SAVEHIST=2000
-setopt autocd
-bindkey -e
+#setopt autocd
+#bindkey -e
 
 
 #completion--------------------------------------------------------- 
-zstyle :compinstall filename '/home/jean/.zshrc'
+#zstyle :compinstall filename '/home/jean/.zshrc'
 
+zmodload zsh/complist
 autoload -Uz compinit
 compinit
+zstyle ':completion:*' menu select
 #------------------------------------------------------------------- 
 
-#Prompt-------------------------------------------------------------
-autoload -U promptinit
-promptinit
+# enable coloring
+#autoload -U colors && colors
 
-#export PS1="%~ %» "
+#Prompt-------------------------------------------------------------
+#autoload -U promptinit
+#promptinit
+
+#PROMPT="%{$fg_bold[yellow]%} »  "
+#RPROMPT="%{$fg[black]%}%M:%{$fg_bold[yellow]%}%~%{$reset_color%}   "
+#RPROMPT="%{$fg[red]%}%(?  ━)%{$reset_color%}"
+export PS1=" %» "
 #export PS1=" %~   [λ] "
 #PROMPT='[%~]──╼ '
 #PROMPT='%b──╼ '
@@ -29,9 +37,9 @@ promptinit
 #PROMPT=' %F{red}» %f%b'
 #RPROMPT='%b%B%F{black}%~ %B%F{white}%#'
 #PROMPT="%{$fg[black]%(! $fg[red] )-$fg[black]%(1j $fg[green] )-$fg[black]%(?  $fg[red])-$reset_color%} "
-PROMPT="%{$fg_bold[yellow]%} »  "
+#PROMPT="%{$fg_bold[yellow]%} »  "
 #RPROMPT="%{$fg[black]%}%M:%{$fg_bold[yellow]%}%~%{$reset_color%}   "
-RPROMPT="%{$fg[red]%}%(?  ━)%{$reset_color%}"
+#RPROMPT="%{$fg[red]%}%(?  ━)%{$reset_color%}"
  #Color command correction promt
 #autoload -U colors && colors
 #export SPROMPT="$fg[cyan]Correct $fg[red]%R$reset_color $fg[magenta]to $fg[green]%r?$reset_color ($fg[white]YES :: NO :: ABORT :: EDIT$fg[white])"
