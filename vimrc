@@ -2,11 +2,12 @@ source ~/.vim/vundlerc
 "source ~/.vim/statuslinerc
 source ~/.vim/mesniprc
 "source ~/.vim/lightlinerc
-source ~/.vim/lightlinesourcerer.vim
+"source ~/.vim/lightlinesourcerer.vim
 
 
 
-
+"folds
+set foldmethod=marker
 
 
 
@@ -16,7 +17,7 @@ set encoding=utf-8 " set default encoding
 set hlsearch
 
 "numbers"
-set relativenumber
+"set relativenumber
 set number 
 
 "colors
@@ -61,5 +62,6 @@ nnoremap <tab> ^^
 nnoremap <C-j> gT
 nnoremap <C-k> gt
 
-
-
+"let g:syntastic_cpp_compiler_options="-std=c++11 -stdlib=libc++"
+let g:syntastic_cpp_compiler_options = '-std=c++11'
+"

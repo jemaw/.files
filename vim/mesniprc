@@ -8,6 +8,6 @@ let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 
-let g:ycm_show_diagnostics_ui = 1
+let g:ycm_show_diagnostics_ui = 0
 
 autocmd CompleteDone * pclose

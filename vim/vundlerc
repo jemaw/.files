@@ -9,7 +9,7 @@ call vundle#begin()
 
 Plugin 'gmarik/Vundle.vim'
 
-Plugin 'itchyny/lightline.vim'
+"Plugin 'itchyny/lightline.vim'
 
 "Plugin 'vim-scripts/CSApprox'
 Plugin 'morhetz/gruvbox'

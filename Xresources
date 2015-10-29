@@ -1,5 +1,7 @@
 ! vi:syntax=xdefaults
 
+!#define cjb_font      Source Code Pro  
+!#define cjb_font     monaco 
 #define cjb_font     Terminus 
 !#define cjb_font     Hack  
 !#define cjb_font     gohufont 
@@ -17,7 +19,9 @@
 !#include </home/jean/.xres/colors/gruvbox256>
 !#include </home/jean/.xres/colors/gruvboxdark>
 !#include </home/jean/.xres/colors/z3bra/smear>
+!#include </home/jean/.xres/colors/brock>
 #include </home/jean/.xres/colors/dmod>
+!#include </home/jean/.xres/colors/urnn/0036.resources>
 !#include </home/jean/.xres/colors/gray>
 !#include </home/jean/.xres/colors/crayolo/branch>
 !#include </home/jean/.xres/colors/crayolo/xresource>

@@ -1,11 +1,5 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =9
-let g:netrw_dirhist_1='/home/jean/Prog/optics'
-let g:netrw_dirhist_2='/home/jean/Prog'
-let g:netrw_dirhist_3='/home/jean/Prog/cluster'
-let g:netrw_dirhist_4='/home/jean/Prog'
-let g:netrw_dirhist_5='/home/jean/Prog/optics'
-let g:netrw_dirhist_6='/home/jean/Prog'
-let g:netrw_dirhist_7='/home/jean/Prog/optics'
-let g:netrw_dirhist_8='/home/jean/.vimperator'
-let g:netrw_dirhist_9='/home/jean/.vim'
+let g:netrw_dirhist_cnt =3
+let g:netrw_dirhist_1='/home/jean'
+let g:netrw_dirhist_2='/home/jean/.config'
+let g:netrw_dirhist_3='/home/jean/.config/nvim'
