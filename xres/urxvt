@@ -7,6 +7,7 @@ URxvt*boldFont: xft:cjb_font:bold:pixelsize=cjb_fontsize
 URxvt*italicFont: xft:cjb_font:italic:pixelsize=cjb_fontsize
 !URxvt*boldItalicFont: xft:cjb_font:bold:italic:pixelsize=cjb_fontsize
 
+
 !savelines
 urxvt.savelines:		65534 
 
@@ -30,9 +31,3 @@ URxvt.matcher.button: 1
 !fading when focus is lost
 urxvt.fading: 0
 
-! Cursor
-!urxvt*cursorColor:       #1815212
-!urxvt.cursorColor:  #CA5E64
-!rxvt*colorUL:		 
-!urxvt*cursorUnderline:   true
-!urxvt*cursorBlink:       true   

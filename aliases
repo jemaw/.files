@@ -3,11 +3,11 @@
 #aliases
 #
 
-alias v=vim
+alias v=nvim
 alias ra=ranger 
 alias pacu="sudo pacman -Syu"
 alias paci="sudo pacman -S" 
-alias aup="yaourt -Syu"
+alias aup="yaourt -Syu --aur"
 alias aui="yaourt"
 alias q=exit
 alias xres="xrdb merge ~/.Xresources"

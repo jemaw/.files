@@ -5,11 +5,22 @@ source $HOME/.aliases
 HISTFILE=~/.zhistory
 HISTSIZE=2000
 SAVEHIST=2000
-#setopt autocd
-#bindkey -e
 
+bindkey -v
+export KEYTIMEOUT=1
+bindkey '^r' history-incremental-search-backward
+
+
+#ls after cd
+setopt autocd
+function chpwd() {
+    emulate -L zsh
+    ls 
+}
 
 #completion--------------------------------------------------------- 
+#syntax highlight:
+#source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 #zstyle :compinstall filename '/home/jean/.zshrc'
 
 zmodload zsh/complist

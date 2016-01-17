@@ -16,6 +16,7 @@ local naughty   = require("naughty")
 local drop      = require("scratchdrop")
 local lain      = require("lain")
 local eminent   = require("eminent")
+local handTiler = require("hand-tiler")
 -- }}}
 
 -- {{{ Error handling
@@ -81,11 +82,11 @@ local layouts = {
     awful.layout.suit.floating,
  -- awful.layout.suit.fair,
     lain.layout.uselesstile,
-    lain.layout.uselessfair.horizontal,
-    awful.layout.suit.tile, 
+  --  lain.layout.uselessfair.horizontal,
+ --   awful.layout.suit.tile, 
  -- lain.layout.uselessfair,
  -- lain.layout.termfair,
- -- lain.layout.centerfair,
+ --   lain.layout.centerwork,
  -- lain.layout.uselesspiral.dwindle
 }
 
@@ -93,8 +94,8 @@ local layouts = {
 
 -- {{{ Tags
 tags = {
-    names = { "start", "2", "3", "4", "5" },
-    layout = { layouts[1], layouts[2], layouts[3], layouts[4],layouts[4]  }
+    names = { "I", "II", "III", "IV", "V" },
+    layout = { layouts[1], layouts[1], layouts[1], layouts[1],layouts[2]  }
 }
 for s = 1, screen.count() do
    tags[s] = awful.tag(tags.names, s, tags.layout)
@@ -383,7 +384,11 @@ for s = 1, screen.count() do
     layout:set_right(right_layout)
 
     mywibox[s]:set_widget(layout)
+  --  if s==2 then not mywibox[s].visible end
 end
+
+mywibox[2].visible = false
+
 -- }}}
 
 -- {{{ Mouse bindings
@@ -418,52 +423,77 @@ globalkeys = awful.util.table.join(
 --	end ),
 
 
---------------------------------------------------------------------------------------------------------------
-
+----------------------------------------------------------------------------------------------------------
     awful.key({ modkey }, "Escape", awful.tag.history.restore),
 
+	-- move/swap
+    awful.key({ modkey }, "j", function (c) 
+		if awful.client.floating.get(c) or awful.layout.getname(awful.layout.get(s)) == "floating" then
+			awful.client.moveresize(  0,  20,   0,   0)
+		else 
+			awful.client.swap.global_bydirection("down")end    end),
+    awful.key({ modkey }, "k", function (c) 
+		if awful.client.floating.get(c) or awful.layout.getname(awful.layout.get(s)) == "floating" then
+			awful.client.moveresize(  0,  -20,   0,   0)
+		else 
+			awful.client.swap.global_bydirection("up")end    end),
+    awful.key({ modkey }, "h", function (c) 
+		if awful.client.floating.get(c) or awful.layout.getname(awful.layout.get(s)) == "floating" then
+			awful.client.moveresize(  -20,  0,   0,   0)
+		else 
+			awful.client.swap.global_bydirection("left")end    end),
+    awful.key({ modkey }, "l", function (c) 
+		if awful.client.floating.get(c) or awful.layout.getname(awful.layout.get(s)) == "floating" then
+			awful.client.moveresize(  20,  0,   0,   0)
+		else 
+			awful.client.swap.global_bydirection("right")end    end),
+			
+	-- resize
+	awful.key({ altkey }, "Next",  function (c) awful.client.moveresize( 0,  0, -40, -40) end), 
+	awful.key({ altkey }, "Prior", function (c) awful.client.moveresize( 0, 0,  40,  40) end),  
+
+	awful.key({ modkey, "Shift" }, "j", function (c) awful.client.moveresize( 0,   0,   0,   20) end),  
+	awful.key({ modkey, "Shift" }, "k", function (c) awful.client.moveresize( 0,   0,   0,  -20) end),  
+	awful.key({ modkey, "Shift" }, "l", function (c) awful.client.moveresize( 0,   0,   20,   0) end),  
+	awful.key({ modkey, "Shift" }, "h", function (c) awful.client.moveresize( 0,   0,  -20,   0) end),  
+
+
     -- Non-empty tag browsing
-    awful.key({ altkey }, "Left", function () lain.util.tag_view_nonempty(-1) end),
-    awful.key({ altkey }, "Right", function () lain.util.tag_view_nonempty(1) end),
+   -- awful.key({ altkey }, "Left", function () lain.util.tag_view_nonempty(-1) end),
+    --awful.key({ altkey }, "Right", function () lain.util.tag_view_nonempty(1) end),
 
     -- Default client focus
-    awful.key({ altkey }, "k",
-        function ()
-            awful.client.focus.byidx( 1)
-            if client.focus then client.focus:raise() end
-        end),
-    awful.key({ altkey }, "j",
-        function ()
-            awful.client.focus.byidx(-1)
-            if client.focus then client.focus:raise() end
-        end),
+    --awful.key({ altkey }, "k",
+     --   function ()
+      --      awful.client.focus.byidx( 1)
+       --     if client.focus then client.focus:raise() end
+       -- end),
+   -- awful.key({ altkey }, "j",
+    --    function ()
+     --       awful.client.focus.byidx(-1)
+      --      if client.focus then client.focus:raise() end
+      --  end),
 
     -- By direction client focus
-    awful.key({ modkey }, "j",
+    awful.key({ altkey }, "j",
         function()
-            awful.client.focus.bydirection("down")
+            awful.client.focus.global_bydirection("down")
             if client.focus then client.focus:raise() end
         end),
-    awful.key({ modkey }, "k",
+    awful.key({ altkey }, "k",
         function()
-            awful.client.focus.bydirection("up")
+            awful.client.focus.global_bydirection("up")
             if client.focus then client.focus:raise() end
         end),
-    awful.key({ modkey }, "h",
+    awful.key({ altkey }, "h",
         function()
-            awful.client.focus.bydirection("left")
+            awful.client.focus.global_bydirection("left")
             if client.focus then client.focus:raise() end
         end),
-    awful.key({ modkey }, "l",
+    awful.key({ altkey }, "l",
         function()
-            awful.client.focus.bydirection("right")
+            awful.client.focus.global_bydirection("right")
             if client.focus then client.focus:raise() end
-        end),
-
-    -- Show Menu
-    awful.key({ modkey }, "w",
-        function ()
-            mymainmenu:show({ keygrabber = true })
         end),
 
     -- Show/Hide Wibox
@@ -475,14 +505,9 @@ globalkeys = awful.util.table.join(
     awful.key({ altkey, "Control" }, "=", function () lain.util.useless_gaps_resize(1) end),
     awful.key({ altkey, "Control" }, "-", function () lain.util.useless_gaps_resize(-1) end),
 
-    -- Rename tag
-    awful.key({ altkey, "Shift"   }, "r", function () lain.util.rename_tag(mypromptbox) end),
-
     -- Layout manipulation
-    awful.key({ modkey, "Shift"   }, "j", function () awful.client.swap.byidx(  1)    end),
-    awful.key({ modkey, "Shift"   }, "k", function () awful.client.swap.byidx( -1)    end),
-    awful.key({ modkey, "Control" }, "j", function () awful.screen.focus_relative( 1) end),
     awful.key({ modkey, "Control" }, "k", function () awful.screen.focus_relative(-1) end),
+    awful.key({ modkey, "Control" }, "j", function () awful.screen.focus_relative(1) end),
     awful.key({ modkey,           }, "u", awful.client.urgent.jumpto),
     awful.key({ modkey,           }, "Tab",
         function ()
@@ -493,16 +518,10 @@ globalkeys = awful.util.table.join(
         end),
     awful.key({ altkey, "Shift"   }, "l",      function () awful.tag.incmwfact( 0.05)     end),
     awful.key({ altkey, "Shift"   }, "h",      function () awful.tag.incmwfact(-0.05)     end),
-    awful.key({ modkey, "Shift"   }, "l",      function () awful.tag.incnmaster(-1)       end),
-    awful.key({ modkey, "Shift"   }, "h",      function () awful.tag.incnmaster( 1)       end),
-    awful.key({ modkey, "Control" }, "l",      function () awful.tag.incncol(-1)          end),
-    awful.key({ modkey, "Control" }, "h",      function () awful.tag.incncol( 1)          end),
+
     awful.key({ modkey,           }, "space",  function () awful.layout.inc(layouts,  1)  end),
-    awful.key({ modkey, "Shift"   }, "space",  function () awful.layout.inc(layouts, -1)  end),
     awful.key({ modkey, "Control" }, "n",      awful.client.restore),
 
-    -- Standard program
-    awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal) end),
     awful.key({ modkey, "Control" }, "r",      awesome.restart),
     awful.key({ modkey, "Shift"   }, "q",      awesome.quit),
 
@@ -511,14 +530,14 @@ globalkeys = awful.util.table.join(
 
     -- Widgets popups
     awful.key({ altkey,           }, "c",      function () lain.widgets.calendar:show(7) end),
-    awful.key({ altkey,           }, "h",      function () fshomeupd.show(7) end),
+    --awful.key({ altkey,           }, "h",      function () fshomeupd.show(7) end),
     awful.key({ altkey,           }, "w",      function () myweather.show(7) end),
 
     -- ALSA volume control
     awful.key({ altkey }, "Up",
         function ()
-            os.execute(string.format("amixer set %s %s+", volume.channel, volume.step))
-            volume.update()
+		os.execute(string.format("amixer set %s %s+", volume.channel, volume.step))
+		volume.update()
         end),
     awful.key({ altkey }, "Down",
         function ()
@@ -536,36 +555,9 @@ globalkeys = awful.util.table.join(
             volume.update()
         end),
 
-    -- MPD control
-    awful.key({ altkey, "Control" }, "Up",
-        function ()
-            awful.util.spawn_with_shell("mpc toggle || ncmpc toggle || pms toggle")
-            mpdwidget.update()
-        end),
-    awful.key({ altkey, "Control" }, "Down",
-        function ()
-            awful.util.spawn_with_shell("mpc stop || ncmpc stop || pms stop")
-            mpdwidget.update()
-        end),
-    awful.key({ altkey, "Control" }, "Left",
-        function ()
-            awful.util.spawn_with_shell("mpc prev || ncmpc prev || pms prev")
-            mpdwidget.update()
-        end),
-    awful.key({ altkey, "Control" }, "Right",
-        function ()
-            awful.util.spawn_with_shell("mpc next || ncmpc next || pms next")
-            mpdwidget.update()
-        end),
 
     -- Copy to clipboard
     awful.key({ modkey }, "c", function () os.execute("xsel -p -o | xsel -i -b") end),
-
-    -- User programs
-    awful.key({ modkey }, "q", function () awful.util.spawn(browser) end),
-    awful.key({ modkey }, "i", function () awful.util.spawn(browser2) end),
-    awful.key({ modkey }, "s", function () awful.util.spawn(gui_editor) end),
-    awful.key({ modkey }, "g", function () awful.util.spawn(graphics) end),
 
     -- Prompt
     awful.key({ modkey }, "r", function () mypromptbox[mouse.screen]:run() end),
@@ -579,6 +571,16 @@ globalkeys = awful.util.table.join(
 )
 
 clientkeys = awful.util.table.join(
+
+
+	awful.key({ modkey},  "]",     function (c) handTiler.tileTo(c, 'right-top')    end),
+    awful.key({ modkey },  "[",     function (c) handTiler.tileTo(c, 'left-top')     end),
+    awful.key({ modkey, "Shift"   },  "[",     function (c) handTiler.tileTo(c, 'left-bottom')  end),
+    awful.key({ modkey,  "Shift"  },  "]",     function (c) handTiler.tileTo(c, 'right-bottom') end),
+    awful.key({ modkey, altkey},   "[",     function (c) handTiler.tileTo(c, 'middle')    end),
+    awful.key({ modkey, altkey},   "]",     function (c) handTiler.tileTo(c, 'test')    end),
+
+
     awful.key({ altkey, "Shift"   }, "m",      lain.util.magnify_client                         ),
     awful.key({ modkey,           }, "f",      function (c) c.fullscreen = not c.fullscreen  end),
     awful.key({ altkey }, "q",      function (c) c:kill()                         end),
@@ -675,8 +677,9 @@ awful.rules.rules = {
                      keys = clientkeys,
                      buttons = clientbuttons,
 	                   size_hints_honor = false } },
+
     { rule = { class = "URxvt" },
-          properties = { opacity = 0.99 } },
+          properties = { opacity = 0.98 } },
 
     { rule = { class = "MPlayer" },
           properties = { floating = true } },
@@ -695,7 +698,8 @@ awful.rules.rules = {
 
     { rule = { class = "Gimp", role = "gimp-image-window" },
           properties = { maximized_horizontal = true,
-                         maximized_vertical = true } },
+                         maximized_vertical = true } }
+
 }
 -- }}}
 
@@ -719,8 +723,11 @@ client.connect_signal("manage", function (c, startup)
 		awful.client.setslave(c)
 
 		if not c.size_hints.user_position and not c.size_hints.program_position then 
+			awful.placement.center_horizontal(c)
+			awful.placement.center_vertical(c)
 	  		awful.placement.no_overlap(c)
 			awful.placement.no_offscreen(c)
+	--		awful.placement.centered(c,nil)
 	end
 
      end
@@ -774,6 +781,9 @@ client.connect_signal("focus",
         else
             c.border_color = beautiful.border_focus
         end
+		if c.class == "Firefox" then
+			c.border_color = beautiful.border_normal
+		end
     end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
@@ -782,7 +792,7 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 for s = 1, screen.count() do screen[s]:connect_signal("arrange", function ()
         local clients = awful.client.visible(s)
         local layout  = awful.layout.getname(awful.layout.get(s))
-
+--TODO border firefox
         if #clients > 0 then -- Fine grained borders and floaters control
             for _, c in pairs(clients) do -- Floaters always have borders
                 if awful.client.floating.get(c) or layout == "floating" then
@@ -799,3 +809,6 @@ for s = 1, screen.count() do screen[s]:connect_signal("arrange", function ()
       end)
 end
 -- }}}
+
+
+

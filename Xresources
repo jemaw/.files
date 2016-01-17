@@ -1,33 +1,38 @@
 ! vi:syntax=xdefaults
 
 !#define cjb_font      Source Code Pro  
-!#define cjb_font     monaco 
-#define cjb_font     Terminus 
+!#define cjb_font     anorexia 
 !#define cjb_font     Hack  
-!#define cjb_font     gohufont 
+#define cjb_font     gohufont 
+!#define cjb_font     montecarlo 
+!#define cjb_font     Terminus 
+!#define cjb_font     candy 
 !#define cjb_font     envypn 
 !#define cjb_font     tamzen 
-#define cjb_fontsize 14 
+#define cjb_fontsize 14
+
 
 !#include </home/jean/.xres/colors>
 !#include </home/jean/.xres/urxvt>
 #include </home/jean/.xres/xft>
 #include </home/jean/.xres/urxvt>
-!#include </home/jean/.xres/base16-xresources/base16-codeschool.light.256.xresources>
+!#include </home/jean/.xres/base16-xresources/base16-default.dark.xresources>
 !#include </home/jean/.xres/colors/dotshare/relic>
 !#include </home/jean/.xres/colors/termsexy/s3ro-modified>
 !#include </home/jean/.xres/colors/gruvbox256>
 !#include </home/jean/.xres/colors/gruvboxdark>
 !#include </home/jean/.xres/colors/z3bra/smear>
-!#include </home/jean/.xres/colors/brock>
-#include </home/jean/.xres/colors/dmod>
+!#include </home/jean/.xres/colors/dcat/smear>
+!#include </home/jean/.xres/colors/dmod>
 !#include </home/jean/.xres/colors/urnn/0036.resources>
-!#include </home/jean/.xres/colors/gray>
-!#include </home/jean/.xres/colors/crayolo/branch>
-!#include </home/jean/.xres/colors/crayolo/xresource>
-
-
 !#include </home/jean/.xres/colors/gruvbox256>
 !#include </home/jean/.xres/colors/z3bra/wine>
+!#include </home/jean/.xres/colors/gray>
+#include </home/jean/.xres/colors/crayolo/bulb>
+#include </home/jean/.xres/colors/crayolo/xresource>
+*cursorColor:  fg
+*background:   #1F1F1F
 
+
+Xcursor.theme: bluecurve
 Xcursor.size: 16

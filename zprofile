@@ -7,13 +7,19 @@ if [[ "$OSTYPE" == darwin* ]]; then
   export BROWSER='open'
 fi
 
+#bar
+#export PANEL_FIFO="/tmp/panel-fifo"
+#export PATH=$PATH:/home/jean/.config/bar
+#PANEL_HEIGHT=24
+#PANEL_FONT_FAMILY="-*-terminus-medium-r-normal-*-12-*-*-*-c-*-*-1"
+#export PANEL_FIFO PANEL_HEIGHT PANEL_FONT_FAMILY
+
 #
 # Editors
 #
 
-
-export EDITOR='vim'
-export VISUAL='vim'
+export EDITOR='nvim'
+export VISUAL='nvim'
 export PAGER='less'
 
 #

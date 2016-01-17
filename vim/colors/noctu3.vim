@@ -42,7 +42,7 @@ hi TabLine             ctermfg=8     ctermbg=0     cterm=NONE
 hi TabLineSel          ctermfg=7     ctermbg=0
 hi Folded              ctermfg=3     ctermbg=0
 hi Directory           ctermfg=12
-hi Title               ctermfg=3     cterm=bold
+hi Title               ctermfg=3     
 hi ErrorMsg            ctermfg=15    ctermbg=1
 hi DiffAdd             ctermfg=0     ctermbg=2
 hi DiffChange          ctermfg=0     ctermbg=3
@@ -74,17 +74,16 @@ hi Delimiter       ctermfg=7
 hi Comment         ctermfg=8
 hi Underlined      ctermfg=4   cterm=underline
 hi Type            ctermfg=4
-"hi String          ctermfg=9
-hi String          ctermfg=2
+hi String          ctermfg=9
 hi Keyword         ctermfg=2
 hi Todo            ctermfg=15  ctermbg=NONE     cterm=bold,underline
 hi Function        ctermfg=4
 hi Identifier      ctermfg=7   cterm=NONE
-hi Statement       ctermfg=15   cterm=bold
-"hi Statement       ctermfg=15   cterm=bold
+hi Statement       ctermfg=4
+"hi Statement       ctermfg=2   cterm=bold
+"return def usw
 hi Constant        ctermfg=13
-hi Number          ctermfg=1
-"hi Number          ctermfg=
+hi Number          ctermfg=12
 hi Boolean         ctermfg=4
 hi Special         ctermfg=13
 hi Ignore          ctermfg=0
@@ -227,4 +226,46 @@ hi netrwClassify  ctermfg=8  cterm=bold
 
 "}}}
 
+hi Float           ctermfg=3
+hi Include         ctermfg=5
+hi Define          ctermfg=2
+hi Macro           ctermfg=13
+hi PreProc         ctermfg=10
+hi PreCondit       ctermfg=13
+hi NonText         ctermfg=6
+hi Directory       ctermfg=6
+hi SpecialKey      ctermfg=11
+hi Type            ctermfg=6
+hi String          ctermfg=2
+hi Constant        ctermfg=13
+hi Special         ctermfg=10
+hi SpecialChar     ctermfg=9
+hi Number          ctermfg=14
+hi Identifier      ctermfg=13
+hi Conditional     ctermfg=14
+hi Repeat          ctermfg=9
+hi Statement       ctermfg=4
+hi Label           ctermfg=13
+hi Operator        ctermfg=3
+hi Keyword         ctermfg=9   
+hi StorageClass    ctermfg=11  
+hi Structure       ctermfg=5
+hi Typedef         ctermfg=6
+hi Function        ctermfg=11
+hi Exception       ctermfg=1
+hi Underlined      ctermfg=4
+hi Title           ctermfg=3   
+hi Tag             ctermfg=11
+hi Delimiter       ctermfg=12  
+hi SpecialComment  ctermfg=9
+hi Boolean         ctermfg=3
+hi Todo            ctermfg=9	ctermbg=None
+hi Debug           ctermfg=1	ctermbg=None
+hi ErrorMsg        ctermfg=1    ctermbg=None
+hi WildMenu        ctermfg=5    ctermbg=15
+hi Search          ctermfg=1    ctermbg=15
+hi IncSearch       ctermfg=1    ctermbg=15
+hi WarningMsg      ctermfg=1    ctermbg=15
+hi Question        ctermfg=10   ctermbg=15
+hi Visual          ctermfg=8    ctermbg=15
 " vim: fdm=marker:sw=2:sts=2:et

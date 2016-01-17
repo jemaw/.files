@@ -3,25 +3,25 @@
 ""
 "" ~/.vimperator/colors/twily.vimp
 
-highlight! CmdLine color: #CECFD1; background: #27282B; 
+highlight! CmdLine color: #CECFD1; background: #1F1F1F; 
 highlight! CmdLine>* font-family: "Terminus"; font-size: 8pt; height: 20px;
-"highlight! Normal color: #AAABAD; /*background: #27282B;*/ font-family: "Terminus"; font-size: 8pt;
-highlight! Normal color: #AAABAD; background: #27282B; font-family: "Terminus"; font-size: 8pt;
-highlight! StatusLine color: #AAABAD; background: #27282B; font-family: "Terminus"; font-size: 8pt;
+"highlight! Normal color: #AAABAD; /*background: #1F1F1F;*/ font-family: "Terminus"; font-size: 8pt;
+highlight! Normal color: #AAABAD; background: #1F1F1F; font-family: "Terminus"; font-size: 8pt;
+highlight! StatusLine color: #AAABAD; background: #1F1F1F; font-family: "Terminus"; font-size: 8pt;
 
-highlight! Bell border: none; background: #27282B;
+highlight! Bell border: none; background: #1F1F1F;
 highlight! Boolean color: #AAABAD;
 highlight! CompDesc width: auto; color: #AAABAD;
 highlight! CompItem>* height: auto; padding: 0 8px;
-highlight! CompItem background: #27282B;
-highlight! CompItem[selected] color: #CECFD1; background: #17181A;
-highlight! CompTitle background: #27282B; font-family: "Terminus"; font-size: 8pt;
+highlight! CompItem background: #1F1F1F;
+highlight! CompItem[selected] color: #CECFD1; background: #28282A;
+highlight! CompTitle background: #3003030; font-family: "Terminus"; font-size: 8pt;
 highlight! CompTitle>* color: #CECFD1; padding: 2px 8px;
 
 highlight! Disabled color: #AAABAD;
 highlight! Enabled color: #AAABAD;
 highlight! ErrorMsg color: #F56C66; font-family: "Terminus"; font-size: 8pt;
-highlight! Filter color: #CECFD1; background: #17181A;
+highlight! Filter color: #CECFD1; background: #28282A;
 highlight! FrameIndicator background: #AAABAD; opacity: 0.5; z-index: 999; position: fixed; top: 0; bottom: 0; left: 0; right: 0;
 
 highlight! HelpNote color: #8859B3;

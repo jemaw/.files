@@ -17,7 +17,7 @@ let g:colors_name="shblah"
 
 " Actual colours and styles.
 highlight ColorColumn  term=NONE cterm=NONE ctermfg=NONE ctermbg=3
-highlight Comment      term=NONE cterm=NONE ctermfg=0    ctermbg=NONE
+highlight Comment      term=NONE cterm=NONE ctermfg=8    ctermbg=NONE
 highlight Constant     term=NONE cterm=bold ctermfg=1    ctermbg=NONE
 highlight Cursor       term=NONE cterm=bold ctermfg=3    ctermbg=NONE
 highlight CursorLine   term=NONE cterm=NONE ctermfg=NONE ctermbg=NONE
@@ -95,11 +95,6 @@ syn match Underlined   "\"__Underlined.*"
 syn match VertSplit    "\"__VertSplit.*"
 syn match Visual       "\"__Visual.*"
 
-" Syntastic {{{
-hi SyntasticWarningSign  ctermfg=3   ctermbg=NONE
-hi SyntasticErrorSign    ctermfg=1   ctermbg=NONE
-
-"}}}
 "__Comment              /* this is a comment */
 "__Constant             var = SHBLAH
 "__Cursor               char under the cursor?

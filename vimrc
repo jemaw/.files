@@ -24,7 +24,7 @@ set number
 syntax on
 set background=dark
 "let base16colorspace=256  " Access colors present in 256 colorspace
-let g:hybrid_use_Xresources=1
+"let g:hybrid_use_Xresources=1
 colorscheme noctu2
 
 "set t_md=       "disable bold font
