@@ -1,21 +1,64 @@
-! vi:syntax=xdefaults
-
 !#define cjb_font      Source Code Pro  
 !#define cjb_font     anorexia 
 !#define cjb_font     Hack  
-#define cjb_font     gohufont 
+!#define cjb_font     gohufont 
 !#define cjb_font     montecarlo 
-!#define cjb_font     Terminus 
+#define cjb_font     Terminus 
 !#define cjb_font     candy 
 !#define cjb_font     envypn 
 !#define cjb_font     tamzen 
 #define cjb_fontsize 14
 
+!xft{{{
+Xft.antialias:		true
+Xft.autohint:			false
+Xft.dpi:			    96
+Xft.hinting:			true
+Xft.hintstyle:		hintfull
+Xft.rgba:	    		rgb
+!}}}
+
+!urxvt settings{{{
+!Font
+URxvt*font: xft:cjb_font:medium:pixelsize=cjb_fontsize
+!URxvt*boldFont:
+URxvt*boldFont: xft:cjb_font:bold:pixelsize=cjb_fontsize
+URxvt*italicFont: xft:cjb_font:italic:pixelsize=cjb_fontsize
+URxvt*boldItalicFont: xft:cjb_font:bold:italic:pixelsize=cjb_fontsize
+
+
+!savelines
+urxvt.savelines:	65534 
+
+! Scrollbar
+*scrollBar:         false
+
+! And scrolling
+*scrollTtyOutput:   false
+*scrollWithBuffer:  true
+*scrollTtyKeypress: true
+
+!internal Border
+urxvt.internalBorder: 7
+
+! Perl stuff
+URxvt.perl-ext-common: default,matcher,clipboard
+URxvt.iso14755: False
+URxvt.keysym.Shift-Control-C: perl:clipboard:copy
+URxvt.keysym.Shift-Control-V: perl:clipboard:paste
+URxvt.clipboard.copycmd:  xsel -ib
+URxvt.clipboard.pastecmd: xsel -ob
+
+URxvt.url-launcher: /usr/bin/firefox
+URxvt.matcher.button: 1
+URxvt.keysym.C-Delete: perl:matcher:last
+
+!fading when focus is lost
+urxvt.fading: 0
+!}}}
 
 !#include </home/jean/.xres/colors>
 !#include </home/jean/.xres/urxvt>
-#include </home/jean/.xres/xft>
-#include </home/jean/.xres/urxvt>
 !#include </home/jean/.xres/base16-xresources/base16-default.dark.xresources>
 !#include </home/jean/.xres/colors/dotshare/relic>
 !#include </home/jean/.xres/colors/termsexy/s3ro-modified>
@@ -34,5 +77,4 @@
 *background:   #1F1F1F
 
 
-Xcursor.theme: bluecurve
-Xcursor.size: 16
+! vi:syntax=xdefaults

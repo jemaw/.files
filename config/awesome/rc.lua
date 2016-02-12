@@ -81,12 +81,15 @@ lain.layout.centerfair.ncol    = 1
 local layouts = {
     awful.layout.suit.floating,
  -- awful.layout.suit.fair,
+    awful.layout.suit.tile, 
     lain.layout.uselesstile,
+    --lain.layout.uselesfair,
   --  lain.layout.uselessfair.horizontal,
- --   awful.layout.suit.tile, 
+  --  awful.layout.suit.magnifier
  -- lain.layout.uselessfair,
- -- lain.layout.termfair,
- --   lain.layout.centerwork,
+ --  lain.layout.termfair,
+ --   lain.layout.cascade,
+--    lain.layout.centerwork,
  -- lain.layout.uselesspiral.dwindle
 }
 
@@ -427,70 +430,58 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey }, "Escape", awful.tag.history.restore),
 
 	-- move/swap
-    awful.key({ modkey }, "j", function (c) 
+    awful.key({ modkey,"Shift" }, "j", function (c) 
 		if awful.client.floating.get(c) or awful.layout.getname(awful.layout.get(s)) == "floating" then
 			awful.client.moveresize(  0,  20,   0,   0)
 		else 
 			awful.client.swap.global_bydirection("down")end    end),
-    awful.key({ modkey }, "k", function (c) 
+    awful.key({ modkey,"Shift" }, "k", function (c) 
 		if awful.client.floating.get(c) or awful.layout.getname(awful.layout.get(s)) == "floating" then
 			awful.client.moveresize(  0,  -20,   0,   0)
 		else 
 			awful.client.swap.global_bydirection("up")end    end),
-    awful.key({ modkey }, "h", function (c) 
+    awful.key({ modkey,"Shift" }, "h", function (c) 
 		if awful.client.floating.get(c) or awful.layout.getname(awful.layout.get(s)) == "floating" then
 			awful.client.moveresize(  -20,  0,   0,   0)
 		else 
 			awful.client.swap.global_bydirection("left")end    end),
-    awful.key({ modkey }, "l", function (c) 
+    awful.key({ modkey,"Shift" }, "l", function (c) 
 		if awful.client.floating.get(c) or awful.layout.getname(awful.layout.get(s)) == "floating" then
 			awful.client.moveresize(  20,  0,   0,   0)
 		else 
 			awful.client.swap.global_bydirection("right")end    end),
 			
 	-- resize
-	awful.key({ altkey }, "Next",  function (c) awful.client.moveresize( 0,  0, -40, -40) end), 
-	awful.key({ altkey }, "Prior", function (c) awful.client.moveresize( 0, 0,  40,  40) end),  
+	awful.key({ modkey }, "Next",  function (c) awful.client.moveresize( 0,  0, -40, -40) end), 
+	awful.key({ modkey }, "Prior", function (c) awful.client.moveresize( 0, 0,  40,  40) end),  
 
-	awful.key({ modkey, "Shift" }, "j", function (c) awful.client.moveresize( 0,   0,   0,   20) end),  
-	awful.key({ modkey, "Shift" }, "k", function (c) awful.client.moveresize( 0,   0,   0,  -20) end),  
-	awful.key({ modkey, "Shift" }, "l", function (c) awful.client.moveresize( 0,   0,   20,   0) end),  
-	awful.key({ modkey, "Shift" }, "h", function (c) awful.client.moveresize( 0,   0,  -20,   0) end),  
+	awful.key({ altkey }, "j", function (c) awful.client.moveresize( 0,   0,   0,   20) end),  
+	awful.key({ altkey }, "k", function (c) awful.client.moveresize( 0,   0,   0,   -20) end),  
+	awful.key({ altkey }, "l", function (c) awful.client.moveresize( 0,   0,   20,   0) end),  
+	awful.key({ altkey }, "h", function (c) awful.client.moveresize( 0,   0,  -20,   0) end),  
 
-
-    -- Non-empty tag browsing
-   -- awful.key({ altkey }, "Left", function () lain.util.tag_view_nonempty(-1) end),
-    --awful.key({ altkey }, "Right", function () lain.util.tag_view_nonempty(1) end),
-
-    -- Default client focus
-    --awful.key({ altkey }, "k",
-     --   function ()
-      --      awful.client.focus.byidx( 1)
-       --     if client.focus then client.focus:raise() end
-       -- end),
-   -- awful.key({ altkey }, "j",
-    --    function ()
-     --       awful.client.focus.byidx(-1)
-      --      if client.focus then client.focus:raise() end
-      --  end),
-
+--	awful.key({ altkey,"Shift"}, "j", function (c) awful.client.moveresize( 0,   20,   0,   -20) end),  
+--	awful.key({ altkey,"Shift" }, "k", function (c) awful.client.moveresize( 0,  0,   0,   -20) end),  
+--	awful.key({ altkey,"Shift" }, "l", function (c) awful.client.moveresize( 20,   0,   -20,   0) end),  
+--	awful.key({ altkey,"Shift" }, "h", function (c) awful.client.moveresize( 0,   0,  -20,   0) end),  
+	 
     -- By direction client focus
-    awful.key({ altkey }, "j",
+    awful.key({ modkey }, "j",
         function()
             awful.client.focus.global_bydirection("down")
             if client.focus then client.focus:raise() end
         end),
-    awful.key({ altkey }, "k",
+    awful.key({ modkey }, "k",
         function()
             awful.client.focus.global_bydirection("up")
             if client.focus then client.focus:raise() end
         end),
-    awful.key({ altkey }, "h",
+    awful.key({ modkey }, "h",
         function()
             awful.client.focus.global_bydirection("left")
             if client.focus then client.focus:raise() end
         end),
-    awful.key({ altkey }, "l",
+    awful.key({ modkey }, "l",
         function()
             awful.client.focus.global_bydirection("right")
             if client.focus then client.focus:raise() end
@@ -573,12 +564,13 @@ globalkeys = awful.util.table.join(
 clientkeys = awful.util.table.join(
 
 
-	awful.key({ modkey},  "]",     function (c) handTiler.tileTo(c, 'right-top')    end),
-    awful.key({ modkey },  "[",     function (c) handTiler.tileTo(c, 'left-top')     end),
-    awful.key({ modkey, "Shift"   },  "[",     function (c) handTiler.tileTo(c, 'left-bottom')  end),
-    awful.key({ modkey,  "Shift"  },  "]",     function (c) handTiler.tileTo(c, 'right-bottom') end),
-    awful.key({ modkey, altkey},   "[",     function (c) handTiler.tileTo(c, 'middle')    end),
-    awful.key({ modkey, altkey},   "]",     function (c) handTiler.tileTo(c, 'test')    end),
+	awful.key({ modkey},  "[",     function (c) handTiler.tp(c, 'right-top')    end),
+    awful.key({ modkey },  "p",     function (c) handTiler.tp(c, 'left-top')     end),
+    awful.key({ modkey },  ";",     function (c) handTiler.tp(c, 'left-bottom')  end),
+    awful.key({ modkey},  "'",     function (c) handTiler.tp(c, 'right-bottom') end),
+    awful.key({ modkey,"Shift"},   "'",     function (c) handTiler.tp(c, 'middle')    end),
+    awful.key({ modkey, "Shift"},   ";",     function (c) handTiler.tp(c, 'left-middle')    end),
+    awful.key({ modkey, "Shift"},   "\\",     function (c) handTiler.tp(c, 'right-middle')    end),
 
 
     awful.key({ altkey, "Shift"   }, "m",      lain.util.magnify_client                         ),
@@ -679,10 +671,21 @@ awful.rules.rules = {
 	                   size_hints_honor = false } },
 
     { rule = { class = "URxvt" },
-          properties = { opacity = 0.98 } },
+          properties = { opacity = 0.98 ,
+	  					 height = 320} },
+
+    { rule = { name = "TeamSpeak 3" },
+          properties = { width = 350 ,
+	  					 height = 450} },
+
+    { rule = { class = "TeamSpeak 3" },
+		  properties = { floating = on}},
 
     { rule = { class = "MPlayer" },
           properties = { floating = true } },
+
+    { rule = { instance = "Firefox" },
+          properties = { height = 1035 } },
 
     { rule = { class = "Dwb" },
           properties = { tag = tags[1][1] } },
@@ -781,9 +784,9 @@ client.connect_signal("focus",
         else
             c.border_color = beautiful.border_focus
         end
-		if c.class == "Firefox" then
-			c.border_color = beautiful.border_normal
-		end
+--		if c.class == "Firefox" then
+--			c.border_color = beautiful.border_normal
+--		end
     end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}

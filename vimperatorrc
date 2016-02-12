@@ -4,7 +4,7 @@ set titlestring=
 nnoremap <S-j> gT
 nnoremap <S-k> gt
 set hintchars=jfkdlsah
-set gui=nonavigation
+set complete=l
 
 let g:smooziee_scroll_amount="150"
 
