@@ -47,6 +47,7 @@ promptinit
 #PROMPT=' ─── '
 #PROMPT=' λ '
 PROMPT=' %F{white}» %f%b'
+#PROMPT=' %c'
 #RPROMPT='%b%B%F{black}%~ %B%F{white}%#'
 #PROMPT="%{$fg[black]%(! $fg[red] )-$fg[black]%(1j $fg[green] )-$fg[black]%(?  $fg[red])-$reset_color%} "
 #PROMPT="%{$fg_bold[yellow]%} »  "

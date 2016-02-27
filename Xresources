@@ -55,6 +55,8 @@ URxvt.keysym.C-Delete: perl:matcher:last
 
 !fading when focus is lost
 urxvt.fading: 0
+
+urxvt*depth: 32
 !}}}
 
 !#include </home/jean/.xres/colors>
@@ -71,10 +73,11 @@ urxvt.fading: 0
 !#include </home/jean/.xres/colors/gruvbox256>
 !#include </home/jean/.xres/colors/z3bra/wine>
 !#include </home/jean/.xres/colors/gray>
-#include </home/jean/.xres/colors/crayolo/bulb>
-#include </home/jean/.xres/colors/crayolo/xresource>
+#include </home/jean/Colors/xres/crayolo/bulb>
+#include </home/jean/Colors/xres/crayolo/xresource>
 *cursorColor:  fg
-*background:   #1F1F1F
+!*background:   #1F1F1F
+
 
 
 ! vi:syntax=xdefaults

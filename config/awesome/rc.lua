@@ -671,8 +671,7 @@ awful.rules.rules = {
 	                   size_hints_honor = false } },
 
     { rule = { class = "URxvt" },
-          properties = { opacity = 0.98 ,
-	  					 height = 320} },
+          properties = { height = 320} },
 
     { rule = { name = "TeamSpeak 3" },
           properties = { width = 350 ,
