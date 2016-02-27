@@ -13,3 +13,4 @@ alias q=exit
 alias xres="xrdb merge ~/.Xresources"
 alias tekshot="screenfetch -o 'upload=1;uploadLoc=teknik;screenshot=1'"
 alias c11="g++ -std=c++11"
+alias lock="/home/jean/Scripts/lock.sh"
