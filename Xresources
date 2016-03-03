@@ -1,3 +1,4 @@
+!{{{font
 !#define cjb_font      Source Code Pro  
 !#define cjb_font     anorexia 
 !#define cjb_font     Hack  
@@ -8,7 +9,14 @@
 !#define cjb_font     envypn 
 !#define cjb_font     tamzen 
 #define cjb_fontsize 14
-
+!}}}
+!{{{ color
+#include </home/jean/Colors/xres/crayolo/bulb>
+#include </home/jean/Colors/xres/crayolo/xresource>
+!#include </home/jean/Colors/xres/termsexy/monotheme>
+*cursorColor:  fg
+!*background:   #1F1F1F
+! }}}
 !xft{{{
 Xft.antialias:		true
 Xft.autohint:			false
@@ -17,7 +25,6 @@ Xft.hinting:			true
 Xft.hintstyle:		hintfull
 Xft.rgba:	    		rgb
 !}}}
-
 !urxvt settings{{{
 !Font
 URxvt*font: xft:cjb_font:medium:pixelsize=cjb_fontsize
@@ -44,8 +51,8 @@ urxvt.internalBorder: 7
 ! Perl stuff
 URxvt.perl-ext-common: default,matcher,clipboard
 URxvt.iso14755: False
-URxvt.keysym.Shift-Control-C: perl:clipboard:copy
-URxvt.keysym.Shift-Control-V: perl:clipboard:paste
+URxvt*keysym.Mod4-c: perl:clipboard:copy
+URxvt*keysym.Mod4-v: perl:clipboard:paste
 URxvt.clipboard.copycmd:  xsel -ib
 URxvt.clipboard.pastecmd: xsel -ob
 
@@ -58,26 +65,5 @@ urxvt.fading: 0
 
 urxvt*depth: 32
 !}}}
-
-!#include </home/jean/.xres/colors>
-!#include </home/jean/.xres/urxvt>
-!#include </home/jean/.xres/base16-xresources/base16-default.dark.xresources>
-!#include </home/jean/.xres/colors/dotshare/relic>
-!#include </home/jean/.xres/colors/termsexy/s3ro-modified>
-!#include </home/jean/.xres/colors/gruvbox256>
-!#include </home/jean/.xres/colors/gruvboxdark>
-!#include </home/jean/.xres/colors/z3bra/smear>
-!#include </home/jean/.xres/colors/dcat/smear>
-!#include </home/jean/.xres/colors/dmod>
-!#include </home/jean/.xres/colors/urnn/0036.resources>
-!#include </home/jean/.xres/colors/gruvbox256>
-!#include </home/jean/.xres/colors/z3bra/wine>
-!#include </home/jean/.xres/colors/gray>
-#include </home/jean/Colors/xres/crayolo/bulb>
-#include </home/jean/Colors/xres/crayolo/xresource>
-*cursorColor:  fg
-!*background:   #1F1F1F
-
-
 
 ! vi:syntax=xdefaults

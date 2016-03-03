@@ -17,6 +17,7 @@ local drop      = require("scratchdrop")
 local lain      = require("lain")
 local eminent   = require("eminent")
 local handTiler = require("hand-tiler")
+
 -- }}}
 
 -- {{{ Error handling
@@ -103,6 +104,7 @@ tags = {
 for s = 1, screen.count() do
    tags[s] = awful.tag(tags.names, s, tags.layout)
 end
+
 -- }}}
 
 --[[ {{{ Wallpaper
@@ -460,6 +462,11 @@ globalkeys = awful.util.table.join(
 	awful.key({ altkey }, "l", function (c) awful.client.moveresize( 0,   0,   20,   0) end),  
 	awful.key({ altkey }, "h", function (c) awful.client.moveresize( 0,   0,  -20,   0) end),  
 
+	awful.key({ altkey,"Shift" }, "j", function (c) awful.client.moveresize( 0,   0,   0,   40) end),  
+	awful.key({ altkey,"Shift"}, "k", function (c) awful.client.moveresize( 0,   0,   0,   -40) end),  
+	awful.key({ altkey,"Shift" }, "l", function (c) awful.client.moveresize( 0,   0,   40,   0) end),  
+	awful.key({ altkey,"Shift" }, "h", function (c) awful.client.moveresize( 0,   0,  -40,   0) end),  
+
 --	awful.key({ altkey,"Shift"}, "j", function (c) awful.client.moveresize( 0,   20,   0,   -20) end),  
 --	awful.key({ altkey,"Shift" }, "k", function (c) awful.client.moveresize( 0,  0,   0,   -20) end),  
 --	awful.key({ altkey,"Shift" }, "l", function (c) awful.client.moveresize( 20,   0,   -20,   0) end),  
@@ -549,6 +556,8 @@ globalkeys = awful.util.table.join(
 
     -- Copy to clipboard
     awful.key({ modkey }, "c", function () os.execute("xsel -p -o | xsel -i -b") end),
+    --awful.key({ modkey }, "v", function () os.execute("xsel") end),
+
 
     -- Prompt
     awful.key({ modkey }, "r", function () mypromptbox[mouse.screen]:run() end),
@@ -558,7 +567,17 @@ globalkeys = awful.util.table.join(
                   mypromptbox[mouse.screen].widget,
                   awful.util.eval, nil,
                   awful.util.getdir("cache") .. "/history_eval")
-              end)
+              end),
+
+	--  dmenu
+	awful.key({ modkey },            ",",     function ()
+    awful.util.spawn("dmenu_run -i -fn 'Terminus-8'  -nb '" .. 
+ 		beautiful.bg_normal .. "' -nf '" .. beautiful.fg_normal .. 
+		"' -sb '" .. beautiful.bg_focus .. 
+		"' -sf '" .. beautiful.fg_focus .. "'")
+	end)
+
+
 )
 
 clientkeys = awful.util.table.join(
@@ -671,7 +690,7 @@ awful.rules.rules = {
 	                   size_hints_honor = false } },
 
     { rule = { class = "URxvt" },
-          properties = { height = 320} },
+          properties = { height = 336} },
 
     { rule = { name = "TeamSpeak 3" },
           properties = { width = 350 ,

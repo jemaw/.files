@@ -1,7 +1,5 @@
 source $HOME/.aliases
 
-
-# Lines configured by zsh-newuser-install
 HISTFILE=~/.zhistory
 HISTSIZE=10000
 SAVEHIST=10000
@@ -18,24 +16,17 @@ function chpwd() {
     ls 
 }
 
-#syntax highlight:
-#source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-#zstyle :compinstall filename '/home/jean/.zshrc'
+#completion
+autoload -U compinit && compinit
+#zstyle ':completion:*' menu select
+setopt menu_complete
 
-#completion--------------------------------------------------------- 
-zmodload zsh/complist
-autoload -Uz compinit
-compinit
-zstyle ':completion:*' menu select
-#------------------------------------------------------------------- 
+zstyle ':completion:::::' completer _complete _approximate
+zstyle ':completion:*:approximate:*' max-errors 2
 
-# enable coloring
-#autoload -U colors && colors
 
-#Prompt{{{-------------------------------------------------------------
+#Prompt 
 autoload -U promptinit
-promptinit
-
 #PROMPT=" %» "
 #PROMPT="%{$fg_bold[yellow]%} »  "
 #RPROMPT="%{$fg[black]%}%M:%{$fg_bold[yellow]%}%~%{$reset_color%}   "
@@ -56,10 +47,9 @@ PROMPT=' %F{white}» %f%b'
  #Color command correction promt
 #autoload -U colors && colors
 #export SPROMPT="$fg[cyan]Correct $fg[red]%R$reset_color $fg[magenta]to $fg[green]%r?$reset_color ($fg[white]YES :: NO :: ABORT :: EDIT$fg[white])"
-#}}}---------------------------------------------------------------------
 
-#  functions {{{1 # 
 
+#functions 
 function twitchl(){
 
 livestreamer -p mpv $1 source
@@ -69,3 +59,12 @@ function twitch(){
 livestreamer -p mpv http://twitch.tv/${1} source
 }
 
+function ranger-cd {
+    tempfile="$(mktemp -t tmp.XXXXXX)"
+    /usr/bin/ranger --choosedir="$tempfile" "${@:-$(pwd)}"
+    test -f "$tempfile" &&
+    if [ "$(cat -- "$tempfile")" != "$(echo -n `pwd`)" ]; then
+        cd -- "$(cat "$tempfile")"
+    fi
+    rm -f -- "$tempfile"
+}

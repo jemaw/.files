@@ -7,11 +7,11 @@ call vundle#begin()
 
 Plugin 'gmarik/Vundle.vim'
 
-Plugin 'bling/vim-bufferline'
-  let g:bufferline_echo = 0
-  autocmd VimEnter *
-    \ let &statusline='%{bufferline#refresh_status()}'
-      \ .bufferline#get_status_string()
+"Plugin 'bling/vim-bufferline'
+  "let g:bufferline_echo = 0
+  "autocmd VimEnter *
+    "\ let &statusline='%{bufferline#refresh_status()}'
+      "\ .bufferline#get_status_string()
 
 Plugin 'octol/vim-cpp-enhanced-highlight'
 
@@ -34,7 +34,7 @@ Plugin 'Valloric/YouCompleteMe'
 	au InsertEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger     . " <C-R>=g:UltiSnips_Complete()<cr>"
 	au InsertEnter * exec "inoremap <silent> " .     g:UltiSnipsJumpBackwardTrigger . " <C-R>=g:UltiSnips_Reverse()<cr>"
 
-	autocmd CompleteDone * pclose
+	"autocmd CompleteDone * pclose
 
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
@@ -116,14 +116,14 @@ nnoremap <silent> k gk
 
 
 " Easily move to start/end of line
- nnoremap H 0
- vnoremap H 0
- nnoremap L $
- vnoremap L $
+" nnoremap H 0
+" vnoremap H 0
+" nnoremap L $
+" vnoremap L $
 
 " scrolling
-map <C-U> 4<C-Y>
-map <C-D> 4<C-E>
+"map <C-U> 4<C-Y>
+"map <C-D> 4<C-E>
 
 " }}}
 " Filetupe {{{
@@ -236,11 +236,46 @@ function! MyFoldText3() "
     return text
   endfunction
 
+function! RangeChooser()
+    let temp = tempname()
+    " The option "--choosefiles" was added in ranger 1.5.1. Use the next line
+    " with ranger 1.4.2 through 1.5.0 instead.
+    "exec 'silent !ranger --choosefile=' . shellescape(temp)
+    if has("gui_running")
+        exec 'silent !xterm -e ranger --choosefiles=' . shellescape(temp)
+    else
+        exec 'silent !ranger --choosefiles=' . shellescape(temp)
+    endif
+    if !filereadable(temp)
+        redraw!
+        " Nothing to read.
+        return
+    endif
+    let names = readfile(temp)
+    if empty(names)
+        redraw!
+        " Nothing to open.
+        return
+    endif
+    " Edit the first item.
+    exec 'edit ' . fnameescape(names[0])
+    " Add any remaning items to the arg list/buffer list.
+    for name in names[1:]
+        exec 'argadd ' . fnameescape(name)
+    endfor
+    redraw!
+endfunction
+command! -bar RangerChooser call RangeChooser()
+nnoremap <leader>r :<C-U>RangerChooser<CR>
 "}}}
 " gui {{{ 
-:set guioptions-=m  "remove menu bar
-:set guioptions-=T  "remove toolbar
-:set guioptions-=r  "remove right-hand scroll bar
-:set guioptions-=L  "remove left-hand scroll bar
+set guioptions-=m  "remove menu bar
+set guioptions-=T  "remove toolbar
+set guioptions-=r  "remove right-hand scroll bar
+set guioptions-=L  "remove left-hand scroll bar
+set guiheadroom=0
+if has("gui_running")
+	colorscheme hybrid
+endif
 
 " }}}

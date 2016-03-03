@@ -4,7 +4,7 @@
 #
 
 alias v=nvim
-alias ra=ranger 
+alias ra=ranger-cd
 alias pacu="sudo pacman -Syu"
 alias paci="sudo pacman -S" 
 alias aup="yaourt -Syu --aur"
