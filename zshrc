@@ -18,8 +18,8 @@ function chpwd() {
 
 #completion
 autoload -U compinit && compinit
-#zstyle ':completion:*' menu select
-setopt menu_complete
+zstyle ':completion:*' menu select
+#setopt menu_complete
 
 zstyle ':completion:::::' completer _complete _approximate
 zstyle ':completion:*:approximate:*' max-errors 2

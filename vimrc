@@ -7,20 +7,19 @@ call vundle#begin()
 
 Plugin 'gmarik/Vundle.vim'
 
-"Plugin 'bling/vim-bufferline'
-  "let g:bufferline_echo = 0
-  "autocmd VimEnter *
-    "\ let &statusline='%{bufferline#refresh_status()}'
-      "\ .bufferline#get_status_string()
+Plugin 'justinmk/vim-sneak'
+	let g:sneak#streak = 1
+
+Plugin 'wikitopian/hardmode'
+	nnoremap <leader>h <Esc>:call ToggleHardMode()<CR>
 
 Plugin 'octol/vim-cpp-enhanced-highlight'
 
-"Plugin 'scrooloose/syntastic'
-"	let g:syntastic_cpp_compiler_options = '-std=c++11'
-
 Plugin 'kien/ctrlp.vim'
+  	let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:20,results:20'
 
 Plugin 'Valloric/YouCompleteMe'
+	let g:ycm_autoclose_preview_window_after_insertion = 1
 	let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py' " you complete me conf
 	let g:ycm_show_diagnostics_ui = 0
 	if !exists("g:UltiSnipsJumpForwardTrigger")
@@ -33,8 +32,6 @@ Plugin 'Valloric/YouCompleteMe'
 
 	au InsertEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger     . " <C-R>=g:UltiSnips_Complete()<cr>"
 	au InsertEnter * exec "inoremap <silent> " .     g:UltiSnipsJumpBackwardTrigger . " <C-R>=g:UltiSnips_Reverse()<cr>"
-
-	"autocmd CompleteDone * pclose
 
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
@@ -130,6 +127,8 @@ nnoremap <silent> k gk
 
 " Disable comment new line
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+
+au FileType python setlocal formatprg=autopep8\ -
 " }}}
 " Buffers  {{{
 
@@ -137,12 +136,6 @@ set hidden
 nnoremap <tab> <c-^>
 nnoremap <c-j> :bp<CR> 
 nnoremap <c-k> :bn<CR> 
-
-" }}}
-" Misc {{{
-
-set clipboard+=unnamedplus
-set encoding=utf-8 " set default encoding
 
 " }}}
 " Functions{{{
@@ -279,3 +272,11 @@ if has("gui_running")
 endif
 
 " }}}
+" Misc {{{
+
+"set clipboard=unnamedplus
+set encoding=utf-8 " set default encoding
+language en_US
+
+" }}}
+

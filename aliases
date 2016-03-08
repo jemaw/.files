@@ -3,7 +3,7 @@
 #aliases
 #
 
-alias v=nvim
+alias v=vim
 alias ra=ranger-cd
 alias pacu="sudo pacman -Syu"
 alias paci="sudo pacman -S" 

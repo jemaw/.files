@@ -31,7 +31,7 @@ xset m 0 0 & #übergangslösungen
 sxhkd -f 120 &
 redshift -l 48.139:11.566 &
 numlockx on &
-xset r rate 200 25 &
+xset r rate 200 30 &
 
 exec awesome
 #exec bspwm

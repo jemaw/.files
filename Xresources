@@ -4,7 +4,8 @@
 !#define cjb_font     Hack  
 !#define cjb_font     gohufont 
 !#define cjb_font     montecarlo 
-#define cjb_font     Terminus 
+#define cjb_font     Tamsyn 
+!#define cjb_font     Terminus 
 !#define cjb_font     candy 
 !#define cjb_font     envypn 
 !#define cjb_font     tamzen 
@@ -15,7 +16,7 @@
 #include </home/jean/Colors/xres/crayolo/xresource>
 !#include </home/jean/Colors/xres/termsexy/monotheme>
 *cursorColor:  fg
-!*background:   #1F1F1F
+*background:   #1F1F1F
 ! }}}
 !xft{{{
 Xft.antialias:		true

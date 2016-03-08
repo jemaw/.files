@@ -571,7 +571,7 @@ globalkeys = awful.util.table.join(
 
 	--  dmenu
 	awful.key({ modkey },            ",",     function ()
-    awful.util.spawn("dmenu_run -i -fn 'Terminus-8'  -nb '" .. 
+    awful.util.spawn("dmenu_run -i -fn 'Tamsyn-10'  -nb '" .. 
  		beautiful.bg_normal .. "' -nf '" .. beautiful.fg_normal .. 
 		"' -sb '" .. beautiful.bg_focus .. 
 		"' -sf '" .. beautiful.fg_focus .. "'")
