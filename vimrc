@@ -7,8 +7,8 @@ call vundle#begin()
 
 Plugin 'gmarik/Vundle.vim'
 
-Plugin 'justinmk/vim-sneak'
-	let g:sneak#streak = 1
+Plugin 'tpope/vim-commentary'
+
 
 Plugin 'wikitopian/hardmode'
 	nnoremap <leader>h <Esc>:call ToggleHardMode()<CR>
@@ -65,12 +65,10 @@ set incsearch
 set ignorecase
 set smartcase
 
-" center search
-"nnoremap n nzzzv
-"nnoremap N Nzzzv
-
-" Don't move on *
-"nnoremap * *<c-o>
+" search replace cs
+vnoremap <silent> s //e<C-r>=&selection=='exclusive'?'+1':''<CR><CR>
+    \:<C-u>call histdel('search',-1)<Bar>let @/=histget('search',-1)<CR>gv
+omap s :normal vs<CR>
 
 " This unsets the "last search pattern" register by hitting return
 nnoremap <CR> :noh<CR><CR> 
@@ -90,8 +88,8 @@ set laststatus=2
 set foldmethod=marker
 set foldtext=MyFoldText2()
 
-nnoremap <Space> za
-vnoremap <Space> za
+nnoremap <Space>a za
+vnoremap <Space>a za
 
 " }}}
 " Indent options{{{
@@ -111,17 +109,15 @@ set ttimeoutlen=0
 nnoremap <silent> j gj
 nnoremap <silent> k gk
 
-
-" Easily move to start/end of line
-" nnoremap H 0
-" vnoremap H 0
-" nnoremap L $
-" vnoremap L $
-
 " scrolling
 "map <C-U> 4<C-Y>
 "map <C-D> 4<C-E>
 
+" }}}
+" Mappings {{{
+let mapleader = "\<Space>"
+nnoremap <Leader>o :CtrlP<CR>
+nnoremap <Leader>w :w<CR>
 " }}}
 " Filetupe {{{
 
@@ -274,7 +270,6 @@ endif
 " }}}
 " Misc {{{
 
-"set clipboard=unnamedplus
 set encoding=utf-8 " set default encoding
 language en_US
 
