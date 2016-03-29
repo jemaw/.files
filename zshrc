@@ -19,7 +19,6 @@ function chpwd() {
 #completion
 autoload -U compinit && compinit
 zstyle ':completion:*' menu select
-#setopt menu_complete
 
 zstyle ':completion:::::' completer _complete _approximate
 zstyle ':completion:*:approximate:*' max-errors 2
@@ -28,26 +27,17 @@ zstyle ':completion:*:approximate:*' max-errors 2
 #Prompt 
 autoload -U promptinit
 #PROMPT=" %» "
-#PROMPT="%{$fg_bold[yellow]%} »  "
-#RPROMPT="%{$fg[black]%}%M:%{$fg_bold[yellow]%}%~%{$reset_color%}   "
-#RPROMPT="%{$fg[red]%}%(?  ━)%{$reset_color%}"
-#export PS1=" %» "
-#export PS1=" %~   [λ] "
-#PROMPT='[%~]──╼ '
+#PROMPT='%~ ── '
 #PROMPT='%b──╼ '
-#PROMPT=' ─── '
+PROMPT=' %─── '
 #PROMPT=' λ '
-PROMPT=' %F{white}» %f%b'
-#PROMPT=' %c'
+#PROMPT=' %F{white}» %f%b'
+#PROMPT=' %F{white}» %f%b'
 #RPROMPT='%b%B%F{black}%~ %B%F{white}%#'
 #PROMPT="%{$fg[black]%(! $fg[red] )-$fg[black]%(1j $fg[green] )-$fg[black]%(?  $fg[red])-$reset_color%} "
 #PROMPT="%{$fg_bold[yellow]%} »  "
-#RPROMPT="%{$fg[black]%}%M:%{$fg_bold[yellow]%}%~%{$reset_color%}   "
 #RPROMPT="%{$fg[red]%}%(?  ━)%{$reset_color%}"
  #Color command correction promt
-#autoload -U colors && colors
-#export SPROMPT="$fg[cyan]Correct $fg[red]%R$reset_color $fg[magenta]to $fg[green]%r?$reset_color ($fg[white]YES :: NO :: ABORT :: EDIT$fg[white])"
-
 
 #functions 
 function twitchl(){

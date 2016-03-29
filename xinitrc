@@ -21,7 +21,6 @@ xrandr --output DVI-0 --primary
 #xsetroot -cursor_name left_ptr &
 
 setxkbmap -layout eu -option ctrl:nocaps &
-#setxkbmap -layout eu -option caps:escape &
 
 xset -dpms &
 xset s off &
@@ -31,7 +30,8 @@ xset m 0 0 & #übergangslösungen
 sxhkd -f 120 &
 redshift -l 48.139:11.566 &
 numlockx on &
-xset r rate 200 30 &
+xset r rate 265 30 &
+xset +fp /.fonts &
 
 exec awesome
 #exec bspwm

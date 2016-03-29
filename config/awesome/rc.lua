@@ -82,7 +82,7 @@ lain.layout.centerfair.ncol    = 1
 local layouts = {
     awful.layout.suit.floating,
  -- awful.layout.suit.fair,
-    awful.layout.suit.tile, 
+--    awful.layout.suit.tile, 
     lain.layout.uselesstile,
     --lain.layout.uselesfair,
   --  lain.layout.uselessfair.horizontal,

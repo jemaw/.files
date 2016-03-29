@@ -9,14 +9,20 @@ Plugin 'gmarik/Vundle.vim'
 
 Plugin 'tpope/vim-commentary'
 
+Plugin 'szw/vim-tags' 
 
 Plugin 'wikitopian/hardmode'
 	nnoremap <leader>h <Esc>:call ToggleHardMode()<CR>
 
 Plugin 'octol/vim-cpp-enhanced-highlight'
 
+Plugin 'https://github.com/neilagabriel/vim-geeknote'
+	nnoremap <F8> :Geeknote<cr>
+	let g:GeeknoteExplorerWidth=23
+
 Plugin 'kien/ctrlp.vim'
   	let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:20,results:20'
+	nnoremap <leader>. :CtrlPTag<cr>
 
 Plugin 'Valloric/YouCompleteMe'
 	let g:ycm_autoclose_preview_window_after_insertion = 1
@@ -115,9 +121,12 @@ nnoremap <silent> k gk
 
 " }}}
 " Mappings {{{
+nnoremap <Space> <NOP>
 let mapleader = "\<Space>"
 nnoremap <Leader>o :CtrlP<CR>
 nnoremap <Leader>w :w<CR>
+nnoremap <Leader>q :q<CR>
+nnoremap <Leader>wq :wq<CR>
 " }}}
 " Filetupe {{{
 
@@ -266,7 +275,14 @@ set guiheadroom=0
 if has("gui_running")
 	colorscheme hybrid
 endif
-
+" Fix borders of fullscreen GUI
+if has('gui_gtk') && has('gui_running')
+    let s:border = synIDattr(synIDtrans(hlID('Normal')), 'bg', 'gui')
+    exe 'silent !echo ''style "vimfix" { bg[NORMAL] = "' . escape(s:border, '#') . '" }'''.
+                \' > ~/.gtkrc-2.0'
+    exe 'silent !echo ''widget "vim-main-window.*GtkForm" style "vimfix"'''.
+                \' >> ~/.gtkrc-2.0'
+endif
 " }}}
 " Misc {{{
 
@@ -274,4 +290,3 @@ set encoding=utf-8 " set default encoding
 language en_US
 
 " }}}
-
