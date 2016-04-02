@@ -1,9 +1,20 @@
 " Plugins{{{
+let mapleader = "\<Space>"
+
 set nocompatible
 filetype off                  " required
  
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
+
+Plugin 'vimwiki/vimwiki'
+	let g:vimwiki_list = [{
+	  \ 'path': '$HOME/Dropbox/wiki',
+	  \ 'template_path': '$HOME/Dropbox/wiki/templates',
+	  \ 'template_default': 'default',
+	  \ 'template_ext': '.html',
+	  \ 'auto_export': 1}]
+
 
 Plugin 'gmarik/Vundle.vim'
 
@@ -11,14 +22,7 @@ Plugin 'tpope/vim-commentary'
 
 Plugin 'szw/vim-tags' 
 
-Plugin 'wikitopian/hardmode'
-	nnoremap <leader>h <Esc>:call ToggleHardMode()<CR>
-
 Plugin 'octol/vim-cpp-enhanced-highlight'
-
-Plugin 'https://github.com/neilagabriel/vim-geeknote'
-	nnoremap <F8> :Geeknote<cr>
-	let g:GeeknoteExplorerWidth=23
 
 Plugin 'kien/ctrlp.vim'
   	let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:20,results:20'
@@ -94,8 +98,8 @@ set laststatus=2
 set foldmethod=marker
 set foldtext=MyFoldText2()
 
-nnoremap <Space>a za
-vnoremap <Space>a za
+nnoremap <Leader><Leader> za
+vnoremap <Leader><Leader> za
 
 " }}}
 " Indent options{{{
@@ -122,11 +126,10 @@ nnoremap <silent> k gk
 " }}}
 " Mappings {{{
 nnoremap <Space> <NOP>
-let mapleader = "\<Space>"
 nnoremap <Leader>o :CtrlP<CR>
 nnoremap <Leader>w :w<CR>
 nnoremap <Leader>q :q<CR>
-nnoremap <Leader>wq :wq<CR>
+nnoremap <Leader>Q :wq<CR>
 " }}}
 " Filetupe {{{
 
@@ -286,6 +289,7 @@ endif
 " }}}
 " Misc {{{
 
+set wildmenu 
 set encoding=utf-8 " set default encoding
 language en_US
 

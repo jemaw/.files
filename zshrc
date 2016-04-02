@@ -26,10 +26,10 @@ zstyle ':completion:*:approximate:*' max-errors 2
 
 #Prompt 
 autoload -U promptinit
-#PROMPT=" %» "
+PROMPT=" %» "
 #PROMPT='%~ ── '
 #PROMPT='%b──╼ '
-PROMPT=' %─── '
+#PROMPT=' %─── '
 #PROMPT=' λ '
 #PROMPT=' %F{white}» %f%b'
 #PROMPT=' %F{white}» %f%b'
