@@ -15,12 +15,14 @@ Plugin 'vimwiki/vimwiki'
 	  \ 'template_ext': '.html',
 	  \ 'auto_export': 1}]
 
-
 Plugin 'gmarik/Vundle.vim'
 
 Plugin 'tpope/vim-commentary'
 
-Plugin 'szw/vim-tags' 
+"Plugin 'szw/vim-tags' 
+Plugin 'ludovicchabant/vim-gutentags'
+	let g:gutentags_define_advanced_commands = 1
+	let g:gutentags_tagfile = '.tags'
 
 Plugin 'octol/vim-cpp-enhanced-highlight'
 
@@ -95,7 +97,9 @@ set relativenumber
 
 set laststatus=2
 
-set foldmethod=marker
+"folding settings
+set foldmethod=syntax   "fold based on indent
+set foldlevel=99
 set foldtext=MyFoldText2()
 
 nnoremap <Leader><Leader> za
@@ -127,14 +131,15 @@ nnoremap <silent> k gk
 " Mappings {{{
 nnoremap <Space> <NOP>
 nnoremap <Leader>o :CtrlP<CR>
-nnoremap <Leader>w :w<CR>
+nnoremap <Leader>s :w<CR>
 nnoremap <Leader>q :q<CR>
-nnoremap <Leader>Q :wq<CR>
+nnoremap <Leader>wq :wq<CR>
+"nnoremap <Leader>Q :wq<CR>
 " }}}
 " Filetupe {{{
 
 " Disable comment new line
-autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+au FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
 au FileType python setlocal formatprg=autopep8\ -
 " }}}
@@ -292,5 +297,8 @@ endif
 set wildmenu 
 set encoding=utf-8 " set default encoding
 language en_US
+set tags=./tags;,tags;
 
+" vim: fdm=marker:fdl=0
 " }}}
+

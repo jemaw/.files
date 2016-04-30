@@ -79,18 +79,23 @@ lain.layout.termfair.ncol      = 1
 lain.layout.centerfair.nmaster = 3
 lain.layout.centerfair.ncol    = 1
 
+lain.layout.centerwork.top_left = 0
+lain.layout.centerwork.top_right = 1
+lain.layout.centerwork.bottom_left = 2
+lain.layout.centerwork.bottom_right = 3
+
 local layouts = {
     awful.layout.suit.floating,
  -- awful.layout.suit.fair,
 --    awful.layout.suit.tile, 
-    lain.layout.uselesstile,
     --lain.layout.uselesfair,
   --  lain.layout.uselessfair.horizontal,
   --  awful.layout.suit.magnifier
  -- lain.layout.uselessfair,
- --  lain.layout.termfair,
+   --lain.layout.centerfair,
  --   lain.layout.cascade,
---    lain.layout.centerwork,
+    lain.layout.centerwork,
+    lain.layout.uselesstile,
  -- lain.layout.uselesspiral.dwindle
 }
 
@@ -392,7 +397,7 @@ for s = 1, screen.count() do
   --  if s==2 then not mywibox[s].visible end
 end
 
-mywibox[2].visible = false
+--mywibox[2].visible = false
 
 -- }}}
 
@@ -434,22 +439,22 @@ globalkeys = awful.util.table.join(
 	-- move/swap
     awful.key({ modkey,"Shift" }, "j", function (c) 
 		if awful.client.floating.get(c) or awful.layout.getname(awful.layout.get(s)) == "floating" then
-			awful.client.moveresize(  0,  20,   0,   0)
+			awful.client.moveresize(  0,  15,   0,   0)
 		else 
 			awful.client.swap.global_bydirection("down")end    end),
     awful.key({ modkey,"Shift" }, "k", function (c) 
 		if awful.client.floating.get(c) or awful.layout.getname(awful.layout.get(s)) == "floating" then
-			awful.client.moveresize(  0,  -20,   0,   0)
+			awful.client.moveresize(  0,  -15,   0,   0)
 		else 
 			awful.client.swap.global_bydirection("up")end    end),
     awful.key({ modkey,"Shift" }, "h", function (c) 
 		if awful.client.floating.get(c) or awful.layout.getname(awful.layout.get(s)) == "floating" then
-			awful.client.moveresize(  -20,  0,   0,   0)
+			awful.client.moveresize(  -15,  0,   0,   0)
 		else 
 			awful.client.swap.global_bydirection("left")end    end),
     awful.key({ modkey,"Shift" }, "l", function (c) 
 		if awful.client.floating.get(c) or awful.layout.getname(awful.layout.get(s)) == "floating" then
-			awful.client.moveresize(  20,  0,   0,   0)
+			awful.client.moveresize(  15,  0,   0,   0)
 		else 
 			awful.client.swap.global_bydirection("right")end    end),
 			
@@ -691,8 +696,8 @@ awful.rules.rules = {
                      buttons = clientbuttons,
 	                   size_hints_honor = false } },
 
-    { rule = { class = "URxvt" },
-          properties = { height = 336} },
+    -- { rule = { class = "URxvt" },
+    --       properties = { height = 336} },
 
     { rule = { name = "TeamSpeak 3" },
           properties = { width = 350 ,
@@ -701,8 +706,8 @@ awful.rules.rules = {
     { rule = { class = "TeamSpeak 3" },
 		  properties = { floating = on}},
 
-    { rule = { class = "MPlayer" },
-          properties = { floating = true } },
+    -- { rule = { class = "MPlayer" },
+    --       properties = { floating = true } },
 
     { rule = { instance = "Firefox" },
           properties = { height = 1035 } },
@@ -833,5 +838,5 @@ for s = 1, screen.count() do screen[s]:connect_signal("arrange", function ()
 end
 -- }}}
 
-
+-- vim: fdm=marker:fdl=0
 

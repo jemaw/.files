@@ -4,6 +4,7 @@
 #
 
 alias v=vim
+alias py=python2
 alias ra=ranger-cd
 alias pacu="sudo pacman -Syu"
 alias paci="sudo pacman -S" 
@@ -14,3 +15,4 @@ alias xres="xrdb merge ~/.Xresources"
 alias tekshot="screenfetch -o 'upload=1;uploadLoc=teknik;screenshot=1'"
 alias c11="g++ -std=c++11"
 alias lock="/home/jean/Scripts/lock.sh"
+alias qnap="sudo mount 192.168.1.4:/Data /media/jean/qnap"

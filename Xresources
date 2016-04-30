@@ -7,6 +7,7 @@ Xft.hintstyle:		hintfull
 Xft.rgba:	    		rgb
 !}}}
 !{{{font
+!#define cjb_font     Liberation Mono 
 #define cjb_font     Tamsyn 
 #define cjb_fontsize 14
 
@@ -58,4 +59,4 @@ urxvt.fading: 0
 
 urxvt*depth: 32
 !}}}
-! vi:syntax=xdefaults
+! vi:syntax=xdefaults:fdm=marker:fdl=0

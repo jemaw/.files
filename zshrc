@@ -26,7 +26,7 @@ zstyle ':completion:*:approximate:*' max-errors 2
 
 #Prompt 
 autoload -U promptinit
-PROMPT=" %» "
+#PROMPT=" %» "
 #PROMPT='%~ ── '
 #PROMPT='%b──╼ '
 #PROMPT=' %─── '
@@ -35,7 +35,7 @@ PROMPT=" %» "
 #PROMPT=' %F{white}» %f%b'
 #RPROMPT='%b%B%F{black}%~ %B%F{white}%#'
 #PROMPT="%{$fg[black]%(! $fg[red] )-$fg[black]%(1j $fg[green] )-$fg[black]%(?  $fg[red])-$reset_color%} "
-#PROMPT="%{$fg_bold[yellow]%} »  "
+PROMPT="%{$fg_bold[yellow]%} » "
 #RPROMPT="%{$fg[red]%}%(?  ━)%{$reset_color%}"
  #Color command correction promt
 
@@ -58,3 +58,16 @@ function ranger-cd {
     fi
     rm -f -- "$tempfile"
 }
+
+
+
+export BROWSER=firefox
+export PATH=/opt/cud/bin:$PATH
+export LD_LIBRARY_PATH=/opt/cuda/lib64:$LD_LIBRARY_PATH
+# Set enviroment-variables for cuda-7:
+# export CUDA_HOME=/opt/cuda
+# export LD_LIBRARY_PATH=${CUDA_HOME}/lib64PATH=${CUDA_HOME}/bin:${PATH}
+# export PATH# Add opencv to python payth
+#export PYTHONPATH=$PYTHONPATH:/home/florian/opencv-3.0.0/build/lib
+#export PYTHONPATH=$PYTHONPATH:/home/florian/opencv-3.0.0/build/lib/python3
+
