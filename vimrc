@@ -13,7 +13,9 @@ Plugin 'vimwiki/vimwiki'
 	  \ 'template_path': '$HOME/Dropbox/wiki/templates',
 	  \ 'template_default': 'default',
 	  \ 'template_ext': '.html',
-	  \ 'auto_export': 1}]
+	  \ 'auto_export': 1,
+	  \ 'nested_syntaxes' : {'python': 'python', 'c++': 'cpp'} }]
+
 
 Plugin 'gmarik/Vundle.vim'
 
@@ -280,6 +282,7 @@ set guioptions-=T  "remove toolbar
 set guioptions-=r  "remove right-hand scroll bar
 set guioptions-=L  "remove left-hand scroll bar
 set guiheadroom=0
+set guicursor+=a:blinkon0
 if has("gui_running")
 	colorscheme hybrid
 endif
