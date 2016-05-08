@@ -1,2 +1,4 @@
 /vim/bundle
+*.tags
+tags
 /firefoxstuff

@@ -7,30 +7,18 @@ filetype off                  " required
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
-Plugin 'vimwiki/vimwiki'
-	let g:vimwiki_list = [{
-	  \ 'path': '$HOME/Dropbox/wiki',
-	  \ 'template_path': '$HOME/Dropbox/wiki/templates',
-	  \ 'template_default': 'default',
-	  \ 'template_ext': '.html',
-	  \ 'auto_export': 1,
-	  \ 'nested_syntaxes' : {'python': 'python', 'c++': 'cpp'} }]
-
-
 Plugin 'gmarik/Vundle.vim'
 
+Plugin 'octol/vim-cpp-enhanced-highlight'
 Plugin 'tpope/vim-commentary'
 
-"Plugin 'szw/vim-tags' 
-Plugin 'ludovicchabant/vim-gutentags'
-	let g:gutentags_define_advanced_commands = 1
-	let g:gutentags_tagfile = '.tags'
-
-Plugin 'octol/vim-cpp-enhanced-highlight'
-
+Plugin 'xolox/vim-easytags'
+Plugin 'xolox/vim-misc'
 Plugin 'kien/ctrlp.vim'
   	let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:20,results:20'
-	nnoremap <leader>. :CtrlPTag<cr>
+	nnoremap <leader>t :CtrlPTag<cr>
+	nnoremap <Leader>o :CtrlP<CR>
+	nnoremap <Leader>p :CtrlPBuffer<CR>
 
 Plugin 'Valloric/YouCompleteMe'
 	let g:ycm_autoclose_preview_window_after_insertion = 1
@@ -50,6 +38,14 @@ Plugin 'Valloric/YouCompleteMe'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 
+Plugin 'vimwiki/vimwiki'
+	let g:vimwiki_list = [{
+	  \ 'path': '$HOME/Dropbox/wiki',
+	  \ 'template_path': '$HOME/Dropbox/wiki/templates',
+	  \ 'template_default': 'default',
+	  \ 'template_ext': '.html',
+	  \ 'auto_export': 1,
+	  \ 'nested_syntaxes' : {'python': 'python', 'c++': 'cpp'} }]
 call vundle#end()            " required
 filetype plugin indent on    " required
 "}}}
@@ -71,10 +67,8 @@ set wrapmargin=0
 
  "highlight search
 set hlsearch
-
 " Show search results as you type
 set incsearch
-
 " Ignore case in searches if query doesn't include capitals
 set ignorecase
 set smartcase
@@ -132,7 +126,6 @@ nnoremap <silent> k gk
 " }}}
 " Mappings {{{
 nnoremap <Space> <NOP>
-nnoremap <Leader>o :CtrlP<CR>
 nnoremap <Leader>s :w<CR>
 nnoremap <Leader>q :q<CR>
 nnoremap <Leader>wq :wq<CR>
@@ -244,38 +237,7 @@ function! MyFoldText3() "
     return text
   endfunction
 
-function! RangeChooser()
-    let temp = tempname()
-    " The option "--choosefiles" was added in ranger 1.5.1. Use the next line
-    " with ranger 1.4.2 through 1.5.0 instead.
-    "exec 'silent !ranger --choosefile=' . shellescape(temp)
-    if has("gui_running")
-        exec 'silent !xterm -e ranger --choosefiles=' . shellescape(temp)
-    else
-        exec 'silent !ranger --choosefiles=' . shellescape(temp)
-    endif
-    if !filereadable(temp)
-        redraw!
-        " Nothing to read.
-        return
-    endif
-    let names = readfile(temp)
-    if empty(names)
-        redraw!
-        " Nothing to open.
-        return
-    endif
-    " Edit the first item.
-    exec 'edit ' . fnameescape(names[0])
-    " Add any remaning items to the arg list/buffer list.
-    for name in names[1:]
-        exec 'argadd ' . fnameescape(name)
-    endfor
-    redraw!
-endfunction
-command! -bar RangerChooser call RangeChooser()
-nnoremap <leader>r :<C-U>RangerChooser<CR>
-"}}}
+" }}}
 " gui {{{ 
 set guioptions-=m  "remove menu bar
 set guioptions-=T  "remove toolbar
@@ -284,15 +246,15 @@ set guioptions-=L  "remove left-hand scroll bar
 set guiheadroom=0
 set guicursor+=a:blinkon0
 if has("gui_running")
-	colorscheme hybrid
+  colorscheme hybrid
 endif
 " Fix borders of fullscreen GUI
 if has('gui_gtk') && has('gui_running')
-    let s:border = synIDattr(synIDtrans(hlID('Normal')), 'bg', 'gui')
-    exe 'silent !echo ''style "vimfix" { bg[NORMAL] = "' . escape(s:border, '#') . '" }'''.
-                \' > ~/.gtkrc-2.0'
-    exe 'silent !echo ''widget "vim-main-window.*GtkForm" style "vimfix"'''.
-                \' >> ~/.gtkrc-2.0'
+  let s:border = synIDattr(synIDtrans(hlID('Normal')), 'bg', 'gui')
+  exe 'silent !echo ''style "vimfix" { bg[NORMAL] = "' . escape(s:border, '#') . '" }'''.
+			  \' > ~/.gtkrc-2.0'
+  exe 'silent !echo ''widget "vim-main-window.*GtkForm" style "vimfix"'''.
+			  \' >> ~/.gtkrc-2.0'
 endif
 " }}}
 " Misc {{{
@@ -304,4 +266,3 @@ set tags=./tags;,tags;
 
 " vim: fdm=marker:fdl=0
 " }}}
-
