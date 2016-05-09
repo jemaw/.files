@@ -95,7 +95,7 @@ set laststatus=2
 "folding settings
 set foldmethod=syntax   "fold based on indent
 set foldlevel=99
-set foldtext=MyFoldText2()
+"set foldtext=MyFoldText2()
 
 nnoremap <Leader><Leader> za
 vnoremap <Leader><Leader> za
@@ -121,6 +121,10 @@ nnoremap <silent> k gk
 " scrolling
 map <C-U> 2<C-Y>
 map <C-D> 2<C-E>
+
+" Paragraph jumping not on empty lines
+nnoremap <expr> { len(getline(line('.')-1)) > 0 ? '{+' : '{-'
+nnoremap <expr> } len(getline(line('.')+1)) > 0 ? '}-' : '}+'
 
 " }}}
 " Mappings {{{
