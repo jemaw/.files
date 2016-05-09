@@ -12,7 +12,7 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'octol/vim-cpp-enhanced-highlight'
 Plugin 'tpope/vim-commentary'
 
-Plugin 'kien/ctrlp.vim'
+Plugin 'ctrlpvim/ctrlp.vim'
   	let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:20,results:20'
 	nnoremap <leader>t :CtrlPTag<cr>
 	nnoremap <Leader>o :CtrlP<CR>
@@ -119,8 +119,8 @@ nnoremap <silent> j gj
 nnoremap <silent> k gk
 
 " scrolling
-"map <C-U> 4<C-Y>
-"map <C-D> 4<C-E>
+map <C-U> 2<C-Y>
+map <C-D> 2<C-E>
 
 " }}}
 " Mappings {{{
