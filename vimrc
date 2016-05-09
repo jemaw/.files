@@ -12,8 +12,6 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'octol/vim-cpp-enhanced-highlight'
 Plugin 'tpope/vim-commentary'
 
-Plugin 'xolox/vim-easytags'
-Plugin 'xolox/vim-misc'
 Plugin 'kien/ctrlp.vim'
   	let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:20,results:20'
 	nnoremap <leader>t :CtrlPTag<cr>
@@ -21,6 +19,7 @@ Plugin 'kien/ctrlp.vim'
 	nnoremap <Leader>p :CtrlPBuffer<CR>
 
 Plugin 'Valloric/YouCompleteMe'
+	nnoremap <leader>g :YcmCompleter GoTo<CR>
 	let g:ycm_autoclose_preview_window_after_insertion = 1
 	let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py' " you complete me conf
 	let g:ycm_show_diagnostics_ui = 0
