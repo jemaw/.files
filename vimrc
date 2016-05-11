@@ -12,6 +12,10 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'octol/vim-cpp-enhanced-highlight'
 Plugin 'tpope/vim-commentary'
 
+Plugin 'terryma/vim-expand-region'
+	vmap v <Plug>(expand_region_expand)
+	vmap <C-v> <Plug>(expand_region_shrink)
+
 Plugin 'ctrlpvim/ctrlp.vim'
   	let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:20,results:20'
 	nnoremap <leader>t :CtrlPTag<cr>
