@@ -16,9 +16,14 @@ Plugin 'terryma/vim-expand-region'
 	vmap v <Plug>(expand_region_expand)
 	vmap <C-v> <Plug>(expand_region_shrink)
 
+Plugin 'majutsushi/tagbar'
+	nmap <leader>tt :TagbarToggle<CR>
+	nmap <leader>to :TagbarOpenAutoClose<CR>
+Plugin 'xolox/vim-easytags'
+Plugin 'xolox/vim-misc'
+
 Plugin 'ctrlpvim/ctrlp.vim'
   	let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:20,results:20'
-	nnoremap <leader>t :CtrlPTag<cr>
 	nnoremap <Leader>o :CtrlP<CR>
 	nnoremap <Leader>p :CtrlPBuffer<CR>
 
