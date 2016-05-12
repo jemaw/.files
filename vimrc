@@ -273,7 +273,7 @@ endif
 
 set wildmenu 
 set encoding=utf-8 " set default encoding
-language en_US
+"language en_US
 set tags=./tags;,tags;
 
 " vim: fdm=marker:fdl=0
