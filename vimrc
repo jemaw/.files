@@ -12,6 +12,16 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'octol/vim-cpp-enhanced-highlight'
 Plugin 'tpope/vim-commentary'
 
+Plugin 'scroloose/nerdtree'
+
+Plugin 'prendradjaja/vim-vertigo'
+	nnoremap <silent> <Leader>j :<C-U>VertigoDown n<CR>
+	vnoremap <silent> <Leader>j :<C-U>VertigoDown v<CR>
+	onoremap <silent> <Leader>j :<C-U>VertigoDown o<CR>
+	nnoremap <silent> <Leader>k :<C-U>VertigoUp n<CR>
+	vnoremap <silent> <Leader>k :<C-U>VertigoUp v<CR>
+	onoremap <silent> <Leader>k :<C-U>VertigoUp o<CR>
+
 Plugin 'terryma/vim-expand-region'
 	vmap v <Plug>(expand_region_expand)
 	vmap <C-v> <Plug>(expand_region_shrink)
@@ -66,9 +76,7 @@ set wrap
 set linebreak
 
 " Set textwidth to 80 characters
-set textwidth=0
-set nolist
-set wrapmargin=0
+set textwidth=80
 
 " }}}
 " Searching{{{
@@ -112,10 +120,13 @@ vnoremap <Leader><Leader> za
 " }}}
 " Indent options{{{
 
+set ts=4 sts=4 sw=4 noexpandtab " default settings
 " cindent options:
 set cindent shiftwidth=4
 set cindent tabstop=4
 set cindent noexpandtab
+
+set listchars=tab:»\ ,extends:›,precedes:‹,nbsp:·,trail:·
 
 " }}}
 " Movement {{{
@@ -148,7 +159,7 @@ nnoremap <Leader>wq :wq<CR>
 " Disable comment new line
 au FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
-au FileType python setlocal formatprg=autopep8\ -
+au FileType python setlocal tabstop=4 noexpandtab 
 " }}}
 " Buffers  {{{
 
@@ -184,70 +195,70 @@ function! g:UltiSnips_Reverse()
   return ""
 endfunction
 
-function! MyFoldText1()
-    let line = getline(v:foldstart)
+" function! MyFoldText1()
+"     let line = getline(v:foldstart)
 
-    let nucolwidth = &fdc + &number * &numberwidth
-    let windowwidth = winwidth(0) - nucolwidth - 3
-    let foldedlinecount = v:foldend - v:foldstart
+"     let nucolwidth = &fdc + &number * &numberwidth
+"     let windowwidth = winwidth(0) - nucolwidth - 3
+"     let foldedlinecount = v:foldend - v:foldstart
 
-    " expand tabs into spaces
-    let onetab = strpart('          ', 0, &tabstop)
-    let line = substitute(line, '\t', onetab, 'g')
+"     " expand tabs into spaces
+"     let onetab = strpart('          ', 0, &tabstop)
+"     let line = substitute(line, '\t', onetab, 'g')
 
-    let line = strpart(line, 0, windowwidth - 2 -len(foldedlinecount))
-    let fillcharcount = windowwidth - len(line) - len(foldedlinecount)
-    return line . '…' . repeat(" ",fillcharcount) . foldedlinecount . '…' . ' '
-endfunction 
+"     let line = strpart(line, 0, windowwidth - 2 -len(foldedlinecount))
+"     let fillcharcount = windowwidth - len(line) - len(foldedlinecount)
+"     return line . '…' . repeat(" ",fillcharcount) . foldedlinecount . '…' . ' '
+" endfunction 
 
-function! MyFoldText2() 
-  let line = ' ' . substitute(getline(v:foldstart), '^\s*"\?\s*\|\s*"\?\s*{{' . '{\d*\s*', '', 'g') . ' '
-  let lines_count = v:foldend - v:foldstart + 1
-  let lines_count_text = '| ' . printf("%10s", lines_count . ' lines') . ' |'
-  let foldchar = matchstr(&fillchars, 'fold:\zs.')
-  let foldtextstart = strpart('+' . repeat(foldchar, v:foldlevel*2) . line, 0, (winwidth(0)*2)/3)
-  let foldtextend = lines_count_text . repeat(foldchar, 8)
-  let foldtextlength = strlen(substitute(foldtextstart . foldtextend, '.', 'x', 'g')) + &foldcolumn
-  return foldtextstart . repeat(foldchar, winwidth(0)-foldtextlength) . foldtextend
-endfunction
+" function! MyFoldText2() 
+"   let line = ' ' . substitute(getline(v:foldstart), '^\s*"\?\s*\|\s*"\?\s*{{' . '{\d*\s*', '', 'g') . ' '
+"   let lines_count = v:foldend - v:foldstart + 1
+"   let lines_count_text = '| ' . printf("%10s", lines_count . ' lines') . ' |'
+"   let foldchar = matchstr(&fillchars, 'fold:\zs.')
+"   let foldtextstart = strpart('+' . repeat(foldchar, v:foldlevel*2) . line, 0, (winwidth(0)*2)/3)
+"   let foldtextend = lines_count_text . repeat(foldchar, 8)
+"   let foldtextlength = strlen(substitute(foldtextstart . foldtextend, '.', 'x', 'g')) + &foldcolumn
+"   return foldtextstart . repeat(foldchar, winwidth(0)-foldtextlength) . foldtextend
+" endfunction
 
 
-function! MyFoldText3() " 
-    let suba = getline(v:foldstart)
-    let suba = substitute(suba, '{{{\d\=\|}}}\d\=', '', 'g')
-    let suba = substitute(suba, '\s*$', '', '')
-    " let subb = getline(v:foldend)
-    " let subb = substitute(subb, '{{{\d\=\|}}}\d\=', '', 'g')
-    " let subb = substitute(subb, '^\s*', '', '')
-    " let subb = substitute(subb, '\s*$', '', '')
-    let lines = v:foldend - v:foldstart + 1
-    let text = suba
-    " if lines > 1 && strlen(subb) > 0
-    "   let text .= ' ... '.subb
-    " endif
-    let fillchar = matchstr(&fillchars, 'fold:\zs.')
-    if strlen(fillchar) == 0
-      let fillchar = '-'
-    endif
-    let lines = repeat(fillchar, 4).' ' . lines . ' lines '.repeat(fillchar, 3)
-    if has('float')
-      let nuw = max([float2nr(log10(line('$')))+3, &numberwidth])
-    else
-      let nuw = &numberwidth
-    endif
-    let n = winwidth(winnr()) - &foldcolumn - nuw - strlen(lines)
-    let text = text[:min([strlen(text), n])]
-    if text[-1:] != ' '
-      if strlen(text) < n
-        let text .= ' '
-      else
-        let text = substitute(text, '\s*.$', '', '')
-      endif
-    endif
-    let text .= repeat(fillchar, n - strlen(text))
-    let text .= lines
-    return text
-  endfunction
+" function! MyFoldText3() " 
+"     let suba = getline(v:foldstart)
+"     let suba = substitute(suba, '{{{\d\=\|}}}\d\=', '', 'g')
+"     let suba = substitute(suba, '\s*$', '', '')
+"     " let subb = getline(v:foldend)
+"     " let subb = substitute(subb, '{{{\d\=\|}}}\d\=', '', 'g')
+"     " let subb = substitute(subb, '^\s*', '', '')
+"     " let subb = substitute(subb, '\s*$', '', '')
+"     let lines = v:foldend - v:foldstart + 1
+"     let text = suba
+"     " if lines > 1 && strlen(subb) > 0
+"     "   let text .= ' ... '.subb
+"     " endif
+"     let fillchar = matchstr(&fillchars, 'fold:\zs.')
+"     if strlen(fillchar) == 0
+"       let fillchar = '-'
+"     endif
+"     let lines = repeat(fillchar, 4).' ' . lines . ' lines '.repeat(fillchar, 3)
+"     if has('float')
+"       let nuw = max([float2nr(log10(line('$')))+3, &numberwidth])
+"     else
+"       let nuw = &numberwidth
+"     endif
+"     let n = winwidth(winnr()) - &foldcolumn - nuw - strlen(lines)
+"     let text = text[:min([strlen(text), n])]
+"     if text[-1:] != ' '
+"       if strlen(text) < n
+"         let text .= ' '
+"       else
+"         let text = substitute(text, '\s*.$', '', '')
+"       endif
+"     endif
+"     let text .= repeat(fillchar, n - strlen(text))
+"     let text .= lines
+"     return text
+"   endfunction
 
 " }}}
 " gui {{{ 
