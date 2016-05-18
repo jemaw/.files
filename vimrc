@@ -149,16 +149,27 @@ nnoremap <expr> } len(getline(line('.')+1)) > 0 ? '}-' : '}+'
 " }}}
 " Mappings {{{
 nnoremap <Space> <NOP>
-nnoremap <Leader>s :w<CR>
-nnoremap <Leader>q :q<CR>
-nnoremap <Leader>wq :wq<CR>
-"nnoremap <Leader>Q :wq<CR>
+
+" Split moving
+nnoremap <C-h> <C-w>h
+" nnoremap <C-j> <C-w>j
+" nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+
+"Quickly paste from +reg
+nnoremap <Leader>v "+p
+vnoremap <Leader>v "+p
+
+" avoid ex mode
+nmap Q q
 " }}}
 " Filetupe {{{
 
 " Disable comment new line
 au FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
+au FileType python setlocal formatprg=autopep8\ -
+au Filetype python vnoremap <buffer> gq gq:%retab!<CR>
 au FileType python setlocal tabstop=4 noexpandtab 
 " }}}
 " Buffers  {{{
@@ -195,7 +206,6 @@ set encoding=utf-8 " set default encoding
 "language en_US
 set tags=./tags;,tags;
 
-" vim: fdm=marker:fdl=0
 " }}}
 " Functions{{{
 
@@ -223,4 +233,5 @@ function! g:UltiSnips_Reverse()
   return ""
 endfunction
 
+" vim: fdm=marker:fdl=0
 " }}}
