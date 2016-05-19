@@ -92,7 +92,7 @@ local layouts = {
   --  lain.layout.uselessfair.horizontal,
   --  awful.layout.suit.magnifier
  -- lain.layout.uselessfair,
-   --lain.layout.centerfair,
+      lain.layout.centerfair,
  --   lain.layout.cascade,
     lain.layout.centerwork,
     lain.layout.uselesstile,
