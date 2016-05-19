@@ -120,13 +120,9 @@ vnoremap <Leader><Leader> za
 " }}}
 " Indent options{{{
 
-set ts=4 sts=4 sw=4 noexpandtab " default settings
-" cindent options:
-set cindent shiftwidth=4
-set cindent tabstop=4
-set cindent noexpandtab
+set ts=4 sts=4 sw=4 noexpandtab
 
-set listchars=tab:»\ ,extends:›,precedes:‹,nbsp:·,trail:·
+set list lcs=tab:\ \ ,extends:›,precedes:‹,nbsp:·,trail:·
 
 " }}}
 " Movement {{{
