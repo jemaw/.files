@@ -12,7 +12,10 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'octol/vim-cpp-enhanced-highlight'
 Plugin 'tpope/vim-commentary'
 
-Plugin 'scroloose/nerdtree'
+"Plugin 'scroloose/nerdtree'
+"Plugin 'tpope/vim-vinegar'
+Plugin 'justinmk/vim-dirvish'
+nnoremap <leader>r :<C-U>RangerChooser<CR>
 
 Plugin 'prendradjaja/vim-vertigo'
 	nnoremap <silent> <Leader>j :<C-U>VertigoDown n<CR>
@@ -120,13 +123,9 @@ vnoremap <Leader><Leader> za
 " }}}
 " Indent options{{{
 
-set ts=4 sts=4 sw=4 noexpandtab " default settings
-" cindent options:
-set cindent shiftwidth=4
-set cindent tabstop=4
-set cindent noexpandtab
+set ts=4 sts=4 sw=4 noexpandtab
 
-set listchars=tab:»\ ,extends:›,precedes:‹,nbsp:·,trail:·
+set list lcs=tab:\ \ ,extends:›,precedes:‹,nbsp:·,trail:·
 
 " }}}
 " Movement {{{
@@ -207,7 +206,15 @@ set encoding=utf-8 " set default encoding
 set tags=./tags;,tags;
 
 " }}}
+" {{{ Backup
+set backupdir=~/.vim/backup//
+set directory=~/.vim/swap//
+set undodir=~/.vim/undo//
+set undofile
+"}}}
 " Functions{{{
+
+
 
 function! g:UltiSnips_Complete()
   call UltiSnips#ExpandSnippet()
@@ -233,5 +240,35 @@ function! g:UltiSnips_Reverse()
   return ""
 endfunction
 
+function! RangeChooser()
+    let temp = tempname()
+    " The option "--choosefiles" was added in ranger 1.5.1. Use the next line
+    " with ranger 1.4.2 through 1.5.0 instead.
+    "exec 'silent !ranger --choosefile=' . shellescape(temp)
+    if has("gui_running")
+        exec 'silent !xterm -e ranger --choosefiles=' . shellescape(temp)
+    else
+        exec 'silent !ranger --choosefiles=' . shellescape(temp)
+    endif
+    if !filereadable(temp)
+        redraw!
+        " Nothing to read.
+        return
+    endif
+    let names = readfile(temp)
+    if empty(names)
+        redraw!
+        " Nothing to open.
+        return
+    endif
+    " Edit the first item.
+    exec 'edit ' . fnameescape(names[0])
+    " Add any remaning items to the arg list/buffer list.
+    for name in names[1:]
+        exec 'argadd ' . fnameescape(name)
+    endfor
+    redraw!
+endfunction
+command! -bar RangerChooser call RangeChooser()
 " vim: fdm=marker:fdl=0
 " }}}
