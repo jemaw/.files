@@ -12,18 +12,13 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'octol/vim-cpp-enhanced-highlight'
 Plugin 'tpope/vim-commentary'
 
+Plugin 'chriskempson/base16-vim'
+Plugin 'juanedi/predawn.vim'
+
 "Plugin 'scroloose/nerdtree'
 "Plugin 'tpope/vim-vinegar'
 Plugin 'justinmk/vim-dirvish'
 nnoremap <leader>r :<C-U>RangerChooser<CR>
-
-Plugin 'prendradjaja/vim-vertigo'
-	nnoremap <silent> <Leader>j :<C-U>VertigoDown n<CR>
-	vnoremap <silent> <Leader>j :<C-U>VertigoDown v<CR>
-	onoremap <silent> <Leader>j :<C-U>VertigoDown o<CR>
-	nnoremap <silent> <Leader>k :<C-U>VertigoUp n<CR>
-	vnoremap <silent> <Leader>k :<C-U>VertigoUp v<CR>
-	onoremap <silent> <Leader>k :<C-U>VertigoUp o<CR>
 
 Plugin 'terryma/vim-expand-region'
 	vmap v <Plug>(expand_region_expand)
@@ -105,6 +100,8 @@ nnoremap <CR> :noh<CR><CR>
 
 syntax on
 set background=dark
+" let base16colorspace=256
+" colorscheme base16-twilight
 colorscheme noctu2
 
 set number
@@ -113,9 +110,9 @@ set relativenumber
 set laststatus=2
 
 "folding settings
-set foldmethod=syntax   "fold based on indent
-set foldlevel=99
-"set foldtext=MyFoldText2()
+set foldmethod=syntax
+"set foldlevel=99
+set foldtext=NeatFoldText()
 
 nnoremap <Leader><Leader> za
 vnoremap <Leader><Leader> za
@@ -141,9 +138,9 @@ nnoremap <silent> k gk
 map <C-U> 2<C-Y>
 map <C-D> 2<C-E>
 
-" Paragraph jumping not on empty lines
-nnoremap <expr> { len(getline(line('.')-1)) > 0 ? '{+' : '{-'
-nnoremap <expr> } len(getline(line('.')+1)) > 0 ? '}-' : '}+'
+" " Paragraph jumping not on empty lines
+" nnoremap <expr> { len(getline(line('.')-1)) > 0 ? '{+' : '{-'
+" nnoremap <expr> } len(getline(line('.')+1)) > 0 ? '}-' : '}+'
 
 " }}}
 " Mappings {{{
@@ -169,7 +166,7 @@ au FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
 au FileType python setlocal formatprg=autopep8\ -
 au Filetype python vnoremap <buffer> gq gq:%retab!<CR>
-au FileType python setlocal tabstop=4 noexpandtab 
+au FileType python setlocal tabstop=4 noexpandtab fdm=indent
 " }}}
 " Buffers  {{{
 
@@ -206,13 +203,39 @@ set encoding=utf-8 " set default encoding
 set tags=./tags;,tags;
 
 " }}}
-" {{{ Backup
+"  Backup {{{
 set backupdir=~/.vim/backup//
 set directory=~/.vim/swap//
-set undodir=~/.vim/undo//
-set undofile
+" set undodir=~/.vim/undo//
+" set undofile
 "}}}
 " Functions{{{
+function! NeatFoldText()
+  let line = ' ' . substitute(getline(v:foldstart), '^\s*"\?\s*\|\s*"\?\s*{{' . '{\d*\s*', '', 'g') . ' '
+  let lines_count = v:foldend - v:foldstart + 1
+  let lines_count_text = '| ' . printf("%10s", lines_count . ' lines') . ' |'
+  let foldchar = matchstr(&fillchars, 'fold:\zs.')
+  let foldtextstart = strpart('+' . repeat(foldchar, v:foldlevel*2) . line, 0, (winwidth(0)*2)/3)
+  let foldtextend = lines_count_text . repeat(foldchar, 8)
+  let foldtextlength = strlen(substitute(foldtextstart . foldtextend, '.', 'x', 'g')) + &foldcolumn
+  return foldtextstart . repeat(foldchar, winwidth(0)-foldtextlength) . foldtextend
+endfunction
+
+function! MyFoldText()
+    let line = getline(v:foldstart)
+
+    let nucolwidth = &fdc + &number * &numberwidth
+    let windowwidth = winwidth(0) - nucolwidth - 3
+    let foldedlinecount = v:foldend - v:foldstart
+
+    " expand tabs into spaces
+    let onetab = strpart('          ', 0, &tabstop)
+    let line = substitute(line, '\t', onetab, 'g')
+
+    let line = strpart(line, 0, windowwidth - 2 -len(foldedlinecount))
+    let fillcharcount = windowwidth - len(line) - len(foldedlinecount)
+    return line . '…' . repeat(" ",fillcharcount) . foldedlinecount . '…' . ' '
+endfunction
 
 
 
