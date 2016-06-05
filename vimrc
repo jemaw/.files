@@ -9,11 +9,16 @@ call vundle#begin()
 
 Plugin 'gmarik/Vundle.vim'
 
+
+
 Plugin 'octol/vim-cpp-enhanced-highlight'
 Plugin 'tpope/vim-commentary'
 
 Plugin 'chriskempson/base16-vim'
 Plugin 'juanedi/predawn.vim'
+
+Plugin 'w0ng/vim-hybrid'
+	"let g:hybrid_custom_term_colors = 1
 
 "Plugin 'scroloose/nerdtree'
 "Plugin 'tpope/vim-vinegar'
@@ -54,6 +59,9 @@ Plugin 'Valloric/YouCompleteMe'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 
+Plugin 'xolox/vim-notes'
+	let g:notes_directories = ['~/Dropbox/notes']
+	let g:notes_shadowdir = '~/Dropbox/notes/shadow'
 Plugin 'vimwiki/vimwiki'
 	let g:vimwiki_list = [{
 	  \ 'path': '$HOME/Dropbox/wiki',
@@ -74,7 +82,7 @@ set wrap
 set linebreak
 
 " Set textwidth to 80 characters
-set textwidth=80
+"set textwidth=80
 
 " }}}
 " Searching{{{
@@ -111,6 +119,7 @@ set laststatus=2
 
 "folding settings
 set foldmethod=syntax
+set foldnestmax=1
 "set foldlevel=99
 set foldtext=NeatFoldText()
 
@@ -158,6 +167,9 @@ vnoremap <Leader>v "+p
 
 " avoid ex mode
 nmap Q q
+
+"easy yank to end of line
+nnoremap Y y$
 " }}}
 " Filetupe {{{
 
