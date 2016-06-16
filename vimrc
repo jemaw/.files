@@ -9,25 +9,17 @@ call vundle#begin()
 
 Plugin 'gmarik/Vundle.vim'
 
-
-
 Plugin 'octol/vim-cpp-enhanced-highlight'
 Plugin 'tpope/vim-commentary'
 
-Plugin 'chriskempson/base16-vim'
-Plugin 'juanedi/predawn.vim'
-
+" Plugin 'chriskempson/base16-vim'
+" Plugin 'juanedi/predawn.vim'
 Plugin 'w0ng/vim-hybrid'
-	"let g:hybrid_custom_term_colors = 1
 
-"Plugin 'scroloose/nerdtree'
-"Plugin 'tpope/vim-vinegar'
-Plugin 'justinmk/vim-dirvish'
-nnoremap <leader>r :<C-U>RangerChooser<CR>
 
-Plugin 'terryma/vim-expand-region'
-	vmap v <Plug>(expand_region_expand)
-	vmap <C-v> <Plug>(expand_region_shrink)
+" Plugin 'terryma/vim-expand-region'
+" 	vmap v <Plug>(expand_region_expand)
+" 	vmap <C-v> <Plug>(expand_region_shrink)
 
 Plugin 'majutsushi/tagbar'
 	nmap <leader>tt :TagbarToggle<CR>
@@ -35,29 +27,35 @@ Plugin 'majutsushi/tagbar'
 Plugin 'xolox/vim-easytags'
 Plugin 'xolox/vim-misc'
 
+" Plugin 'Shougo/vimproc.vim'
+" Plugin 'Shougo/unite.vim'
+
+Plugin 'rking/ag.vim'
 Plugin 'ctrlpvim/ctrlp.vim'
-  	let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:20,results:20'
+  	let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:30,results:30'
 	nnoremap <Leader>o :CtrlP<CR>
 	nnoremap <Leader>p :CtrlPBuffer<CR>
 
 Plugin 'Valloric/YouCompleteMe'
-	nnoremap <leader>g :YcmCompleter GoTo<CR>
 	let g:ycm_autoclose_preview_window_after_insertion = 1
 	let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py' " you complete me conf
 	let g:ycm_show_diagnostics_ui = 0
-	if !exists("g:UltiSnipsJumpForwardTrigger")
-	  let g:UltiSnipsJumpForwardTrigger = "<tab>"
-	endif
+	" if !exists("g:UltiSnipsJumpForwardTrigger")
+	"   let g:UltiSnipsJumpForwardTrigger = "<tab>"
+	" endif
 
-	if !exists("g:UltiSnipsJumpBackwardTrigger")
-	  let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
-	endif
+	" if !exists("g:UltiSnipsJumpBackwardTrigger")
+	"   let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+	" endif
 
-	au InsertEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger     . " <C-R>=g:UltiSnips_Complete()<cr>"
-	au InsertEnter * exec "inoremap <silent> " .     g:UltiSnipsJumpBackwardTrigger . " <C-R>=g:UltiSnips_Reverse()<cr>"
+	" au InsertEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger     . " <C-R>=g:UltiSnips_Complete()<cr>"
+	" au InsertEnter * exec "inoremap <silent> " .     g:UltiSnipsJumpBackwardTrigger . " <C-R>=g:UltiSnips_Reverse()<cr>"
 
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
+	let g:UltiSnipsExpandTrigger="<c-l>"
+	let g:UltiSnipsJumpForwardTrigger="<c-j>"
+	let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 
 Plugin 'xolox/vim-notes'
 	let g:notes_directories = ['~/Dropbox/notes']
@@ -73,6 +71,20 @@ Plugin 'vimwiki/vimwiki'
 call vundle#end()            " required
 filetype plugin indent on    " required
 "}}}
+" {{{ Ag
+" The Silver Searcher
+if executable('ag')
+	" Use ag over grep
+	set grepprg=ag\ --nogroup\ --nocolor\ --ignore-case\ --column
+	set grepformat=%f:%l:%c:%m,%f:%l:%m
+
+	" Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+	let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+
+	" ag is fast enough that CtrlP doesn't need to cache
+	"let g:ctrlp_use_caching = 0
+endif
+" }}}
 " Line Wrap {{{
 
 " Soft wraps lines without editing file
@@ -108,8 +120,6 @@ nnoremap <CR> :noh<CR><CR>
 
 syntax on
 set background=dark
-" let base16colorspace=256
-" colorscheme base16-twilight
 colorscheme noctu2
 
 set number
@@ -144,8 +154,11 @@ nnoremap <silent> j gj
 nnoremap <silent> k gk
 
 " scrolling
-map <C-U> 2<C-Y>
-map <C-D> 2<C-E>
+" cursor position stays the same
+"set nostartofline
+set so=999
+nnoremap <C-U> 4k
+nnoremap <C-D> 4j
 
 " " Paragraph jumping not on empty lines
 " nnoremap <expr> { len(getline(line('.')-1)) > 0 ? '{+' : '{-'
@@ -154,6 +167,8 @@ map <C-D> 2<C-E>
 " }}}
 " Mappings {{{
 nnoremap <Space> <NOP>
+
+nnoremap <leader>r :<C-U>RangerChooser<CR>
 
 " Split moving
 nnoremap <C-h> <C-w>h
@@ -176,9 +191,11 @@ nnoremap Y y$
 " Disable comment new line
 au FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
-au FileType python setlocal formatprg=autopep8\ -
-au Filetype python vnoremap <buffer> gq gq:%retab!<CR>
-au FileType python setlocal tabstop=4 noexpandtab fdm=indent
+au FileType c		setlocal commentstring=//\ %s
+au FileType cpp		setlocal commentstring=//\ %s
+au FileType python	setlocal formatprg=autopep8\ -
+au Filetype python	vnoremap <buffer> gq gq:%retab!<CR>
+au FileType python	setlocal tabstop=4 noexpandtab fdm=indent
 " }}}
 " Buffers  {{{
 
