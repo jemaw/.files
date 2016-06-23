@@ -42,13 +42,11 @@ call dein#add('Shougo/neosnippet.vim',{'on_i': 1})
 		\    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
 	smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
 		\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-	
 " call dein#add('honza/vim-snippets',{'on_i':1})
 " 	let g:neosnippet#disable_runtime_snippets = {
 " 	\   '_' : 1,
 " 	\ }
 " 	let g:neosnippet#snippets_directory='~/.config/nvim/dein/repos/github.com/honza/vim-snippets/snippets'
-call dein#add('Shougo/neosnippet-snippets',{'on_i': 1})
 
 call dein#add('w0ng/vim-hybrid')
 call dein#add('octol/vim-cpp-enhanced-highlight',{'on_ft': 'cpp'})
@@ -90,13 +88,12 @@ call dein#end()
 filetype plugin indent on
 " }}}
 "{{{ Notes
-" let notesdir = '~/Dropbox/notes/'
+
 nnoremap <Leader>nm :e ~/Dropbox/notes/main.md<cr>
 nnoremap <Leader>nn :e ~/Dropbox/notes/
 nnoremap <Leader>nt :tabe ~/Dropbox/notes/main.md<cr>
 nnoremap <Leader>ns :CtrlP ~/Dropbox/notes/<cr>
 nnoremap <Leader>nf :e ~/Dropbox/notes/<cfile><cr>
-
 
 "}}}
 " {{{ Ag
@@ -202,6 +199,7 @@ nnoremap <C-l> <C-w>l
 nnoremap <Leader>v "+p
 vnoremap <Leader>v "+p
 
+nnoremap <Leader>c :e $MYVIMRC<CR>
 " avoid ex mode
 nmap Q q
 
