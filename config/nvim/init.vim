@@ -37,11 +37,11 @@ call dein#add('Shougo/neosnippet.vim',{'on_i': 1})
 	smap <C-l>     <Plug>(neosnippet_expand_or_jump)
 	xmap <C-l>     <Plug>(neosnippet_expand_target)
 	imap <expr><TAB>
-	\ pumvisible() ? "\<C-n>" :
-	\ neosnippet#expandable_or_jumpable() ?
-	\    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+		\ pumvisible() ? "\<C-n>" :
+		\ neosnippet#expandable_or_jumpable() ?
+		\    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
 	smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-	\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+		\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
 	
 " call dein#add('honza/vim-snippets',{'on_i':1})
 " 	let g:neosnippet#disable_runtime_snippets = {
@@ -54,6 +54,10 @@ call dein#add('w0ng/vim-hybrid')
 call dein#add('octol/vim-cpp-enhanced-highlight',{'on_ft': 'cpp'})
 call dein#add('tpope/vim-commentary')
 call dein#add('kana/vim-smartinput',{'on_i' :1})
+call dein#add('rbgrouleff/bclose.vim')
+call dein#add('francoiscabrol/ranger.vim')
+	let g:ranger_map_keys = 0
+	nnoremap <Leader>r :Ranger<CR>
 
 
 " TODO replace with unite
@@ -188,8 +192,6 @@ noremap : ;
 
 nnoremap <Space> <NOP>
 
-nnoremap <leader>r :<C-U>RangerChooser<CR>
-
 " Split moving
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
@@ -208,8 +210,8 @@ nnoremap Y y$
 " }}}
 " Filetupe {{{
 
-" Disable comment new line
-au FileType *		setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+
+au FileType *		setlocal formatoptions-=c formatoptions-=r formatoptions-=o " Disable comment new line
 au FileType c		setlocal commentstring=//\ %s
 au FileType cpp		setlocal commentstring=//\ %s
 au FileType python	setlocal fdm=indent formatprg=autopep8\ -
@@ -277,36 +279,5 @@ function! MyFoldText()
     let fillcharcount = windowwidth - len(line) - len(foldedlinecount)
     return line . '…' . repeat(" ",fillcharcount) . foldedlinecount . '…' . ' '
 endfunction
-
-function! RangeChooser() " not working in nvim
-    let temp = tempname()
-    " The option "--choosefiles" was added in ranger 1.5.1. Use the next line
-    " with ranger 1.4.2 through 1.5.0 instead.
-    "exec 'silent !ranger --choosefile=' . shellescape(temp)
-    if has("gui_running")
-        exec 'silent !xterm -e ranger --choosefiles=' . shellescape(temp)
-    else
-        exec 'silent !ranger --choosefiles=' . shellescape(temp)
-    endif
-    if !filereadable(temp)
-        redraw!
-        " Nothing to read.
-        return
-    endif
-    let names = readfile(temp)
-    if empty(names)
-        redraw!
-        " Nothing to open.
-        return
-    endif
-    " Edit the first item.
-    exec 'edit ' . fnameescape(names[0])
-    " Add any remaning items to the arg list/buffer list.
-    for name in names[1:]
-        exec 'argadd ' . fnameescape(name)
-    endfor
-    redraw!
-endfunction
-command! -bar RangerChooser call RangeChooser()
 " }}}
 " vim: fdm=marker:fdl=0
