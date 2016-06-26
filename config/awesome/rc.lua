@@ -86,17 +86,17 @@ lain.layout.centerwork.bottom_right = 3
 
 local layouts = {
     awful.layout.suit.floating,
- -- awful.layout.suit.fair,
---    awful.layout.suit.tile, 
-    --lain.layout.uselesfair,
-  --  lain.layout.uselessfair.horizontal,
-  --  awful.layout.suit.magnifier
- -- lain.layout.uselessfair,
-      lain.layout.centerfair,
- --   lain.layout.cascade,
-    lain.layout.centerwork,
-    lain.layout.uselesstile,
- -- lain.layout.uselesspiral.dwindle
+	-- awful.layout.suit.fair,
+	-- awful.layout.suit.tile, 
+	-- ain.layout.uselesfair,
+	-- lain.layout.uselessfair.horizontal,
+	-- awful.layout.suit.magnifier
+	-- lain.layout.uselessfair,
+	-- lain.layout.centerfair,
+	-- lain.layout.cascade,
+	-- lain.layout.centerwork,
+	lain.layout.uselesstile,
+	-- lain.layout.uselesspiral.dwindle
 }
 
 -- }}}

@@ -177,8 +177,9 @@ nnoremap Y y$
 au FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
 au FileType python setlocal formatprg=autopep8\ -
-au Filetype python vnoremap <buffer> gq gq:%retab!<CR>
-au FileType python setlocal tabstop=4 noexpandtab fdm=indent
+" au Filetype python vnoremap <buffer> gq gq:%retab!<CR>
+" au Filetype python setlocal noexpandtabv
+au FileType python setlocal tabstop=4 fdm=indent
 " }}}
 " Buffers  {{{
 

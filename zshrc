@@ -62,8 +62,9 @@ function ranger-cd {
 
 
 export BROWSER=firefox
-export PATH=/opt/cud/bin:$PATH
-export LD_LIBRARY_PATH=/opt/cuda/lib64:$LD_LIBRARY_PATH
+export CUDA_HOME=/opt/cuda
+export PATH=$CUDA_HOME/bin:$PATH
+export LD_LIBRARY_PATH=$CUDA_HOME/lib64:$LD_LIBRARY_PATH
 # Set enviroment-variables for cuda-7:
 # export CUDA_HOME=/opt/cuda
 # export LD_LIBRARY_PATH=${CUDA_HOME}/lib64PATH=${CUDA_HOME}/bin:${PATH}

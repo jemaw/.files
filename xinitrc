@@ -21,10 +21,13 @@ fi
 #compton -cC &
 #xsetroot -cursor_name left_ptr &
 
-setxkbmap -layout eu -option ctrl:nocaps &
+setxkbmap -layout eu -option 'caps:ctrl_modifier' &
+xcape -e 'Caps_Lock=Escape;Control_L=Escape;Control_R=Escape' &
 
 xset -dpms &
-xset s off &
+# xset s off &
+xset dpms 600 1200 3600
+# xset s 880 880
 
 #dropbox &
 xset m 0 0 & #übergangslösungen
@@ -34,9 +37,10 @@ numlockx on &
 xset r rate 265 30 &
 xset +fp /.fonts &
 
-xrandr --output DVI-I-1 --mode 1920x1080 --rate 119.98 --right-of DVI-D-0
-xrandr --output DVI-I-1 --primary
-xrandr --output DVI-D-0 --auto --left-of DVI-I-1
+# xrandr --output DVI-I-1 --mode 1920x1080 --rate 119.98 --right-of DVI-D-0
+xrandr --output DVI-D-0 --mode 1920x1080 --rate 119.98 --right-of DVI-I-1
+xrandr --output DVI-D-0 --primary
+# xrandr --output DVI-D-0 --auto --left-of DVI-I-1
 
 exec awesome 
 #exec bspwm
