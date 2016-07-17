@@ -23,7 +23,7 @@ call dein#add('rip-rip/clang_complete',{'on_ft': ['cpp','c'],'build' : 'make'})
 	let g:clang_auto_select = 0
 	let g:clang_omnicppcomplete_compliance = 0
 	let g:clang_make_default_keymappings = 0
-	let g:clang_use_library = 1
+	" let g:clang_use_library = 1
 " call dein#add('zchee/deoplete-clang') "too slow somehow
 " 	let g:deoplete#sources#clang#libclang_path = '/usr/lib/libclang.so'
 " 	let g:deoplete#sources#clang#clang_header = '/usr/lib/clang'
@@ -42,6 +42,9 @@ call dein#add('Shougo/neosnippet.vim',{'on_i': 1})
 		\    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
 	smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
 		\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+
+" TODO create own python snippets
+call dein#add('Shougo/neosnippet-snippets')
 " call dein#add('honza/vim-snippets',{'on_i':1})
 " 	let g:neosnippet#disable_runtime_snippets = {
 " 	\   '_' : 1,
@@ -52,6 +55,12 @@ call dein#add('w0ng/vim-hybrid')
 call dein#add('octol/vim-cpp-enhanced-highlight',{'on_ft': 'cpp'})
 call dein#add('tpope/vim-commentary')
 call dein#add('kana/vim-smartinput',{'on_i' :1})
+call dein#add('Konfekt/FastFold')
+	let g:fastfold_savehook = 1
+	let g:fastfold_fdmhook = 0
+	nmap zuz <Plug>(FastFoldUpdate)
+	let g:fastfold_fold_command_suffixes =  ['x','X','a','A','o','O','c','C']
+	let g:fastfold_fold_movement_commands = [']z', '[z', 'zj', 'zk']
 call dein#add('rbgrouleff/bclose.vim')
 call dein#add('francoiscabrol/ranger.vim')
 	let g:ranger_map_keys = 0
@@ -63,21 +72,19 @@ call dein#add('rking/ag.vim',{'on_cmd': ['Ag','Ag!']})
 call dein#add('ctrlpvim/ctrlp.vim',{'on_cmd' : ['CtrlP','CtrlPBuffer']})
   	let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:30,results:30'
 	let g:ctrlp_use_caching = 0
-	nnoremap <Leader>o :CtrlP<CR>
+	nnoremap <Leader>o :CtrlP .<CR>
+	nnoremap <Leader>g :CtrlP<CR>
 	nnoremap <Leader>p :CtrlPBuffer<CR>
 
+call dein#add('neomake/neomake',{'on_cmd': 'write'})
+    let g:neomake_python_enabled_makers = ['python']
+	autocmd! BufWritePost * Neomake
 
-
-" call dein#add('xolox/vim-notes',{'on_cmd': 'Note'})
-" 	let g:notes_directories = ['~/Dropbox/notes']
-" 	let g:notes_suffix = '.md'
-	" let g:notes_shadowdir = '~/Dropbox/notes/shadow'
-
-" call dein#add('majutsushi/tagbar')
-" 	nmap <leader>tt :TagbarToggle<CR>
-" 	nmap <leader>to :TagbarOpenAutoClose<CR>
-call dein#add('xolox/vim-easytags') " ,{'on_cmd' : 'write'})
+call dein#add('xolox/vim-easytags')
+	let g:easytags_async = 1
+	let g:easytags_suppress_ctags_warning = 1
 call dein#add('xolox/vim-misc')
+" call dein#add('ludovicchabant/vim-gutentags')
 
 if dein#check_install()
   call dein#install()
@@ -146,7 +153,7 @@ set laststatus=2
 
 "folding settings
 set foldmethod=syntax
-set foldnestmax=1
+set foldnestmax=3
 "set foldlevel=99
 set foldtext=NeatFoldText()
 
@@ -173,9 +180,9 @@ nnoremap <silent> k gk
 " scrolling
 " cursor position stays the same
 "set nostartofline
-set so=999
-nnoremap <C-U> 4k
-nnoremap <C-D> 4j
+set so=10
+" nnoremap <C-U> 4k
+" nnoremap <C-D> 4j
 set sidescroll=1
 
 " " Paragraph jumping not on empty lines
@@ -184,8 +191,8 @@ set sidescroll=1
 
 " }}}
 " Mappings {{{
-noremap ; :
-noremap : ;
+" noremap ; :
+" noremap : ;
 
 nnoremap <Space> <NOP>
 
@@ -279,3 +286,4 @@ function! MyFoldText()
 endfunction
 " }}}
 " vim: fdm=marker:fdl=0
+
