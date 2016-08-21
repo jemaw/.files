@@ -1,9 +1,10 @@
 source $HOME/.aliases
 export KEYTIMEOUT=4
 setopt autocd \
-	correct
+	correct \
+	prompt_subst
 
-autoload -Uz edit-command-line compinit
+autoload -Uz edit-command-line compinit vcs_info
 zmodload zsh/complist
 zle -N edit-command-line
 
@@ -45,6 +46,12 @@ bindkey -M vicmd 'v' edit-command-line
 #}}}
 
 # Prompt {{{  
+
+zstyle ':vcs_info:*' enable git svn
+zstyle ':vcs_info:git*' formats " %{$fg[grey]%}%{$fg[blue]%}%b%{$reset_color%}%m%u%c%{$reset_color%}"
+# zstyle ':vcs_info:git*' actionformats "  %r/%S %b %m%u%c "
+
+precmd () { vcs_info }
 autoload -U promptinit
 #PROMPT=" %» "
 #PROMPT='%~ ── '
@@ -52,7 +59,7 @@ autoload -U promptinit
 #PROMPT=' %─── '
 #PROMPT=' λ '
 #PROMPT=' %F{white}» %f%b'
-PROMPT=' %F{white}» %f%b'
+PROMPT='%F{white}${vcs_info_msg_0_} %» %f%b'
 RPROMPT='%b%B%F{black}%~' #' %B%F{white}%#'
 #PROMPT="%{$fg[black]%(! $fg[red] )-$fg[black]%(1j $fg[green] )-$fg[black]%(?  $fg[red])-$reset_color%} "
 #PROMPT="%{$fg_bold[yellow]%} » "
@@ -80,10 +87,11 @@ function ranger-cd {
     rm -f -- "$tempfile"
 }
 
-function chpwd() {
-    emulate -L zsh
-    ls 
-}
+#ls after cd
+# function chpwd() {
+#     emulate -L zsh
+#     ls 
+# }
 # }}}
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
