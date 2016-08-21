@@ -1,30 +1,50 @@
 source $HOME/.aliases
+export KEYTIMEOUT=4
+setopt autocd \
+	correct
+
+autoload -Uz edit-command-line compinit
+zmodload zsh/complist
+zle -N edit-command-line
+
+# history {{{ 
 
 HISTFILE=~/.zhistory
 HISTSIZE=10000
 SAVEHIST=10000
-
-bindkey -v
-export KEYTIMEOUT=1
 bindkey '^[[A' up-line-or-search
 bindkey '^[[B' down-line-or-search
 
-#ls after cd
-setopt autocd
-function chpwd() {
-    emulate -L zsh
-    ls 
-}
+# }}}
 
-#completion
-autoload -U compinit && compinit
+# completion {{{
+compinit
+# Some verbosity for completions
+zstyle ':completion:*:options' list-colors '=^(-- *)=34'
+zstyle ':completion:*' verbose yes
+zstyle ':completion:*:descriptions' format '%B%d%b'
+zstyle ':completion:*:messages' format '%d'
+zstyle ':completion:*' group-name
+
+# Style.
 zstyle ':completion:*' menu select
+zstyle ':completion:*' use-cache on
+zstyle ':completion:*' rehash yes
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 
-zstyle ':completion:::::' completer _complete _approximate
-zstyle ':completion:*:approximate:*' max-errors 2
+# }}}
 
+# bindkeys {{{
 
-#Prompt 
+#vim mode
+bindkey -v
+
+# Open in editor.
+bindkey -M vicmd 'v' edit-command-line
+
+#}}}
+
+# Prompt {{{  
 autoload -U promptinit
 #PROMPT=" %» "
 #PROMPT='%~ ── '
@@ -37,9 +57,10 @@ RPROMPT='%b%B%F{black}%~' #' %B%F{white}%#'
 #PROMPT="%{$fg[black]%(! $fg[red] )-$fg[black]%(1j $fg[green] )-$fg[black]%(?  $fg[red])-$reset_color%} "
 #PROMPT="%{$fg_bold[yellow]%} » "
 #RPROMPT="%{$fg[red]%}%(?  ━)%{$reset_color%}"
- #Color command correction promt
 
-#functions 
+# }}}
+
+# functions {{{ 
 function twitchl(){
 
 livestreamer -p mpv $1 source
@@ -59,16 +80,12 @@ function ranger-cd {
     rm -f -- "$tempfile"
 }
 
+function chpwd() {
+    emulate -L zsh
+    ls 
+}
+# }}}
 
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-export BROWSER=firefox
-export CUDA_HOME=/opt/cuda
-export PATH=$CUDA_HOME/bin:$PATH
-export LD_LIBRARY_PATH=$CUDA_HOME/lib64:$LD_LIBRARY_PATH
-# Set enviroment-variables for cuda-7:
-# export CUDA_HOME=/opt/cuda
-# export LD_LIBRARY_PATH=${CUDA_HOME}/lib64PATH=${CUDA_HOME}/bin:${PATH}
-# export PATH# Add opencv to python payth
-#export PYTHONPATH=$PYTHONPATH:/home/florian/opencv-3.0.0/build/lib
-#export PYTHONPATH=$PYTHONPATH:/home/florian/opencv-3.0.0/build/lib/python3
-
+# vim: fdm=marker:fdl=0

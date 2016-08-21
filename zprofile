@@ -2,16 +2,7 @@
 # Browser
 #
 
-if [[ "$OSTYPE" == darwin* ]]; then
-  export BROWSER='open'
-fi
-
-#bar
-#export PANEL_FIFO="/tmp/panel-fifo"
-#export PATH=$PATH:/home/jean/.config/bar
-#PANEL_HEIGHT=24
-#PANEL_FONT_FAMILY="-*-terminus-medium-r-normal-*-12-*-*-*-c-*-*-1"
-#export PANEL_FIFO PANEL_HEIGHT PANEL_FONT_FAMILY
+export BROWSER=firefox
 
 #
 # Editors
@@ -40,11 +31,22 @@ typeset -gU cdpath fpath mailpath path
 # cdpath=(
 #   $cdpath
 # )
+# Cuda
+grep "Ubuntu" /etc/issue -i -q
+if [ $? = '0' ];
+then
+	export CUDA_HOME='/usr/local/cuda'
+else
+	export CUDA_HOME='/opt/cuda'
+fi
+export LD_LIBRARY_PATH=$CUDA_HOME/lib64:$LD_LIBRARY_PATH
 
 # Set the list of directories that Zsh searches for programs.
 path=(
-  /usr/local/{bin,sbin}
-  $path
+		~/bin/
+		$CUDA_HOME
+		/usr/local/{bin,sbin}
+		$path
 )
 
 #
