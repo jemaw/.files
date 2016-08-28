@@ -3,6 +3,7 @@
 #
 
 alias vi=nvim
+alias sleeep="echo systemctl suspend | at now +"
 alias viconf="nvim ~/.config/nvim/init.vim"
 alias py=python2
 alias ra=ranger-cd

@@ -94,6 +94,36 @@ function ranger-cd {
 # }
 # }}}
 
+# fzf {{{ 
+
+export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
+# export FZF_DEFAULT_OPTS="--exact"
+
+# fe [FUZZY PATTERN] - Open the selected file with the default editor
+fe() {
+	IFS='
+	'
+	local declare files=($(fzf-tmux --query="$1" --select-1 --exit-0))
+	[[ -n "$files" ]] && ${EDITOR:-vim} "${files[@]}"
+	unset IFS
+}
+
+# fd - cd to selected directory
+fd() {
+  local dir
+  dir=$(find ${1:-.} -path '*/\.*' -prune \
+                  -o -type d -print 2> /dev/null | fzf +m) &&
+  cd "$dir"
+}
+
+# fda - including hidden directories
+fda() {
+	local dir
+	dir=$(find ${1:-.} -type d 2> /dev/null | fzf +m) && cd "$dir"
+}
+
+#}}}
+
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # vim: fdm=marker:fdl=0
