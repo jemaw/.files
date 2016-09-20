@@ -2,9 +2,10 @@ source $HOME/.aliases
 export KEYTIMEOUT=4
 setopt autocd \
 	correct \
-	prompt_subst
+	prompt_subst \
+	transient_rprompt # rprompt only current prompt
 
-autoload -Uz edit-command-line compinit vcs_info
+autoload -Uz edit-command-line compinit vcs_info promptinit
 zmodload zsh/complist
 zle -N edit-command-line
 
@@ -49,21 +50,17 @@ bindkey -M vicmd 'v' edit-command-line
 
 zstyle ':vcs_info:*' enable git svn
 zstyle ':vcs_info:git*' formats " %{$fg[grey]%}%{$fg[blue]%}%b%{$reset_color%}%m%u%c%{$reset_color%}"
-# zstyle ':vcs_info:git*' actionformats "  %r/%S %b %m%u%c "
 
 precmd () { vcs_info }
-autoload -U promptinit
-#PROMPT=" %» "
-#PROMPT='%~ ── '
-#PROMPT='%b──╼ '
-#PROMPT=' %─── '
-#PROMPT=' λ '
-#PROMPT=' %F{white}» %f%b'
-PROMPT='%F{white}${vcs_info_msg_0_} %» %f%b'
-RPROMPT='%b%B%F{black}%~' #' %B%F{white}%#'
-#PROMPT="%{$fg[black]%(! $fg[red] )-$fg[black]%(1j $fg[green] )-$fg[black]%(?  $fg[red])-$reset_color%} "
-#PROMPT="%{$fg_bold[yellow]%} » "
-#RPROMPT="%{$fg[red]%}%(?  ━)%{$reset_color%}"
+
+if [[ $USER == 'root' ]]; then
+  PROMPT_SIGN='#'
+else
+  PROMPT_SIGN='»' #>
+fi
+
+PROMPT='%F{white}${vcs_info_msg_0_} % $PROMPT_SIGN %f%b'
+RPROMPT='%b%B%F{black}%~'
 
 # }}}
 
