@@ -1,5 +1,5 @@
 source $HOME/.aliases
-export KEYTIMEOUT=4
+export KEYTIMEOUT=8
 setopt autocd \
 	correct \
 	prompt_subst \
@@ -16,6 +16,8 @@ HISTSIZE=10000
 SAVEHIST=10000
 bindkey '^[[A' up-line-or-search
 bindkey '^[[B' down-line-or-search
+bindkey '^P' up-line-or-search
+bindkey '^N' down-line-or-search
 
 # }}}
 
@@ -43,6 +45,10 @@ bindkey -v
 
 # Open in editor.
 bindkey -M vicmd 'v' edit-command-line
+
+# Avoid Esc
+bindkey -M viins 'kj' vi-cmd-mode
+
 
 #}}}
 
