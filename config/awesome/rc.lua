@@ -416,7 +416,9 @@ globalkeys = awful.util.table.join(
     awful.key({ altkey }, "p", function() os.execute("screenshot") end),
 
 -----Tag browsing---------------------------------------------------------------------------------------------
-    awful.key({ modkey }, "Left",   awful.tag.viewprev       ),
+    awful.key({ modkey }, ",",   awful.tag.viewprev       ),
+    awful.key({ modkey }, ".",  awful.tag.viewnext       ),
+    awful.key({ modkey }, "Left",  awful.tag.viewprev       ),
     awful.key({ modkey }, "Right",  awful.tag.viewnext       ),
 --	awful.key({ modkey  }, "Left", 
 --	function()
@@ -575,7 +577,7 @@ globalkeys = awful.util.table.join(
               end),
 
 	--  dmenu
-	awful.key({ modkey },            ",",     function ()
+	awful.key({ modkey },            "d",     function ()
     awful.util.spawn("dmenu_run -i -fn 'Tamsyn-10'  -nb '" .. 
  		beautiful.bg_normal .. "' -nf '" .. beautiful.fg_normal .. 
 		"' -sb '" .. beautiful.bg_focus .. 
