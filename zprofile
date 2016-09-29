@@ -24,6 +24,8 @@ fi
 # Paths
 #
 
+#go
+export GOPATH=$HOME/Prog/go
 # Ensure path arrays do not contain duplicates.
 typeset -gU cdpath fpath mailpath path
 
@@ -44,9 +46,10 @@ export LD_LIBRARY_PATH=$CUDA_HOME/lib64:$LD_LIBRARY_PATH
 # Set the list of directories that Zsh searches for programs.
 path=(
 		~/bin/
-		$CUDA_HOME
+		$CUDA_HOME/bin
 		/usr/local/{bin,sbin}
 		$path
+		$GOPATH/bin
 )
 
 #
