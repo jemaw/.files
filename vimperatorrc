@@ -9,7 +9,7 @@ set complete=l
 silent qmark y https://www.youtube.com
 silent qmark r https://www.reddit.com
 silent qmark p https://www.pr0gramm.com
-silent silent qmark g https://www.github.com
+silent qmark g https://www.github.com
 
 
 let g:smooziee_scroll_amount="150"
