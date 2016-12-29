@@ -28,10 +28,11 @@ function pl_fpath_git()
 }
 function pl_load_wget()
 {
-    if [ -a $zplugs/local/$pl_url_lst[-1] ]; then
+    local filepath=$zplugs/local/$pl_url_lst[-1]
+    if [[ -a $filepath ]]; then
         return 0
     fi
-    wget $pl_url -P $zplugs/local
+    wget $pl_url -O $filepath
 
 }
 # $1 url,
