@@ -9,34 +9,48 @@ autoload -Uz edit-command-line compinit vcs_info promptinit
 zmodload zsh/complist
 zle -N edit-command-line
 
-# zplug {{{
+# plug {{{
+#really ugly, but fast
+export zplugs=~/.zsh/plugins
+mkdir -p $zplugs/local
+fpath=( $zplugs/local "${fpath[@]}" )
 
-# Check if zplug is installed
-if [[ ! -d ~/.zplug ]]; then
-  git clone https://github.com/zplug/zplug ~/.zplug
-  source ~/.zplug/init.zsh && zplug update --self
-fi
-
-# # Essential
-source ~/.zplug/init.zsh
-
-# # plugins
-zplug "zplug/zplug"
-zplug "zsh-users/zsh-completions", depth:1
-zplug "~/.zplug/local", from:local
-
-# # Install packages that have not been installed yet
-if ! zplug check --verbose; then
-    printf "Install? [y/N]: "
-    if read -q; then
-        echo; zplug install
-    else
-        echo
+function pl_load_git()
+{
+    if [[ -d $zplugs/$pl_git[-2] ]];then
+        return 0
     fi
-fi
+    git clone $pl_url $zplugs/$pl_git[-2]
+}
+function pl_fpath_git()
+{
+    fpath=( $zplugs/$pl_git[-2]/$1 "${fpath[@]}" )
+}
+function pl_load_wget()
+{
+    if [ -a $zplugs/local/$pl_url_lst[-1] ]; then
+        return 0
+    fi
+    wget $pl_url -P $zplugs/local
 
-zplug load
+}
+# $1 url,
+# $2 optional for git repositories, where to find plugin
+function pl_load()
+{
+    pl_url=$1
+    pl_url_lst=(${(s:/:)pl_url})
+    pl_git=(${(s:.:)pl_url_lst[-1]})
 
+    if [[ "${pl_git[-1]}" == "git" ]];then
+        pl_load_git
+        pl_fpath_git $2
+    else
+        pl_load_wget
+    fi
+}
+pl_load https://raw.githubusercontent.com/bazelbuild/bazel/master/scripts/zsh_completion/_bazel
+pl_load https://github.com/zsh-users/zsh-completions.git
 # }}}
 
 # history {{{ 
