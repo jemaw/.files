@@ -14,6 +14,7 @@ zle -N edit-command-line
 export zplugs=~/.zsh/plugins
 mkdir -p $zplugs/local
 fpath=( $zplugs/local "${fpath[@]}" )
+pl_locals=()
 
 function pl_load_git()
 {
@@ -29,6 +30,10 @@ function pl_fpath_git()
 function pl_load_wget()
 {
     local filepath=$zplugs/local/$pl_url_lst[-1]
+
+    #add to wanted local plugins
+    pl_locals=($pl_url_lst[-1] $pl_locals)
+
     if [[ -a $filepath ]]; then
         return 0
     fi
@@ -50,8 +55,23 @@ function pl_load()
         pl_load_wget
     fi
 }
+function pl_clean_locals()
+{
+    # get outputs of ls in array
+    local files=("${(@f)$(ls $zplugs/local)}")
+    # loop over all files in local
+    for fil in $files; do
+        # check if file is in wanted plugins
+        if [[ ! ${pl_locals[(r)$fil]} == $fil ]]; then
+            rm $zplugs/local/$fil
+        fi
+    done
+}
+
 pl_load https://raw.githubusercontent.com/bazelbuild/bazel/master/scripts/zsh_completion/_bazel
 pl_load https://github.com/zsh-users/zsh-completions.git
+
+pl_clean_locals
 # }}}
 
 # history {{{ 
