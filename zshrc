@@ -69,7 +69,7 @@ function pl_clean_locals()
 }
 
 pl_load https://raw.githubusercontent.com/bazelbuild/bazel/master/scripts/zsh_completion/_bazel
-pl_load https://github.com/zsh-users/zsh-completions.git
+pl_load https://github.com/zsh-users/zsh-completions.git src
 
 pl_clean_locals
 # }}}
