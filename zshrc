@@ -1,5 +1,5 @@
 source $HOME/.aliases
-export KEYTIMEOUT=8
+export KEYTIMEOUT=1
 setopt autocd \
 	correct \
 	prompt_subst \
@@ -8,6 +8,36 @@ setopt autocd \
 autoload -Uz edit-command-line compinit vcs_info promptinit
 zmodload zsh/complist
 zle -N edit-command-line
+
+# zplug {{{
+
+# Check if zplug is installed
+if [[ ! -d ~/.zplug ]]; then
+  git clone https://github.com/zplug/zplug ~/.zplug
+  source ~/.zplug/init.zsh && zplug update --self
+fi
+
+# # Essential
+source ~/.zplug/init.zsh
+
+# # plugins
+zplug "zplug/zplug"
+zplug "zsh-users/zsh-completions", depth:1
+zplug "~/.zplug/local", from:local
+
+# # Install packages that have not been installed yet
+if ! zplug check --verbose; then
+    printf "Install? [y/N]: "
+    if read -q; then
+        echo; zplug install
+    else
+        echo
+    fi
+fi
+
+zplug load
+
+# }}}
 
 # history {{{ 
 
