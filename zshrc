@@ -9,7 +9,10 @@ autoload -Uz edit-command-line compinit vcs_info promptinit
 zmodload zsh/complist
 zle -N edit-command-line
 
+
 # plug {{{
+# TODO clean everythong
+# TODO update plugins
 #really ugly, but fast
 export zplugs=~/.zsh/plugins
 mkdir -p $zplugs/local
@@ -18,18 +21,23 @@ pl_locals=()
 
 function pl_load_git()
 {
-    if [[ -d $zplugs/$pl_git[-2] ]];then
+    if [[ -d $pl_folder ]];then
         return 0
     fi
-    git clone $pl_url $zplugs/$pl_git[-2]
+    git clone $1 $pl_folder
 }
+
 function pl_fpath_git()
 {
-    fpath=( $zplugs/$pl_git[-2]/$1 "${fpath[@]}" )
+    fpath=( ${pl_folder}/$1 "${fpath[@]}" )
 }
+
+# $1 url
+# $2 filepath
 function pl_load_wget()
 {
-    local filepath=$zplugs/local/$pl_url_lst[-1]
+    local url=$1
+    local filepath=$2
 
     #add to wanted local plugins
     pl_locals=($pl_url_lst[-1] $pl_locals)
@@ -37,24 +45,36 @@ function pl_load_wget()
     if [[ -a $filepath ]]; then
         return 0
     fi
-    wget $pl_url -O $filepath
-
+    wget $url -P $pl_folder
 }
-# $1 url,
-# $2 optional for git repositories, where to find plugin
+
+# $1 url or git repository
 function pl_load()
 {
     pl_url=$1
+    # url_lst url split at /
     pl_url_lst=(${(s:/:)pl_url})
-    pl_git=(${(s:.:)pl_url_lst[-1]})
-
-    if [[ "${pl_git[-1]}" == "git" ]];then
-        pl_load_git
-        pl_fpath_git $2
+    # pl_git last entry of url_lst split at .
+    # local pl_git=(${(s:.:)pl_url_lst[-1]})
+    # if [[ "${pl_git[-1]}" == "git" ]];then
+    if [[ ! "${pl_url_lst[1]}" == "https:" ]]; then
+        pl_git=true
+        pl_folder=${zplugs}/${pl_url_lst[-1]}
+        local pl_url=https://github.com/${pl_url}.git
+        pl_load_git $pl_url
     else
-        pl_load_wget
+        pl_git=false
+        pl_folder=${zplugs}/local
+        local filepath=${pl_folder}/$pl_url_lst[-1]
+        pl_load_wget $pl_url $filepath
     fi
 }
+
+function pl_source_plug()
+{
+    source ${pl_folder}/$1
+}
+
 function pl_clean_locals()
 {
     # get outputs of ls in array
@@ -68,22 +88,36 @@ function pl_clean_locals()
     done
 }
 
-pl_load https://raw.githubusercontent.com/bazelbuild/bazel/master/scripts/zsh_completion/_bazel
-pl_load https://github.com/zsh-users/zsh-completions.git src
+# clone plugins and source specific file
+function plug()
+{
+    # download plugin
+    pl_load $1
+    # source
+    pl_source_plug $2
+}
+
+# clone or wget completion files and setup fpath
+# $1 git repository or url
+# $2 folder of completion files inside git rep (optional)
+function comp()
+{
+    # download completion file
+    pl_load $1
+    # setup fpath if necessary
+    if [[ ${pl_git} == true ]];then
+        pl_fpath_git $2
+    fi
+}
+
+# }}}
+# {{{ plugins
+comp https://raw.githubusercontent.com/bazelbuild/bazel/master/scripts/zsh_completion/_bazel
+comp zsh-users/zsh-completions src
+plug zsh-users/zsh-autosuggestions zsh-autosuggestions.plugin.zsh
+    bindkey '^ ' autosuggest-accept
 
 pl_clean_locals
-# }}}
-
-# history {{{ 
-
-HISTFILE=~/.zhistory
-HISTSIZE=10000
-SAVEHIST=10000
-bindkey '^[[A' up-line-or-search
-bindkey '^[[B' down-line-or-search
-bindkey '^P' up-line-or-search
-bindkey '^N' down-line-or-search
-
 # }}}
 
 # completion {{{
@@ -100,6 +134,18 @@ zstyle ':completion:*' menu select
 zstyle ':completion:*' use-cache on
 zstyle ':completion:*' rehash yes
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+
+# }}}
+
+# history {{{ 
+
+HISTFILE=~/.zhistory
+HISTSIZE=10000
+SAVEHIST=10000
+bindkey '^[[A' up-line-or-search
+bindkey '^[[B' down-line-or-search
+bindkey '^P' up-line-or-search
+bindkey '^N' down-line-or-search
 
 # }}}
 
