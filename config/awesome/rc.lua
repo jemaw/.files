@@ -576,6 +576,8 @@ globalkeys = awful.util.table.join(
                   awful.util.getdir("cache") .. "/history_eval")
               end),
 
+    -- term
+    awful.key({ modkey } , "Return" , function () awful.util.spawn(terminal) end),
 	--  dmenu
 	awful.key({ modkey },            "d",     function ()
     awful.util.spawn("dmenu_run -i -fn 'Tamsyn-10'  -nb '" .. 
