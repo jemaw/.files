@@ -46,9 +46,9 @@ export LD_LIBRARY_PATH=$CUDA_HOME/lib64:$LD_LIBRARY_PATH
 # Set the list of directories that Zsh searches for programs.
 path=(
 		~/bin/
-		$CUDA_HOME/bin
 		/usr/local/{bin,sbin}
 		$path
+		$CUDA_HOME/bin
 		$GOPATH/bin
 )
 
