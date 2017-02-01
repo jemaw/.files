@@ -3,7 +3,9 @@ export KEYTIMEOUT=1
 setopt autocd \
 	correct \
 	prompt_subst \
-    histignoredups  \
+    histignorealldups  \
+    append_history \
+    share_history \
 	transient_rprompt # rprompt only current prompt
 
 autoload -Uz edit-command-line compinit vcs_info promptinit
@@ -111,17 +113,17 @@ bindkey -M viins 'kj' vi-cmd-mode
 # Prompt {{{  
 
 zstyle ':vcs_info:*' enable git svn
-zstyle ':vcs_info:git*' formats " %{$fg[grey]%}%{$fg[blue]%}%b%{$reset_color%}%m%u%c%{$reset_color%}"
+# zstyle ':vcs_info:git*' formats " %{$fg[grey]%}%{$fg[blue]%}%b%{$reset_color%}%m%u%c%{$reset_color%}"
+zstyle ':vcs_info:git*' formats " %b%m%u%c% "
+zstyle ':vcs_info:*' check-for-changes true
+zstyle ':vcs_info:*' unstagedstr '!'
+zstyle ':vcs_info:*' stagedstr '+'
+
+PROMPT_SIGN='»'
 
 precmd () { vcs_info }
-
-if [[ $USER == 'root' ]]; then
-  PROMPT_SIGN='#'
-else
-  PROMPT_SIGN='»' #>
-fi
-
-PROMPT='%F{white}${vcs_info_msg_0_} % $PROMPT_SIGN %f%b'
+# PROMPT='%F{white}${vcs_info_msg_0_} % $PROMPT_SIGN %f%b'
+PROMPT='${vcs_info_msg_0_} % $PROMPT_SIGN %f%b'
 RPROMPT='%b%B%F{black}%~'
 
 # }}}
