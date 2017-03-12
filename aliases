@@ -1,6 +1,4 @@
-#
 #aliases
-#
 
 alias vi=nvim
 alias sleeep="echo systemctl suspend | at now +"
@@ -31,3 +29,14 @@ alias gd='git diff'
 alias ga='git add'
 alias gaa='git add --all'
 alias gc='git commit'
+alias gp='git push'
+
+#docker
+alias dfuck='docker rm $(docker ps -a -q)'
+alias dfucki='docker rmi $(docker images -q)'
+
+# cd
+alias -- -='cd -'
+alias ..='cd ..'
+alias ...='cd ../..'
+
