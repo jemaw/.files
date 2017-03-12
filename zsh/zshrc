@@ -286,6 +286,4 @@ fda() {
 
 #}}}
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
 # vim: fdm=marker:fdl=0

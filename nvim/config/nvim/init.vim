@@ -45,32 +45,9 @@ call dein#add('zchee/deoplete-jedi',{'on_ft' : 'python'})
 
 call dein#add('Shougo/neoinclude.vim')
 if executable('clang')
-	" call dein#add('rip-rip/clang_complete',{'on_ft': ['cpp','c'],'build' : 'make'})
-	" 	let g:clang_complete_auto = 0
-	" 	let g:clang_auto_select = 0
-	" 	let g:clang_omnicppcomplete_compliance = 0
-	" 	let g:clang_make_default_keymappings = 0
-	" 	let g:clang_use_library = 1
-        " let g:clang_auto_user_options = ".clang_complete, compile_commands.json, path"
 call dein#add('zchee/deoplete-clang',{'on_ft': ['cpp','c']} )
 	let g:deoplete#sources#clang#libclang_path = '/usr/lib/libclang.so'
 	let g:deoplete#sources#clang#clang_header = '/usr/lib/clang'
-
-" call dein#add('justmao945/vim-clang')
-    " let g:clang_compilation_database = './build'
-    " let g:clang_vim_exec = "nvim"
-    " disable auto completion for vim-clang
-    " let g:clang_auto = 1
-    " let g:clang_c_completeopt = 'menuone'
-    " let g:clang_cpp_completeopt = 'menuone'
-    " if !exists('g:deoplete#omni_patterns')
-    "     let g:deoplete#omni_patterns = {}
-    " endif
-    " let g:deoplete#omni_patterns.c =
-    "             \ '[^.[:digit:] *\t]\%(\.\|->\)\w*'
-    " let g:deoplete#omni_patterns.cpp =
-    "             \ '[^.[:digit:] *\t]\%(\.\|->\)\w*\|\h\w*::\w*'
-
 endif
 
 if executable("gocode")
@@ -112,26 +89,10 @@ call dein#add('bling/vim-bufferline')
   let g:bufferline_active_buffer_left = ' '
   let g:bufferline_active_buffer_right = ' '
   let g:bufferline_modified = ' +'
-  autocmd VimEnter *
-    \ let &statusline='%{bufferline#refresh_status()}'
+  set statusline=%r
+  autocmd VimEnter * 
+    \ let &statusline.='%{bufferline#refresh_status()}'
       \ .bufferline#get_status_string()
-call dein#add('Junegunn/fzf', {'build' : './install --all'})
-call dein#add('Junegunn/fzf.vim')
-	nnoremap <Leader>o :FZF<CR>
-	nnoremap <Leader>g :GFiles<CR>
-	nnoremap <Leader>p :Buffer<CR>
-	nnoremap <Leader>/ :Ag<CR>
-	autocmd FileType fzf tnoremap <buffer> <C-j> <Down>
-	autocmd FileType fzf tnoremap <buffer> <C-k> <Up>
-
-	function! s:fzf_statusline()
-		" Override statusline as you like
-		highlight fzf1 ctermfg=161 ctermbg=None
-		highlight fzf2 ctermfg=7 ctermbg=None
-		highlight fzf3 ctermfg=7 ctermbg=None
-		setlocal statusline=%#fzf1#\ >\ %#fzf2#fz%#fzf3#f
-	endfunction
-	autocmd! User FzfStatusLine call <SID>fzf_statusline()
 " }}}
 
 " Neomake {{{
@@ -253,6 +214,8 @@ set sidescroll=1
 
 set ttimeoutlen=0
 inoremap kj <c-c>`^
+
+" terminal
 if has('nvim')
 	" jk conflitcts with ranger, esc conflicts with zsh vi mode
 	" tnoremap kj <C-\><C-n>
@@ -267,10 +230,6 @@ if has('nvim')
 endif
 
 nnoremap <Space> <NOP>
-
-"tab moving
-" nnoremap <Leader>. gt
-" nnoremap <Leader>, gT
 
 " Split moving
 nnoremap <C-h> <C-w>h
@@ -300,6 +259,19 @@ nnoremap <leader>wq :wq<CR>
 " easy search for visual selection
 vnoremap // y/<C-R>"<CR>
 
+" file opening
+nnoremap <leader>e :e **/
+
+" }}}
+" Buffers  {{{
+
+set hidden
+" buffer switching
+nnoremap <leader>b :b <C-d>
+" quickswitch
+nnoremap <leader>q :b#<cr>
+nnoremap <bs> <c-^>
+
 " }}}
 " Filetupe {{{
 
@@ -313,12 +285,6 @@ au FileType vimwiki		setlocal nowrap
 
 au FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 au BufRead,BufNewFile *.tf setlocal ts=2 sts=2 sw=2 expandtab
-
-" }}}
-" Buffers  {{{
-
-set hidden
-nnoremap <bs> <c-^>
 
 " }}}
 " gui {{{ 
