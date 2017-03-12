@@ -108,6 +108,13 @@ call dein#add('fatih/vim-go', {'on_ft' : 'go'})
 
 " file and buffer switching {{{
 call dein#add('bling/vim-bufferline')
+  let g:bufferline_echo = 0
+  let g:bufferline_active_buffer_left = ' '
+  let g:bufferline_active_buffer_right = ' '
+  let g:bufferline_modified = ' +'
+  autocmd VimEnter *
+    \ let &statusline='%{bufferline#refresh_status()}'
+      \ .bufferline#get_status_string()
 call dein#add('Junegunn/fzf', {'build' : './install --all'})
 call dein#add('Junegunn/fzf.vim')
 	nnoremap <Leader>o :FZF<CR>
