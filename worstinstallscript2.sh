@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-dots=(zsh aliases vimperator)
+dots=(nvim vim zsh aliases vimperator)
 TARGETDIR="$HOME"
 
 remove() {
