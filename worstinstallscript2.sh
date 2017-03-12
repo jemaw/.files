@@ -6,12 +6,12 @@ TARGETDIR="$HOME"
 
 remove() {
     local targetfile=$1
+    basename "$targetfile"
     while true; do
-        read -rp "$targetfile - already exists, overwrite? [y]es/[n]o " yn
+        read -rp "$targetfile - already exists, overwrite? [Y/n] " yn
         case $yn in
-            [Yy]* ) rm "$targetfile"; echo "$targetfile removed."; break;;
             [Nn]* ) echo "$targetfile not removed"; break;;
-            * ) echo "Please answer yes or no.";;
+            * ) rm "$targetfile"; echo "$targetfile removed."; break;;
         esac
     done	
 }
