@@ -32,6 +32,7 @@ if ! zgen saved; then
     # bulk load
     zgen loadall <<EOPLUGINS
         zsh-users/zsh-history-substring-search
+        zsh-users/zsh-autosuggestions
 EOPLUGINS
     # ^ can't indent this EOPLUGINS
 
@@ -56,7 +57,8 @@ typeset -g HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND='fg=white,bold'
 typeset -g HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_NOT_FOUND='fg=red,bold'
 
 # zsh-users/zsh-autosuggestions
-# bindkey '^ ' autosuggest-accept
+bindkey '^ '  autosuggest-accept     # accept on ctrl space
+bindkey '^\n' autosuggest-execute    # execute on ctrl enter
 
 fi
 
