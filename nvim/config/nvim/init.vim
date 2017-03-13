@@ -267,9 +267,9 @@ nnoremap <leader>e :e **/
 
 set hidden
 " buffer switching
-nnoremap <leader>b :b <C-d>
+nnoremap <leader>p :b <C-d>
 " quickswitch
-nnoremap <leader>q :b#<cr>
+nnoremap <leader>s :b#<cr>
 nnoremap <bs> <c-^>
 
 " }}}
