@@ -84,6 +84,8 @@ call dein#add('fatih/vim-go', {'on_ft' : 'go'})
 " }}}
 
 " file and buffer switching {{{
+call dein#add('dbakker/vim-projectroot')
+    nnoremap <expr> <leader>g ':edit '.projectroot#guess().'/**/'
 call dein#add('bling/vim-bufferline')
   let g:bufferline_echo = 0
   let g:bufferline_active_buffer_left = ' '
