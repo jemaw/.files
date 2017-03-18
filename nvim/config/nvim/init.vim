@@ -22,6 +22,7 @@ call dein#add('Shougo/dein.vim')
 " }}}
 
 " misc {{{
+call dein#add('romainl/vim-cool')
 call dein#add('tpope/vim-commentary')
 call dein#add('wellle/targets.vim')
 call dein#add('airblade/vim-gitgutter')
@@ -85,7 +86,7 @@ call dein#add('fatih/vim-go', {'on_ft' : 'go'})
 
 " file and buffer switching {{{
 call dein#add('dbakker/vim-projectroot')
-    nnoremap <expr> <leader>g ':edit '.projectroot#guess().'/**/'
+    nnoremap <expr> <leader>g ':edit '.projectroot#guess().'/**/*'
 call dein#add('bling/vim-bufferline')
   let g:bufferline_echo = 0
   let g:bufferline_active_buffer_left = ' '
@@ -262,7 +263,9 @@ nnoremap <leader>wq :wq<CR>
 vnoremap // y/<C-R>"<CR>
 
 " file opening
-nnoremap <leader>e :e **/
+set path=.,**
+nnoremap <leader>e :e **/*
+nnoremap <leader>f :find *
 
 " }}}
 " Buffers  {{{
@@ -271,7 +274,6 @@ set hidden
 " buffer switching
 nnoremap <leader>p :b <C-d>
 " quickswitch
-nnoremap <leader>s :b#<cr>
 nnoremap <bs> <c-^>
 
 " }}}
@@ -287,6 +289,20 @@ au FileType vimwiki		setlocal nowrap
 
 au FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 au BufRead,BufNewFile *.tf setlocal ts=2 sts=2 sw=2 expandtab
+
+" }}}
+" wildmenu {{{
+
+set wildmenu 
+set wildmode=full
+set wildignore+=*.swp,.tags,*.bak,*.pyc,*.class,*.jar,*.gif,*.png,*.jpg
+set wildignorecase
+
+" }}}
+" Misc {{{
+
+set tags=./tags;,tags;
+set autochdir
 
 " }}}
 " gui {{{ 
@@ -312,13 +328,6 @@ if has('gui_gtk') && has('gui_running')
   exe 'silent !echo ''widget "vim-main-window.*GtkForm" style "vimfix"'''.
 			  \' >> ~/.gtkrc-2.0'
 endif
-
-" }}}
-" Misc {{{
-
-set wildmenu 
-set tags=./tags;,tags;
-set autochdir
 
 " }}}
 " Backup {{{
