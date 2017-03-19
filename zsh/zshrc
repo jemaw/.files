@@ -66,6 +66,7 @@ fi
 # completion {{{
 compinit
 # Some verbosity for completions
+zstyle ':completion:*:*:*:*:processes' command "ps -a"
 zstyle ':completion:*:options' list-colors '=^(-- *)=34'
 zstyle ':completion:*' verbose yes
 
