@@ -65,8 +65,13 @@ fi
 
 # completion {{{
 compinit
-# Some verbosity for completions
-zstyle ':completion:*:*:*:*:processes' command "ps -a"
+# kill completions
+zstyle ':completion:*:processes' command 'ps aux --forest'
+zstyle ':completion:*:*:kill:*' menu yes select
+zstyle ':completion:*:kill:*' force-list always
+zstyle ':completion:*:*:killall:*' menu yes select
+zstyle ':completion:*:killall:*' force-list always
+
 zstyle ':completion:*:options' list-colors '=^(-- *)=34'
 zstyle ':completion:*' verbose yes
 
