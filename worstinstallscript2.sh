@@ -20,6 +20,10 @@ symlink() {
     local targetfile
     for file in "${files[@]}";do
         targetfile="$TARGETDIR/.$file" 
+        if [ "$(readlink "$targetfile")" == "$PWD/$file" ]; then
+            echo "Correct Symlink already exists: $file"
+            continue
+        fi
         if [ -e "$targetfile" ] || [ -h "$targetfile" ]; then
             remove "$targetfile"
         fi
@@ -44,9 +48,9 @@ makesubdirs() {
 }
 
 for dot in "${dots[@]}";do
-    pushd "$dot"
+    cd "$dot"
     files=($(find * -type f) $(find * -type l))
     makesubdirs
     symlink
-    popd
+    cd ..
 done

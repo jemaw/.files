@@ -55,20 +55,17 @@ if executable("gocode")
 endif
 
 " }}}
-" {{{ Snippets 
+
+" Snippets  {{{
 
 call dein#add('SirVer/ultisnips', {'on_i':1})
     set rtp+=~/.config/nvim/snippets
     let g:UltiSnipsSnippetsDir="~/.config/nvim/snippets/UltiSnips"
-    let g:UltiSnipsSnippetsDirectories=["UltiSnips", "~/.config/nvim/snippets/UltiSnips"]
     let g:UltiSnipsExpandTrigger="<c-l>"
     let g:UltiSnipsJumpForwardTrigger="<c-l>"
     let g:UltiSnipsJumpBackwardTrigger="<c-b>"
 
 call dein#add('honza/vim-snippets',{'on_i':1}) 
-
-" If you want :UltiSnipsEdit to split your window.
-let g:UltiSnipsEditSplit="vertical"
 
 " }}}
 
