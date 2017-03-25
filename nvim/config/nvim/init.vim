@@ -22,7 +22,6 @@ call dein#add('Shougo/dein.vim')
 " }}}
 
 " misc {{{
-call dein#add('romainl/vim-cool')
 call dein#add('tpope/vim-commentary')
 call dein#add('wellle/targets.vim')
 call dein#add('airblade/vim-gitgutter')
@@ -55,17 +54,22 @@ if executable("gocode")
     call dein#add("zchee/deoplete-go", {'build' : 'make'})
 endif
 
-call dein#add('Shougo/neosnippet.vim',{'on_i': 1})
-	if has('conceal')
-	  set conceallevel=2 concealcursor=niv
-	endif
-	" let g:neosnippet#enable_completed_snippet = 1
-	imap <C-l>     <Plug>(neosnippet_expand_or_jump)
-	smap <C-l>     <Plug>(neosnippet_expand_or_jump)
-	xmap <C-l>     <Plug>(neosnippet_expand_target)
+" }}}
+" {{{ Snippets 
 
-call dein#add('Shougo/neosnippet-snippets')
-	let g:neosnippet#snippets_directory = "~/.config/nvim/snippets"
+call dein#add('SirVer/ultisnips', {'on_i':1})
+    set rtp+=~/.config/nvim/snippets
+    let g:UltiSnipsSnippetsDir="~/.config/nvim/snippets/UltiSnips"
+    let g:UltiSnipsSnippetsDirectories=["UltiSnips", "~/.config/nvim/snippets/UltiSnips"]
+    let g:UltiSnipsExpandTrigger="<c-l>"
+    let g:UltiSnipsJumpForwardTrigger="<c-l>"
+    let g:UltiSnipsJumpBackwardTrigger="<c-b>"
+
+call dein#add('honza/vim-snippets',{'on_i':1}) 
+
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
+
 " }}}
 
 " Language Specific {{{
@@ -263,7 +267,6 @@ nnoremap <leader>wq :wq<CR>
 vnoremap // y/<C-R>"<CR>
 
 " file opening
-set path=.,**
 nnoremap <leader>e :e **/*
 nnoremap <leader>f :find *
 
