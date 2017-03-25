@@ -1,4 +1,11 @@
 #!/bin/bash
+
+# worstinstallscript2 creates symlinks for config files
+# use the dots array below to specify which configurations should be installed
+# for every folder in the dots array the script first creates 
+# the same directory structure  (with a prepended .) in the TRGETDIR
+# and then symlinks all files
+
 set -e
 
 dots=(nvim vim zsh aliases vimperator qutebrowser)
