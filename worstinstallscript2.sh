@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-dots=(nvim vim zsh aliases vimperator)
+dots=(nvim vim zsh aliases vimperator qutebrowser)
 TARGETDIR="$HOME"
 
 remove() {
