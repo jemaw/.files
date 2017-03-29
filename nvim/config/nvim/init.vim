@@ -72,7 +72,6 @@ call dein#add('honza/vim-snippets',{'on_i':1})
 " Language Specific {{{
 call dein#add('google/vim-ft-bzl')
 call dein#add('octol/vim-cpp-enhanced-highlight',{'on_ft': 'cpp'})
-" call dein#add('vim-scripts/a.vim', {'on_ft': 'cpp'})
 call dein#add('mitsuhiko/vim-python-combined', {'on_ft' : 'python'})
 call dein#add('fatih/vim-go', {'on_ft' : 'go'})
     " let g:go_fmt_command = "goimports"
@@ -295,7 +294,11 @@ au BufRead,BufNewFile *.tf setlocal ts=2 sts=2 sw=2 expandtab
 
 set wildmenu 
 set wildmode=full
-set wildignore+=*.swp,.tags,*.bak,*.pyc,*.class,*.jar,*.gif,*.png,*.jpg
+set wildignore+=*.swp,.tags,*.bak,*.pyc,*.class,*.jar
+set wildignore+=*.gif,*.png,*.jpg,*.ico
+set wildignore+=*.pdf,*.psd
+set wildignore+=node_modules/*
+
 set wildignorecase
 
 " }}}
