@@ -45,14 +45,23 @@ call dein#add('zchee/deoplete-jedi',{'on_ft' : 'python'})
 
 call dein#add('Shougo/neoinclude.vim')
 if executable('clang')
-call dein#add('zchee/deoplete-clang',{'on_ft': ['cpp','c']} )
-	let g:deoplete#sources#clang#libclang_path = '/usr/lib/libclang.so'
-	let g:deoplete#sources#clang#clang_header = '/usr/lib/clang'
+    " use .lvimrc with let g:deoplete#sources#clang#flags = ['-I/path/to/include']
+    call dein#add('zchee/deoplete-clang',{'on_ft': ['cpp','c']} )
+        let g:deoplete#sources#clang#libclang_path = '/usr/lib/libclang.so'
+        let g:deoplete#sources#clang#clang_header = '/usr/lib/clang'
 endif
 
 if executable("gocode")
     call dein#add("zchee/deoplete-go", {'build' : 'make'})
 endif
+
+" call dein#add('maralla/completor.vim')
+"     let g:completor_clang_binary = '/usr/bin/clang'
+"     python not working, cpp still quite slow
+"     let g:completor_python_binary = '/usr/bin/python2'
+"     inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+"     inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+"     inoremap <expr> <cr> pumvisible() ? "\<C-y>\<cr>" : "\<cr>"
 
 " }}}
 
@@ -100,14 +109,17 @@ call dein#add('bling/vim-bufferline')
 
 " Neomake {{{
 
-    call dein#add("neomake/neomake")
-        autocmd! BufWritePost * Neomake
-        let g:neomake_cpp_enabled_makers = []
-	" call dein#add('w0rp/ale.git')
-        " let g:ale_lint_delay = 600
-        " let g:ale_echo_msg_format = '%linter%: %s'
-        " let g:ale_sign_error = 'x'
-        " let g:ale_sign_warning = '⚠'
+"     call dein#add("neomake/neomake")
+"         autocmd! BufWritePost * Neomake
+"         let g:neomake_cpp_enabled_makers = []
+	call dein#add('w0rp/ale.git')
+        let g:ale_lint_delay = 1600
+        let g:ale_echo_msg_format = '%linter%: %s'
+        let g:ale_sign_error = 'x'
+        let g:ale_sign_warning = '⚠'
+        " for cpp use .lvimrc to set include dirs with following variable
+        " let g:ale_cpp_clang_options='-std=c++14 -Wall -I/folder/to/include'
+        let g:ale_linters = {'cpp': ['clang']}
 
 " }}}
 
