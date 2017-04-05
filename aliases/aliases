@@ -1,25 +1,25 @@
 #aliases
 
+# programs
 alias vi=nvim
-alias sleeep="echo systemctl suspend | at now +"
-alias py=python
 alias ra=ranger-cd
+
+# python
+alias py=python
+alias py2=python2
+
+# arch
 alias pacu="sudo pacman -Syu"
 alias paci="sudo pacman -S" 
 alias aup="yaourt -Syu --aur"
 alias aui="yaourt"
-alias q=exit
-alias xres="xrdb merge ~/.Xresources"
-alias tekshot="screenfetch -o 'upload=1;uploadLoc=teknik;screenshot=1'"
-# alias qnap="sudo mount 192.168.1.15:/Data /media/jean/qnap"
-alias ergo="setxkbmap us;xset r rate 260 30;setxkbmap -option 'caps:ctrl_modifier' && xcape -e 'Caps_Lock=Escape' & "
 
-#ls
+# ls
 alias ls='ls --color=auto'
 alias ll='ls -l'
 alias lla='ls -la'
 
-#git
+# git
 alias g='git'
 alias gs='git status'
 alias gd='git diff'
@@ -28,9 +28,10 @@ alias gaa='git add --all'
 alias gc='git commit'
 alias gp='git push'
 
-#docker
-alias dfuck='docker rm $(docker ps -a -q)'
-alias dfucki='docker rmi $(docker images -q)'
+# docker
+alias dfuck='docker rm -f $(docker ps -a -q)'
+alias dfucki='docker rmi -f $(docker images -q)'
+alias dfuckall='dfuck && dfucki'
 
 # cd
 alias -- -='cd -'
@@ -41,3 +42,12 @@ alias ...='cd ../..'
 alias vconf="nvim ~/.config/nvim/init.vim"
 alias aconf="nvim ~/.config/awesome/rc.lua"
 alias zconf="nvim ~/.zshrc"
+
+# fasd
+alias v='f -e vim'
+
+# misc
+alias sleeep="echo systemctl suspend | at now +"
+alias q=exit
+alias xres="xrdb merge ~/.Xresources"
+alias tekshot="screenfetch -o 'upload=1;uploadLoc=teknik;screenshot=1'"
