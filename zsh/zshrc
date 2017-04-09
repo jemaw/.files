@@ -64,25 +64,34 @@ fi
 # }}}
 
 # completion {{{
-compinit
-# kill completions
-zstyle ':completion:*:processes' command 'ps aux --forest'
-zstyle ':completion:*:*:kill:*' menu yes select
-zstyle ':completion:*:kill:*' force-list always
-zstyle ':completion:*:*:killall:*' menu yes select
-zstyle ':completion:*:killall:*' force-list always
 
+compinit
+
+# enable menu completion
+zstyle ':completion:*' menu select
+
+# option colors
 zstyle ':completion:*:options' list-colors '=^(-- *)=34'
+# verbose Output
 zstyle ':completion:*' verbose yes
 
+# group completion candidates in groups (example no<TAB>)
 zstyle ':completion:*:descriptions' format '%U%B%d%b%u' # shows group name
 zstyle ':completion:*' group-name ''
 zstyle ':completion:*:messages' format '%d'
 
-zstyle ':completion:*' menu select
-zstyle ':completion:*' use-cache on                     # completion caching, use rehash to clear
+# completion caching for speedup
+zstyle ':completion:*' use-cache on
 zstyle ':completion:*' rehash yes
-zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+
+# kill completions
+zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
+zstyle ':completion:*:kill:*' command 'ps -u $USER --forest -o pid,%cpu,tty,cputime,cmd'
+# show kill completion even when there is only one match
+zstyle ':completion:*:*:kill:*' menu yes select
+zstyle ':completion:*:kill:*' force-list always
+zstyle ':completion:*:*:killall:*' menu yes select
+zstyle ':completion:*:killall:*' force-list always
 
 # }}}
 
