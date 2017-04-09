@@ -1,38 +1,24 @@
-#
 # Browser
-#
-
 export BROWSER=firefox
 
-#
 # Editors
-#
-
 export EDITOR='nvim'
 export VISUAL='vim'
 export PAGER='less'
 
-#
 # Language
-#
-
 if [[ -z "$LANG" ]]; then
   export LANG='en_US.UTF-8'
 fi
 
-#
-# Paths
-#
+# Paths {{{
 
 #go
 export GOPATH=$HOME/Prog/go
-# Ensure path arrays do not contain duplicates.
-typeset -gU cdpath fpath mailpath path
 
-# Set the the list of directories that cd searches.
-# cdpath=(
-#   $cdpath
-# )
+# Ensure path arrays do not contain duplicates.
+typeset -gU cdpath fpath mailpath path gopath
+
 # Cuda
 grep "Ubuntu" /etc/issue -i -q
 if [ $? = '0' ];
@@ -41,20 +27,22 @@ then
 else
 	export CUDA_HOME='/opt/cuda'
 fi
+
+# ld_library_path
 export LD_LIBRARY_PATH=$CUDA_HOME/lib64:$LD_LIBRARY_PATH
 
 # Set the list of directories that Zsh searches for programs.
 path=(
 		~/bin/
 		/usr/local/{bin,sbin}
-		$path
 		$CUDA_HOME/bin
 		$GOPATH/bin
+		$path
 )
 
-#
-# Less
-#
+# }}}
+
+# Less {{{
 
 # Set the default Less options.
 # Mouse-wheel scrolling has been disabled by -X (disable screen clearing).
@@ -67,9 +55,9 @@ if (( $#commands[(i)lesspipe(|.sh)] )); then
   export LESSOPEN="| /usr/bin/env $commands[(i)lesspipe(|.sh)] %s 2>&-"
 fi
 
-#
+# }}}
+
 # Temporary Files
-#
 
 if [[ ! -d "$TMPDIR" ]]; then
   export TMPDIR="/tmp/$LOGNAME"
@@ -77,3 +65,5 @@ if [[ ! -d "$TMPDIR" ]]; then
 fi
 
 TMPPREFIX="${TMPDIR%/}/zsh"
+
+# vim: fdm=marker:fdl=0

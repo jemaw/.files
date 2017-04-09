@@ -1,14 +1,127 @@
 source $HOME/.aliases
-export KEYTIMEOUT=1
-setopt autocd \
-	prompt_subst \
-    histignorealldups  \
-	transient_rprompt # rprompt only current prompt
 
 autoload -Uz edit-command-line compinit vcs_info promptinit
 zmodload zsh/complist
 zle -N edit-command-line
 
+# cd movement {{{
+
+# use cd -<TAB> and cd +<TAB> to navigate dir stack
+setopt autocd autopushd pushdminus pushdsilent pushdtohome
+DIRSTACKSIZE=5
+
+# }}}
+
+# history {{{ 
+
+# no duplicates in history
+setopt histignorealldups
+
+HISTFILE=~/.zhistory
+HISTSIZE=10000
+SAVEHIST=10000
+
+# }}}
+
+# completion {{{
+
+compinit
+
+# enable menu completion
+zstyle ':completion:*' menu select
+
+# option colors
+zstyle ':completion:*:options' list-colors '=^(-- *)=34'
+# verbose Output
+zstyle ':completion:*' verbose yes
+
+# group completion candidates in groups (example no<TAB>)
+zstyle ':completion:*:descriptions' format '%U%B%d%b%u' # shows group name
+zstyle ':completion:*' group-name ''
+zstyle ':completion:*:messages' format '%d'
+
+# completion caching for speedup
+zstyle ':completion:*' use-cache on
+zstyle ':completion:*' rehash yes
+
+# kill completions
+zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
+zstyle ':completion:*:kill:*' command 'ps -u $USER --forest -o pid,%cpu,tty,cputime,cmd'
+# show kill completion even when there is only one match
+zstyle ':completion:*:*:kill:*' menu yes select
+zstyle ':completion:*:kill:*' force-list always
+zstyle ':completion:*:*:killall:*' menu yes select
+zstyle ':completion:*:killall:*' force-list always
+
+# }}}
+
+# bindkeys {{{
+
+# history search, already done by plugin substring search
+# bindkey '^[[A' up-line-or-search
+# bindkey '^[[B' down-line-or-search
+# bindkey '^P' up-line-or-search
+# bindkey '^N' down-line-or-search
+
+#vim mode
+bindkey -v
+
+# Open in editor.
+bindkey -M vicmd 'v' edit-command-line
+
+# Avoid Esc
+bindkey -M viins 'kj' vi-cmd-mode
+# Time in ms to wait for sequences
+KEYTIMEOUT=30
+
+
+#}}}
+
+# prompt {{{
+
+# command substitution (needed for vcs prompt)
+setopt prompt_subst
+# rprompt only current prompt
+setopt transient_rprompt
+
+zstyle ':vcs_info:*' enable git svn
+# zstyle ':vcs_info:git*' formats " %{$fg[grey]%}%{$fg[blue]%}%b%{$reset_color%}%m%u%c%{$reset_color%}"
+zstyle ':vcs_info:git*' formats " %b%m%u%c% "
+zstyle ':vcs_info:*' check-for-changes true
+zstyle ':vcs_info:*' unstagedstr '!'
+zstyle ':vcs_info:*' stagedstr '+'
+
+PROMPT_SIGN='»'
+
+precmd () { vcs_info }
+# PROMPT='%F{white}${vcs_info_msg_0_} % $PROMPT_SIGN %f%b'
+PROMPT='${vcs_info_msg_0_} % $PROMPT_SIGN %f%b'
+RPROMPT='%b%B%F{black}%~'
+
+# }}}
+
+# global aliases {{{
+
+# Automatically Expanding Global Aliases (Space key to expand)
+# references: http://blog.patshead.com/2012/11/automatically-expaning-zsh-global-aliases---simplified.html 
+globalias() {
+  if [[ $LBUFFER =~ '[A-Z0-9]+$' ]]; then
+    zle _expand_alias
+    zle expand-word
+  fi
+  zle self-insert
+}
+zle -N globalias
+bindkey " " globalias                 # space key to expand globalalias
+bindkey "^[[Z" magic-space            # shift-tab to bypass completion
+bindkey -M isearch " " magic-space    # normal space during searches
+
+# global aliases
+alias -g T='| tail'
+alias -g G='| grep'
+alias -g C='| wc -l'
+
+# }}}
 
 # zgen {{{
 
@@ -60,84 +173,6 @@ typeset -g HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_NOT_FOUND='fg=red,bold'
 bindkey '^ '  autosuggest-execute     # accept on ctrl space
 
 fi
-
-# }}}
-
-# completion {{{
-
-compinit
-
-# enable menu completion
-zstyle ':completion:*' menu select
-
-# option colors
-zstyle ':completion:*:options' list-colors '=^(-- *)=34'
-# verbose Output
-zstyle ':completion:*' verbose yes
-
-# group completion candidates in groups (example no<TAB>)
-zstyle ':completion:*:descriptions' format '%U%B%d%b%u' # shows group name
-zstyle ':completion:*' group-name ''
-zstyle ':completion:*:messages' format '%d'
-
-# completion caching for speedup
-zstyle ':completion:*' use-cache on
-zstyle ':completion:*' rehash yes
-
-# kill completions
-zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
-zstyle ':completion:*:kill:*' command 'ps -u $USER --forest -o pid,%cpu,tty,cputime,cmd'
-# show kill completion even when there is only one match
-zstyle ':completion:*:*:kill:*' menu yes select
-zstyle ':completion:*:kill:*' force-list always
-zstyle ':completion:*:*:killall:*' menu yes select
-zstyle ':completion:*:killall:*' force-list always
-
-# }}}
-
-# history {{{ 
-
-HISTFILE=~/.zhistory
-HISTSIZE=10000
-SAVEHIST=10000
-
-# }}}
-
-# bindkeys {{{
-
-# history search, already done by plugin substring search
-# bindkey '^[[A' up-line-or-search
-# bindkey '^[[B' down-line-or-search
-# bindkey '^P' up-line-or-search
-# bindkey '^N' down-line-or-search
-
-#vim mode
-bindkey -v
-
-# Open in editor.
-bindkey -M vicmd 'v' edit-command-line
-
-# Avoid Esc
-bindkey -M viins 'kj' vi-cmd-mode
-
-
-#}}}
-
-# Prompt {{{  
-
-zstyle ':vcs_info:*' enable git svn
-# zstyle ':vcs_info:git*' formats " %{$fg[grey]%}%{$fg[blue]%}%b%{$reset_color%}%m%u%c%{$reset_color%}"
-zstyle ':vcs_info:git*' formats " %b%m%u%c% "
-zstyle ':vcs_info:*' check-for-changes true
-zstyle ':vcs_info:*' unstagedstr '!'
-zstyle ':vcs_info:*' stagedstr '+'
-
-PROMPT_SIGN='»'
-
-precmd () { vcs_info }
-# PROMPT='%F{white}${vcs_info_msg_0_} % $PROMPT_SIGN %f%b'
-PROMPT='${vcs_info_msg_0_} % $PROMPT_SIGN %f%b'
-RPROMPT='%b%B%F{black}%~'
 
 # }}}
 
@@ -238,29 +273,6 @@ if [ $commands[fasd] ]; then # check if fasd is installed
   source "$fasd_cache"
   unset fasd_cache
 fi
-
-# }}}
-
-# global aliases {{{
-
-# Automatically Expanding Global Aliases (Space key to expand)
-# references: http://blog.patshead.com/2012/11/automatically-expaning-zsh-global-aliases---simplified.html 
-globalias() {
-  if [[ $LBUFFER =~ '[A-Z0-9]+$' ]]; then
-    zle _expand_alias
-    zle expand-word
-  fi
-  zle self-insert
-}
-zle -N globalias
-bindkey " " globalias                 # space key to expand globalalias
-bindkey "^[[Z" magic-space            # shift-tab to bypass completion
-bindkey -M isearch " " magic-space    # normal space during searches
-
-# global aliases
-alias -g T='| tail'
-alias -g G='| grep'
-alias -g C='| wc -l'
 
 # }}}
 
