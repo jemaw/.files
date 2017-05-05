@@ -55,14 +55,6 @@ if executable("gocode")
     call dein#add("zchee/deoplete-go", {'build' : 'make'})
 endif
 
-" call dein#add('maralla/completor.vim')
-"     let g:completor_clang_binary = '/usr/bin/clang'
-"     python not working, cpp still quite slow
-"     let g:completor_python_binary = '/usr/bin/python2'
-"     inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-"     inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-"     inoremap <expr> <cr> pumvisible() ? "\<C-y>\<cr>" : "\<cr>"
-
 " }}}
 
 " Snippets  {{{
@@ -86,45 +78,45 @@ call dein#add('fatih/vim-go', {'on_ft' : 'go'})
     " let g:go_fmt_command = "goimports"
     let g:go_fmt_fail_silently = 1
     let g:go_fmt_experimental = 1
+    let g:go_fmt_autosave = 0
     let g:go_metalinter_autosave = 0
-    let g:go_snippet_engine = "neosnippet"
+    let g:go_snippet_engine = "ultinsips"
     let g:go_metalinter_autosave_enabled = []
     let g:go_metalinter_enabled = []
     let g:go_asmfmt_autosave = 0
+call dein#add('rust-lang/rust.vim')
+
+" }}}
+
+" Formatting {{{
+call dein#add('Chiel92/vim-autoformat')
+    let g:formatdef_clang = '"clang-format -style=\"{BasedOnStyle: llvm, IndentWidth: 4, PointerAlignment: Left}\""'
+    let g:formatters_cpp = ['clang']
+    nnoremap <buffer><Leader>af :<C-u>Autoformat<CR>
+    vnoremap <buffer><Leader>af :Autoformat<CR>
+    " only autoformat for Specific filetypes
+    let fts = ['cpp', 'go']
+    au BufWrite * if index(fts, &filetype) != -1 |:Autoformat| endif
 " }}}
 
 " file and buffer switching {{{
 call dein#add('dbakker/vim-projectroot')
     nnoremap <expr> <leader>g ':edit '.projectroot#guess().'/**/*'
-call dein#add('bling/vim-bufferline')
-  let g:bufferline_echo = 0
-  let g:bufferline_active_buffer_left = ' '
-  let g:bufferline_active_buffer_right = ' '
-  let g:bufferline_modified = ' +'
-  set statusline=%r
-  autocmd VimEnter * 
-    \ let &statusline.='%{bufferline#refresh_status()}'
-      \ .bufferline#get_status_string()
 " }}}
 
 " Neomake {{{
 
-"     call dein#add("neomake/neomake")
-"         autocmd! BufWritePost * Neomake
-"         let g:neomake_cpp_enabled_makers = []
 	call dein#add('w0rp/ale.git')
-        let g:ale_lint_delay = 1600
+        let g:ale_lint_delay = 800
         let g:ale_echo_msg_format = '%linter%: %s'
-        let g:ale_sign_error = 'x'
-        let g:ale_sign_warning = '⚠'
         " for cpp use .lvimrc to set include dirs with following variable
         " let g:ale_cpp_clang_options='-std=c++14 -Wall -I/folder/to/include'
-        let g:ale_linters = {'cpp': ['clang']}
+        " let g:ale_linters = {'cpp': ['clang']}
+        let g:ale_linters = {'cpp': []}
 
 " }}}
 
 " Notes {{{
-"TODO better mappings
 call dein#add('vimwiki/vimwiki')
 	let g:vimwiki_table_mappings = 0
 	let g:vimwiki_folding = 'expr'
@@ -177,6 +169,12 @@ set smartcase
 " This unsets the last search pattern register by hitting return
 nnoremap <CR> :noh<CR><CR> 
 
+" preview effects of substitute command
+if has('nvim')
+    set icm=split
+endif
+
+
 " }}}
 " Appearance {{{
 
@@ -190,6 +188,9 @@ set relativenumber
 set laststatus=2
 set noshowmode
 
+" use normal block curosr
+set guicursor=
+
 " }}}
 " Folding {{{
 
@@ -199,7 +200,7 @@ set foldmethod=syntax
 set foldnestmax=1
 " set foldlevelstart=0
 " set foldminlines=1
-set foldtext=FoldText()
+set foldtext=NeatFoldText()
 
 " }}}
 " Indent options{{{
@@ -278,6 +279,9 @@ vnoremap // y/<C-R>"<CR>
 nnoremap <leader>e :e **/*
 nnoremap <leader>f :find *
 
+" source vimrc
+nnoremap <leader>ss :so $MYVIMRC<CR>
+
 " }}}
 " Buffers  {{{
 
@@ -316,7 +320,10 @@ set wildignorecase
 " }}}
 " Misc {{{
 
+" tag file name
 set tags=./tags;,tags;
+
+" automatically change working directory
 set autochdir
 
 " }}}
@@ -326,7 +333,6 @@ set guioptions-=m  "remove menu bar
 set guioptions-=T  "remove toolbar
 set guioptions-=r  "remove right-hand scroll bar
 set guioptions-=L  "remove left-hand scroll bar
-set guiheadroom=0
 set guicursor+=a:blinkon0
 if has("gui_running")
 	try

@@ -35,9 +35,9 @@ export LD_LIBRARY_PATH=$CUDA_HOME/lib64:$LD_LIBRARY_PATH
 path=(
 		~/bin/
 		/usr/local/{bin,sbin}
+		$path
 		$CUDA_HOME/bin
 		$GOPATH/bin
-		$path
 )
 
 # }}}
