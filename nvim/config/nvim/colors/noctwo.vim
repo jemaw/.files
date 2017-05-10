@@ -1,4 +1,4 @@
-" noctu2.vim - Vim color scheme for 16-color terminals
+" noctwo.vim - Vim color scheme for 16-color terminals
 " --------------------------------------------------------------
 " OriginalAuthor:   Noah Frederick (http://noahfrederick.com/)
 " Modified:         gabbagandalf   (http://github.com/gabbagandalf)
@@ -34,7 +34,7 @@ if exists("syntax_on")
   syntax reset
 endif
 
-let colors_name="noctu2"
+let colors_name="noctwo"
 
 "}}}
 " Vim UI {{{
@@ -84,17 +84,17 @@ hi! link SpecialKey               NonText
 " Generic syntax {{{
 hi Delimiter       ctermfg=7
 hi Comment         ctermfg=8
-hi Underlined      ctermfg=4  cterm=underline
+hi Underlined      ctermfg=12 cterm=underline
 hi Type            ctermfg=6
 hi String          ctermfg=2
-hi Keyword         ctermfg=4
+hi Keyword         ctermfg=12
 hi Todo            ctermfg=15 ctermbg=NONE cterm=bold,underline
-hi Function        ctermfg=4
+hi Function        ctermfg=12
 hi Identifier      ctermfg=7  cterm=NONE
 hi Statement       ctermfg=15 cterm=bold
 hi Constant        ctermfg=13
 hi Number          ctermfg=1
-hi Boolean         ctermfg=4
+hi Boolean         ctermfg=9
 hi Special         ctermfg=13
 hi Ignore          ctermfg=0
 hi! link Operator  Delimiter
