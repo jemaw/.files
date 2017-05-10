@@ -83,7 +83,7 @@ hi! link SpecialKey               NonText
 "}}}
 " Generic syntax {{{
 hi Delimiter       ctermfg=7
-hi Comment         ctermfg=8  cterm=italic
+hi Comment         ctermfg=8
 hi Underlined      ctermfg=4  cterm=underline
 hi Type            ctermfg=6
 hi String          ctermfg=2
