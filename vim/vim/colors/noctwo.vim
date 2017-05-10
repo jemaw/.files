@@ -1,0 +1,1 @@
+../../../nvim/config/nvim/colors/noctwo.vim

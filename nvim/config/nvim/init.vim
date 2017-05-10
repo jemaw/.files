@@ -180,7 +180,7 @@ endif
 
 syntax on
 set background=dark
-colorscheme noctu2
+colorscheme noctwo
 
 set number
 set relativenumber
