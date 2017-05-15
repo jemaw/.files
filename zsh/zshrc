@@ -306,4 +306,27 @@ fda() {
 
 #}}}
 
+# skim {{{
+
+# fe [FUZZY PATTERN] - Open the selected file with the default editor
+ke() {
+    ${EDITOR:-vim} $(find ${1:-.} -type f 2> /dev/null | sk -m) && cd "$dir"
+}
+
+# fd - cd to selected directory
+kd() {
+  local dir
+  dir=$(find ${1:-$HOME} -path '*/\.*' -prune \
+                  -o -type d -print 2> /dev/null | sk -m) &&
+  cd "$dir"
+}
+
+# fda - including hidden directories
+kda() {
+	local dir
+	dir=$(find ${1:-.} -type d 2> /dev/null | sk -m) && cd "$dir"
+}
+
+#}}}
+
 # vim: fdm=marker:fdl=0

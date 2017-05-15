@@ -231,5 +231,9 @@ hi netrwExe       ctermfg=9
 hi netrwClassify  ctermfg=8  cterm=bold
 
 "}}}
+" Denite {{{
+hi deniteMatchedChar ctermbg=0 ctermfg=1
+
+"}}}
 
 " vim: fdm=marker:sw=2:sts=2:et

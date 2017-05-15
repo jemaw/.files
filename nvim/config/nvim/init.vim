@@ -54,6 +54,11 @@ endif
 if executable("gocode")
     call dein#add("zchee/deoplete-go", {'build' : 'make'})
 endif
+if executable("racer")
+    call dein#add("sebastianmarkow/deoplete-rust")
+    let g:deoplete#sources#rust#racer_binary='/usr/bin/racer'
+    let g:deoplete#sources#rust#rust_source_path='/home/jean/packages/rust/src'
+endif
 
 " }}}
 
@@ -100,8 +105,9 @@ call dein#add('Chiel92/vim-autoformat')
 " }}}
 
 " file and buffer switching {{{
+call dein#add('Shougo/denite.nvim')
 call dein#add('dbakker/vim-projectroot')
-    nnoremap <expr> <leader>g ':edit '.projectroot#guess().'/**/*'
+    " nnoremap <expr> <leader>g ':edit '.projectroot#guess().'/**/*'
 " }}}
 
 " Neomake {{{
@@ -143,6 +149,32 @@ endif
 
 filetype plugin indent on
 " }}}
+
+" denite configuration{{{
+call denite#custom#map(
+      \ 'insert',
+      \ '<C-j>',
+      \ '<denite:move_to_next_line>',
+      \ 'noremap'
+      \)
+call denite#custom#map(
+      \ 'insert',
+      \ '<C-k>',
+      \ '<denite:move_to_previous_line>',
+      \ 'noremap'
+      \)
+if executable('ag')
+    call denite#custom#var('file_rec', 'command',
+                \ ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])
+endif
+
+nnoremap <leader>p :Denite buffers<CR>
+nnoremap <leader>o :Denite file<CR>
+nnoremap <leader>g :DeniteProjectDir file_rec<CR>
+
+hi deniteMatchedChar ctermbg=0 ctermfg=1
+
+"}}}
 
 " }}}
 " Line Wrap {{{
@@ -287,7 +319,7 @@ nnoremap <leader>ss :so $MYVIMRC<CR>
 
 set hidden
 " buffer switching
-nnoremap <leader>p :b <C-d>
+" nnoremap <leader>p :b <C-d>
 " quickswitch
 nnoremap <bs> <c-^>
 
