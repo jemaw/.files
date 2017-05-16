@@ -76,8 +76,8 @@ local tag_icon_active = "◆"
 -- table of layouts to cover with awful.layout.inc, order matters.
 awful.layout.layouts = {
     awful.layout.suit.floating,
-    awful.layout.suit.tile,
     awful.layout.suit.tile.bottom,
+    awful.layout.suit.tile,
 }
 
 -- lain
@@ -687,16 +687,12 @@ awful.rules.rules = {
     { rule_any = { type = { "dialog", "normal" } },
       properties = { titlebars_enabled = true } },
 
-    -- Set Firefox to always map on the first tag on screen 1.
-    -- { rule = { class = "Firefox" },
-    --   properties = { screen = 1, tag = awful.screen.focused().tags[1] } },
-
     { rule = { class = "Gimp", role = "gimp-image-window" },
           properties = { maximized_horizontal = true,
                          maximized_vertical = true } },
     { rule = { class = "Steam"},
           properties = { floating = true},},
-    { rule = { class = "Teamspeak3"},
+    { rule = { name = "TeamSpeak*"},
           properties = { floating = true},}
 }
 -- }}}
