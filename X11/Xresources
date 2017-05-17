@@ -1,43 +1,73 @@
-!xft{{{
-Xft.antialias:		true
-Xft.autohint:			false
-Xft.dpi:			    96
-Xft.hinting:			true
-Xft.hintstyle:		hintfull
-Xft.rgba:	    		rgb
-!}}}
-!{{{font
-!#define cjb_font     Liberation Mono 
-#define cjb_font     Tamsyn 
+! xft {{{
+
+Xft.antialias:      true
+Xft.autohint:       false
+Xft.dpi:            96
+Xft.hinting:        true
+Xft.hintstyle:      hintfull
+Xft.rgba:           rgb
+
+! }}}
+! font {{{
+
+#define cjb_font     Misc Tamsyn 
 #define cjb_fontsize 14
 
-!urxvt.font :	-benis-uushi-medium-r-normal--11-90-75-75-p-58-iso10646-1
-!URxvt.boldFont :	
+! }}}
+! colors {{{
+
+#include </home/jean/.colors/xres/crayolo/bulb>
+
+*background:   bg
+*foreground:   fg
+*cursorColor:  cyn
+
+*color0:      blk
+*color8:      bblk
+*color1:      red
+*color9:      red
+*color2:      grn
+*color10:     grn
+*color3:      ylw
+*color11:     ylw
+*color4:      blu
+*color12:     blu
+*color5:      mag
+*color13:     mag
+*color6:      cyn
+*color14:     cyn
+*color7:      wht
+*color15:     wht
+
+! override
+*cursorColor:  fg
+*background:   #111314
+*color12: #75919D
+
+! }}}
+! xst settings {{{
+st.bold_font: 1
+st.borderpx: 15
+st.font: cjb_font:medium:pixelsize=cjb_fontsize
+! }}}
+! urxvt settings {{{
 
 !Font
 URxvt*font: xft:cjb_font:medium:pixelsize=cjb_fontsize
-!URxvt*boldFont:
 URxvt*boldFont: xft:cjb_font:bold:pixelsize=cjb_fontsize
 URxvt*italicFont: xft:cjb_font:italic:pixelsize=cjb_fontsize
 URxvt*boldItalicFont: xft:cjb_font:bold:italic:pixelsize=cjb_fontsize
-!}}}
-!{{{ color
-#include </home/jean/Colors/xres/crayolo/bulb>
-#include </home/jean/Colors/xres/crayolo/xresource>
-*cursorColor:  fg
-*background:   #1F1F1F
-! }}}
-!urxvt settings{{{
-!savelines
-urxvt.savelines:	65534 
+!URxvt.font :	-benis-uushi-medium-r-normal--11-90-75-75-p-58-iso10646-1
+!URxvt.boldFont :	
 
-! Scrollbar
-*scrollBar:         false
+! savelines
+URxvt.savelines:	65534 
 
-! And scrolling
-*scrollTtyOutput:   false
-*scrollWithBuffer:  true
-*scrollTtyKeypress: true
+! scrolling
+URxvt.scrollBar:         false
+URxvt.scrollTtyOutput:   false
+URxvt.scrollWithBuffer:  true
+URxvt.scrollTtyKeypress: true
 
 !internal Border
 urxvt.internalBorder: 7
@@ -54,9 +84,5 @@ URxvt.url-launcher: /usr/bin/firefox
 URxvt.matcher.button: 1
 URxvt.keysym.C-Delete: perl:matcher:last
 
-!fading when focus is lost
-urxvt.fading: 0
-
-urxvt*depth: 32
 !}}}
 ! vi:syntax=xdefaults:fdm=marker:fdl=0
