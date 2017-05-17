@@ -1,7 +1,7 @@
 #!/bin/bash
 #
-# Small shell script that creates symlinks for config files
-#
+# Description: Creates symlinks for config files
+# Author: Jean Wanka (https://github.com/jemaw)
 
 set -e
 
@@ -16,6 +16,9 @@ main(){
             -h|--help)
                 usage
                 exit 0
+                ;;
+            -a|--all)
+                dots=($(ls -d */))
                 ;;
             -t|--target)
                 setTargetDir "$2"
@@ -41,6 +44,7 @@ usage(){
     echo "Usage: ./worstinstallscript2.sh [Options] args [Folders]"
     echo "Options:"
     echo -e "\t -h --help         Display help message"
+    echo -e "\t -a --all          Install all configs"
     echo -e "\t -t --target arg   Change Targetdirectory (Default: \$HOME)"
     echo "Folders (Default specified in defaultdots array at the beginning of the script)"
     echo -e "\t vim         Folder containing vim config"
@@ -53,7 +57,8 @@ setTargetDir(){
         echo "$1" does not exist
         exit 0
     else
-        TARGETDIR="$1"
+        # get absolute path
+        TARGETDIR="$(cd "$(dirname "$1")"; pwd)/$(basename "$1")"
     fi
 }
 
@@ -71,6 +76,11 @@ info(){
     echo "Chosen Configs: ${dots[*]}"
     echo "Target Directory: $TARGETDIR"
     echo ""
+    read -rp "Proceed? [Y/n] " yn
+    case $yn in
+        [Nn]* ) exit 0;;
+        * ) return;;
+    esac
 }
 
 remove() {
