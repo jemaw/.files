@@ -164,7 +164,7 @@ if executable('ag')
                 \ ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])
 endif
 
-nnoremap <leader>p :Denite buffers<CR>
+nnoremap <leader>p :Denite buffer<CR>
 nnoremap <leader>o :Denite file<CR>
 nnoremap <leader>g :DeniteProjectDir file_rec<CR>
 
