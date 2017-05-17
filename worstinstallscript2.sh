@@ -79,7 +79,7 @@ info(){
     read -rp "Proceed? [Y/n] " yn
     case $yn in
         [Nn]* ) exit 0;;
-        * ) return;;
+        * ) echo ""; return;;
     esac
 }
 
