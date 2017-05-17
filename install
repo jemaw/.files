@@ -76,20 +76,22 @@ info(){
     echo "Chosen Configs: ${dots[*]}"
     echo "Target Directory: $TARGETDIR"
     echo ""
-    read -rp "Proceed? [Y/n] " yn
-    case $yn in
-        [Nn]* ) exit 0;;
-        * ) echo ""; return;;
-    esac
+    while true; do
+        read -rp "Proceed? [Y/n] " yn
+        case $yn in
+            [Nn]* ) exit 0;;
+            * ) echo ""; return;;
+        esac
+    done
 }
 
 remove() {
     local targetfile=$1
     while true; do
-        read -rp "File already exists: $targetfile, overwrite? [Y/n] " yn
+        read -rp "File already exists: $targetfile, overwrite? [y/N] " yn
         case $yn in
-            [Nn]* ) break;;
-            * ) rm "$targetfile"; echo "Removed: $targetfile"; break;;
+            [Yy]* ) rm "$targetfile"; echo "Removed: $targetfile"; break;;
+            * ) break;;
         esac
     done
 }
@@ -127,7 +129,7 @@ makesubdirs() {
 install(){
     for dot in "${dots[@]}";do
         cd "$dot"
-        echo "$dot"
+        echo "$(tput bold)$dot$(tput sgr0)"
         files=($(find * -type f) $(find * -type l))
         makesubdirs
         symlink
