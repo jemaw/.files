@@ -22,6 +22,7 @@ call dein#add('Shougo/dein.vim')
 " }}}
 
 " misc {{{
+call dein#add('jemaw/vim-noctwo')
 call dein#add('tpope/vim-commentary')
 call dein#add('wellle/targets.vim')
 call dein#add('airblade/vim-gitgutter')
@@ -211,7 +212,11 @@ endif
 
 syntax on
 set background=dark
-colorscheme noctwo
+try 
+    colorscheme noctwo
+catch
+    colorscheme desert
+endtry
 
 set number
 set relativenumber
