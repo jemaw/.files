@@ -143,10 +143,6 @@ if dein#check_install()
 endif
 
 call dein#end()
-
-endif
-endif
-
 filetype plugin indent on
 " }}}
 
@@ -173,6 +169,9 @@ nnoremap <leader>o :Denite file<CR>
 nnoremap <leader>g :DeniteProjectDir file_rec<CR>
 
 hi deniteMatchedChar ctermbg=0 ctermfg=1
+
+endif " !empty(glob('~/.config/nvim/dein'))
+endif " has ('nvim')
 
 "}}}
 
