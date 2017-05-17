@@ -41,7 +41,7 @@ main(){
 }
 
 usage(){
-    echo "Usage: ./worstinstallscript2.sh [Options] args [Folders]"
+    echo "Usage: ./install [Options] args [Folders]"
     echo "Options:"
     echo -e "\t -h --help         Display help message"
     echo -e "\t -a --all          Install all configs"

@@ -1,7 +1,7 @@
 " noctwo.vim - Vim color scheme for 16-color terminals
 " --------------------------------------------------------------
 " OriginalAuthor:   Noah Frederick (http://noahfrederick.com/)
-" Modified:         gabbagandalf   (http://github.com/gabbagandalf)
+" Modified:         Jean Wanka     (http://github.com/jemaw)
 " --------------------------------------------------------------
 
 " {{{
