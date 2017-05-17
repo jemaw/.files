@@ -18,9 +18,10 @@ Xft.rgba:           rgb
 
 #include </home/jean/.colors/xres/crayolo/bulb>
 
+! apply theme {{{
 *background:   bg
 *foreground:   fg
-*cursorColor:  cyn
+*cursorColor:  fg
 
 *color0:      blk
 *color8:      bblk
@@ -38,17 +39,20 @@ Xft.rgba:           rgb
 *color14:     cyn
 *color7:      wht
 *color15:     wht
+! }}}
 
 ! override
-*cursorColor:  fg
 *background:   #111314
 *color12: #75919D
 
+
 ! }}}
 ! xst settings {{{
+
 st.bold_font: 1
 st.borderpx: 15
 st.font: cjb_font:medium:pixelsize=cjb_fontsize
+
 ! }}}
 ! urxvt settings {{{
 
