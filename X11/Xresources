@@ -16,35 +16,40 @@ Xft.rgba:           rgb
 ! }}}
 ! colors {{{
 
-#include </home/jean/.colors/xres/crayolo/bulb>
+#include </home/jean/.colors/xres/crayolo/colors/bulb>
+
+! override
+#define bg #111314
+#define bblu #75919D
 
 ! apply theme {{{
 *background:   bg
 *foreground:   fg
-*cursorColor:  fg
 
 *color0:      blk
 *color8:      bblk
 *color1:      red
-*color9:      red
+*color9:      bred
 *color2:      grn
-*color10:     grn
+*color10:     bgrn
 *color3:      ylw
-*color11:     ylw
+*color11:     bylw
 *color4:      blu
-*color12:     blu
+*color12:     bblu
 *color5:      mag
-*color13:     mag
+*color13:     bmag
 *color6:      cyn
-*color14:     cyn
+*color14:     bcyn
 *color7:      wht
-*color15:     wht
+*color15:     bwht
 ! }}}
 
-! override
-*background:   #111314
-*color12: #75919D
+! }}}
+! Rofi {{{
 
+rofi.color-enabled: true
+rofi.color-window: bg, bg, #1e2529
+rofi.color-normal: bg, fg, bg, blk, #ffffff
 
 ! }}}
 ! xst settings {{{
@@ -74,7 +79,7 @@ URxvt.scrollWithBuffer:  true
 URxvt.scrollTtyKeypress: true
 
 !internal Border
-urxvt.internalBorder: 7
+urxvt.internalBorder: 15
 
 ! Perl stuff
 URxvt.perl-ext-common: default,matcher,clipboard
