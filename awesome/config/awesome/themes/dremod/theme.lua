@@ -16,6 +16,7 @@ theme.dir                                       = os.getenv("HOME") .. "/.config
 theme.wallpaper                                 = theme.dir .. "/wall.png"
 
 theme.delta = 10
+theme.padding = 15
 
 theme.font                                      = "Misc Tamsyn 10.5"
 theme.taglist_font                              = "Misc Tamsyn 10.5"

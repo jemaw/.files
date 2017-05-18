@@ -699,7 +699,7 @@ awful.rules.rules = {
 
 -- {{{ Signals
 for s in screen do
-    s.padding = 30
+    s.padding = beautiful.padding
 end
 
 dynamic_tagging = function() 
