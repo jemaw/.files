@@ -106,9 +106,25 @@ call dein#add('Chiel92/vim-autoformat')
 " }}}
 
 " file and buffer switching {{{
-call dein#add('Shougo/denite.nvim')
-call dein#add('dbakker/vim-projectroot')
-    " nnoremap <expr> <leader>g ':edit '.projectroot#guess().'/**/*'
+
+call dein#add('junegunn/fzf', {'build': './install --all'})
+call dein#add('junegunn/fzf.vim')
+    nnoremap <Leader>o :FZF<CR>
+    nnoremap <Leader>g :GFiles<CR>
+    nnoremap <Leader>p :Buffer<CR>
+    nnoremap <Leader>/ :Ag<CR>
+    autocmd FileType fzf tnoremap <buffer> <C-j> <Down>
+    autocmd FileType fzf tnoremap <buffer> <C-k> <Up>
+
+    function! s:fzf_statusline()
+        " Override statusline as you like
+        highlight fzf1 ctermfg=161 ctermbg=None
+        highlight fzf2 ctermfg=7 ctermbg=None
+        highlight fzf3 ctermfg=7 ctermbg=None
+        setlocal statusline=%#fzf1#\ >\ %#fzf2#fz%#fzf3#f
+    endfunction
+    autocmd! User FzfStatusLine call <SID>fzf_statusline()
+
 " }}}
 
 " Neomake {{{
@@ -144,36 +160,9 @@ endif
 
 call dein#end()
 filetype plugin indent on
-" }}}
-
-" denite configuration{{{
-call denite#custom#map(
-      \ 'insert',
-      \ '<C-j>',
-      \ '<denite:move_to_next_line>',
-      \ 'noremap'
-      \)
-call denite#custom#map(
-      \ 'insert',
-      \ '<C-k>',
-      \ '<denite:move_to_previous_line>',
-      \ 'noremap'
-      \)
-if executable('ag')
-    call denite#custom#var('file_rec', 'command',
-                \ ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])
-endif
-
-nnoremap <leader>p :Denite buffer<CR>
-nnoremap <leader>o :Denite file<CR>
-nnoremap <leader>g :DeniteProjectDir file_rec<CR>
-
-hi deniteMatchedChar ctermbg=0 ctermfg=1
-
 endif " !empty(glob('~/.config/nvim/dein'))
 endif " has ('nvim')
-
-"}}}
+" }}}
 
 " }}}
 " Line Wrap {{{

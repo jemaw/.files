@@ -293,7 +293,7 @@ fe() {
 # fd - cd to selected directory
 fd() {
   local dir
-  dir=$(find ${1:-.} -path '*/\.*' -prune \
+  dir=$(find ${1:-$HOME} -path '*/\.*' -prune \
                   -o -type d -print 2> /dev/null | fzf +m) &&
   cd "$dir"
 }
@@ -301,7 +301,7 @@ fd() {
 # fda - including hidden directories
 fda() {
     local dir
-    dir=$(find ${1:-.} -type d 2> /dev/null | fzf +m) && cd "$dir"
+    dir=$(find ${1:-$HOME} -type d 2> /dev/null | fzf +m) && cd "$dir"
 }
 
 v() {
@@ -334,9 +334,11 @@ kd() {
 # fda - including hidden directories
 kda() {
     local dir
-    dir=$(find ${1:-.} -type d 2> /dev/null | sk -m) && cd "$dir"
+    dir=$(find ${1:-$HOME} -type d 2> /dev/null | sk -m) && cd "$dir"
 }
 
 #}}}
 
 # vim: fdm=marker:fdl=0
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
