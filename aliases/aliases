@@ -44,8 +44,8 @@ alias aconf="nvim ~/.config/awesome/rc.lua"
 alias zconf="nvim ~/.zshrc"
 
 # fasd
-alias v='fasd -f -e $EDITOR'
-alias vv='fasd -f -i -e $EDITOR'
+# alias v='fasd -f -e $EDITOR'
+# alias vv='fasd -f -i -e $EDITOR'
 
 # misc
 alias sleeep="echo systemctl suspend | at now +"

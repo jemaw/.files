@@ -114,12 +114,11 @@ call dein#add('dbakker/vim-projectroot')
 " Neomake {{{
 
 	call dein#add('w0rp/ale.git')
-        let g:ale_lint_delay = 800
-        let g:ale_echo_msg_format = '%linter%: %s'
         " for cpp use .lvimrc to set include dirs with following variable
         " let g:ale_cpp_clang_options='-std=c++14 -Wall -I/folder/to/include'
-        " let g:ale_linters = {'cpp': ['clang']}
-        let g:ale_linters = {'cpp': []}
+        " let g:ale_lint_delay = 800
+        let g:ale_echo_msg_format = '%linter%: %s'
+        let g:ale_linters = {'cpp': ['clang']}
 
 " }}}
 
@@ -271,6 +270,7 @@ inoremap kj <c-c>`^
 if has('nvim')
 	" jk conflitcts with ranger, esc conflicts with zsh vi mode
 	" tnoremap kj <C-\><C-n>
+    nnoremap <leader>t :sp<cr>:resize 15<cr>:term<cr>
 	tnoremap <C-\> <C-\><C-n>
 	tnoremap <C-h> <C-\><C-n><C-w>h
 	tnoremap <C-j> <C-\><C-n><C-w>j
@@ -282,6 +282,10 @@ if has('nvim')
 endif
 
 nnoremap <Space> <NOP>
+
+" easy saving
+inoremap <c-s> <esc>:w<cr>
+nnoremap <c-s> :w<cr>
 
 " Split moving
 nnoremap <C-h> <C-w>h
@@ -318,6 +322,10 @@ nnoremap <leader>f :find *
 " source vimrc
 nnoremap <leader>ss :so $MYVIMRC<CR>
 
+" }}}
+" {{{ Splits 
+set splitbelow
+set splitright
 " }}}
 " Buffers  {{{
 

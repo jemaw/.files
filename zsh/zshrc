@@ -267,7 +267,7 @@ function ranger-cd {
 
 # fasd {{{
 if [ $commands[fasd] ]; then # check if fasd is installed
-  fasd_cache=".zgen/fasd-init-cache"
+  fasd_cache="$HOME/.zgen/fasd-init-cache"
   if [ "$(command -v fasd)" -nt "$fasd_cache" -o ! -s "$fasd_cache" ]; then
     fasd --init auto >| "$fasd_cache"
   fi
@@ -302,6 +302,16 @@ fd() {
 fda() {
 	local dir
 	dir=$(find ${1:-.} -type d 2> /dev/null | fzf +m) && cd "$dir"
+}
+
+v() {
+  local file
+  file="$(fasd -Rfl "$1" | fzf -1 -0 --no-sort +m)" && vi "${file}" || return 1
+}
+
+z() {
+  local dir
+  dir="$(fasd -Rdl "$1" | fzf -1 -0 --no-sort +m)" && cd "${dir}" || return 1
 }
 
 #}}}
