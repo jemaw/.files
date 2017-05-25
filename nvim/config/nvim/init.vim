@@ -9,9 +9,9 @@ endif
 if has('nvim')
 " install dein
 if empty(glob('~/.config/nvim/dein/repos/github.com/Shougo/dein.vim'))
-	silent !mkdir -p ~/.config/nvim/dein/repos/github.com/Shougo/dein.vim
-	silent !git clone https://github.com/Shougo/dein.vim.git ~/.config/nvim/dein/repos/github.com/Shougo/dein.vim
-	autocmd VimEnter * if !dein#util#_is_sudo() call dein#install() | call dein#remote_plugins() | nested source $MYVIMRC | endif
+    silent !mkdir -p ~/.config/nvim/dein/repos/github.com/Shougo/dein.vim
+    silent !git clone https://github.com/Shougo/dein.vim.git ~/.config/nvim/dein/repos/github.com/Shougo/dein.vim
+    autocmd VimEnter * if !dein#util#_is_sudo() call dein#install() | call dein#remote_plugins() | nested source $MYVIMRC | endif
 endif
 
 if !empty(glob('~/.config/nvim/dein'))
@@ -28,21 +28,21 @@ call dein#add('wellle/targets.vim')
 call dein#add('airblade/vim-gitgutter')
 
 call dein#add('ludovicchabant/vim-gutentags')
-	let g:gutentags_ctags_tagfile = ".tags"
+    let g:gutentags_ctags_tagfile = ".tags"
 call dein#add('MarcWeber/vim-addon-local-vimrc.git')
     let g:local_vimrc = {'names':['.lvimrc']}
 " }}}
 
 " Autocompletion {{{
 call dein#add('Shougo/deoplete.nvim')
-	autocmd InsertLeave * if pumvisible() == 0 | pclose | endif
-	let g:deoplete#enable_at_startup = 1
-	let g:deoplete#enable_smart_case = 1
-	let g:deoplete#auto_completion_start_length = 2
-	inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+    autocmd InsertLeave * if pumvisible() == 0 | pclose | endif
+    let g:deoplete#enable_at_startup = 1
+    let g:deoplete#enable_smart_case = 1
+    let g:deoplete#auto_completion_start_length = 2
+    inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 
 call dein#add('zchee/deoplete-jedi',{'on_ft' : 'python'})
-	let deoplete#sources#jedi#show_docstring=1
+    let deoplete#sources#jedi#show_docstring=1
 
 call dein#add('Shougo/neoinclude.vim')
 if executable('clang')
@@ -113,7 +113,7 @@ call dein#add('dbakker/vim-projectroot')
 
 " Neomake {{{
 
-	call dein#add('w0rp/ale.git')
+    call dein#add('w0rp/ale.git')
         " for cpp use .lvimrc to set include dirs with following variable
         " let g:ale_cpp_clang_options='-std=c++14 -Wall -I/folder/to/include'
         " let g:ale_lint_delay = 800
@@ -124,15 +124,15 @@ call dein#add('dbakker/vim-projectroot')
 
 " Notes {{{
 call dein#add('vimwiki/vimwiki')
-	let g:vimwiki_table_mappings = 0
-	let g:vimwiki_folding = 'expr'
-	let g:vimwiki_list = [{
-				\ 'path': '$HOME/Dropbox/wiki',
-				\ 'template_path': '$HOME/Dropbox/wiki/templates',
-				\ 'template_default': 'default',
-				\ 'template_ext': '.html',
-				\ 'auto_export': 1,
-				\ 'nested_syntaxes' : {'python': 'python', 'c++': 'cpp'} }]
+    let g:vimwiki_table_mappings = 0
+    let g:vimwiki_folding = 'expr'
+    let g:vimwiki_list = [{
+                \ 'path': '$HOME/Dropbox/wiki',
+                \ 'template_path': '$HOME/Dropbox/wiki/templates',
+                \ 'template_default': 'default',
+                \ 'template_ext': '.html',
+                \ 'auto_export': 1,
+                \ 'nested_syntaxes' : {'python': 'python', 'c++': 'cpp'} }]
 
 
 " }}}
@@ -268,17 +268,17 @@ inoremap kj <c-c>`^
 
 " terminal
 if has('nvim')
-	" jk conflitcts with ranger, esc conflicts with zsh vi mode
-	" tnoremap kj <C-\><C-n>
+    " jk conflitcts with ranger, esc conflicts with zsh vi mode
+    " tnoremap kj <C-\><C-n>
     nnoremap <leader>t :sp<cr>:resize 15<cr>:term<cr>
-	tnoremap <C-\> <C-\><C-n>
-	tnoremap <C-h> <C-\><C-n><C-w>h
-	tnoremap <C-j> <C-\><C-n><C-w>j
-	tnoremap <C-k> <C-\><C-n><C-w>k
-	tnoremap <C-l> <C-\><C-n><C-w>l
-	" tnoremap <Leader>. <C-\><C-n>gt
-	" tnoremap <Leader>, <C-\><C-n>gT
-	au BufWinEnter,WinEnter term://* startinsert
+    tnoremap <C-\> <C-\><C-n>
+    tnoremap <C-h> <C-\><C-n><C-w>h
+    tnoremap <C-j> <C-\><C-n><C-w>j
+    tnoremap <C-k> <C-\><C-n><C-w>k
+    tnoremap <C-l> <C-\><C-n><C-w>l
+    " tnoremap <Leader>. <C-\><C-n>gt
+    " tnoremap <Leader>, <C-\><C-n>gT
+    au BufWinEnter,WinEnter term://* startinsert
 endif
 
 nnoremap <Space> <NOP>
@@ -338,13 +338,12 @@ nnoremap <bs> <c-^>
 " }}}
 " Filetupe {{{
 
-au FileType *		setlocal formatoptions-=c formatoptions-=r formatoptions-=o " Disable comment new line
-au FileType c		setlocal commentstring=//\ %s
-au FileType cpp		setlocal commentstring=//\ %s
-" au FileType cpp		call Findinclude()
-au FileType python	setlocal fdm=indent formatprg=autopep8\ -
-" au Filetype python	vnoremap <buffer> gq gq:%retab!<CR>
-au FileType vimwiki		setlocal nowrap
+au FileType *       setlocal formatoptions-=c formatoptions-=r formatoptions-=o " Disable comment new line
+au FileType c       setlocal commentstring=//\ %s
+au FileType cpp     setlocal commentstring=//\ %s
+au FileType python  setlocal fdm=indent formatprg=autopep8\ -
+" au Filetype python    vnoremap <buffer> gq gq:%retab!<CR>
+au FileType vimwiki     setlocal nowrap
 
 au FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 au BufRead,BufNewFile *.tf setlocal ts=2 sts=2 sw=2 expandtab
@@ -379,19 +378,19 @@ set guioptions-=r  "remove right-hand scroll bar
 set guioptions-=L  "remove left-hand scroll bar
 set guicursor+=a:blinkon0
 if has("gui_running")
-	try
-		colorscheme hybrid
-	catch /E185/
-		colorscheme desert
-	endtry
+    try
+        colorscheme hybrid
+    catch /E185/
+        colorscheme desert
+    endtry
 endif
 " Fix borders of fullscreen GUI
 if has('gui_gtk') && has('gui_running')
   let s:border = synIDattr(synIDtrans(hlID('Normal')), 'bg', 'gui')
   exe 'silent !echo ''style "vimfix" { bg[NORMAL] = "' . escape(s:border, '#') . '" }'''.
-			  \' > ~/.gtkrc-2.0'
+              \' > ~/.gtkrc-2.0'
   exe 'silent !echo ''widget "vim-main-window.*GtkForm" style "vimfix"'''.
-			  \' >> ~/.gtkrc-2.0'
+              \' >> ~/.gtkrc-2.0'
 endif
 
 " }}}
@@ -399,10 +398,10 @@ endif
 
 "ensure directories exist
 if empty(glob('~/.config/nvim/backup'))
-	silent !mkdir -p ~/.config/nvim/backup
+    silent !mkdir -p ~/.config/nvim/backup
 endif
 if empty(glob('~/.config/nvim/swap'))
-	silent !mkdir -p ~/.config/nvim/swap
+    silent !mkdir -p ~/.config/nvim/swap
 endif
 
 set backupdir=~/.config/nvim/backup//
@@ -443,38 +442,38 @@ endfunction
 
 " Foldtexts {{{
 function! FoldText()
-	let l:lpadding = &fdc
-	redir => l:signs
-	  execute 'silent sign place buffer='.bufnr('%')
-	redir End
-	let l:lpadding += l:signs =~ 'id=' ? 2 : 0
+    let l:lpadding = &fdc
+    redir => l:signs
+      execute 'silent sign place buffer='.bufnr('%')
+    redir End
+    let l:lpadding += l:signs =~ 'id=' ? 2 : 0
 
-	if exists("+relativenumber")
-	  if (&number)
-		let l:lpadding += max([&numberwidth, strlen(line('$'))]) + 1
-	  elseif (&relativenumber)
-		let l:lpadding += max([&numberwidth, strlen(v:foldstart - line('w0')), strlen(line('w$') - v:foldstart), strlen(v:foldstart)]) + 1
-	  endif
-	else
-	  if (&number)
-		let l:lpadding += max([&numberwidth, strlen(line('$'))]) + 1
-	  endif
-	endif
+    if exists("+relativenumber")
+      if (&number)
+        let l:lpadding += max([&numberwidth, strlen(line('$'))]) + 1
+      elseif (&relativenumber)
+        let l:lpadding += max([&numberwidth, strlen(v:foldstart - line('w0')), strlen(line('w$') - v:foldstart), strlen(v:foldstart)]) + 1
+      endif
+    else
+      if (&number)
+        let l:lpadding += max([&numberwidth, strlen(line('$'))]) + 1
+      endif
+    endif
 
-	" expand tabs
-	let l:start = substitute(getline(v:foldstart), '\t', repeat(' ', &tabstop), 'g')
-	let l:end = substitute(substitute(getline(v:foldend), '\t', repeat(' ', &tabstop), 'g'), '^\s*', '', 'g')
+    " expand tabs
+    let l:start = substitute(getline(v:foldstart), '\t', repeat(' ', &tabstop), 'g')
+    let l:end = substitute(substitute(getline(v:foldend), '\t', repeat(' ', &tabstop), 'g'), '^\s*', '', 'g')
 
-	let l:info = ' (' . (v:foldend - v:foldstart) . ')'
-	let l:infolen = strlen(substitute(l:info, '.', 'x', 'g'))
-	let l:width = winwidth(0) - l:lpadding - l:infolen
+    let l:info = ' (' . (v:foldend - v:foldstart) . ')'
+    let l:infolen = strlen(substitute(l:info, '.', 'x', 'g'))
+    let l:width = winwidth(0) - l:lpadding - l:infolen
 
-	let l:separator = ' … '
-	let l:separatorlen = strlen(substitute(l:separator, '.', 'x', 'g'))
-	let l:start = strpart(l:start , 0, l:width - strlen(substitute(l:end, '.', 'x', 'g')) - l:separatorlen)
-	" let l:text = l:start . ' … ' . l:end
-	let l:text = l:start . '…'
-	return l:text . repeat(' ', l:width - strlen(substitute(l:text, ".", "x", "g"))) . l:info
+    let l:separator = ' … '
+    let l:separatorlen = strlen(substitute(l:separator, '.', 'x', 'g'))
+    let l:start = strpart(l:start , 0, l:width - strlen(substitute(l:end, '.', 'x', 'g')) - l:separatorlen)
+    " let l:text = l:start . ' … ' . l:end
+    let l:text = l:start . '…'
+    return l:text . repeat(' ', l:width - strlen(substitute(l:text, ".", "x", "g"))) . l:info
 endfunction
 
 function! NeatFoldText()
