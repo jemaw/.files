@@ -1,62 +1,57 @@
 let mapleader = "\<Space>"
 " plugins {{{
 
-" dein begin{{{
+" plug begin{{{
 if &compatible
   set nocompatible
 endif
 
 if has('nvim')
-" install dein
-if empty(glob('~/.config/nvim/dein/repos/github.com/Shougo/dein.vim'))
-    silent !mkdir -p ~/.config/nvim/dein/repos/github.com/Shougo/dein.vim
-    silent !git clone https://github.com/Shougo/dein.vim.git ~/.config/nvim/dein/repos/github.com/Shougo/dein.vim
-    autocmd VimEnter * if !dein#util#_is_sudo() call dein#install() | call dein#remote_plugins() | nested source $MYVIMRC | endif
+if empty(glob('~/.local/share/nvim/site/autoload/plug.vim'))
+    silent !curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs
+                \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
-if !empty(glob('~/.config/nvim/dein'))
-set runtimepath^=~/.config/nvim/dein/repos/github.com/Shougo/dein.vim
-
-call dein#begin(expand('~/.config/nvim/dein'))
-call dein#add('Shougo/dein.vim')
+call plug#begin('~/.local/share/nvim/plugged')
 " }}}
 
 " misc {{{
-call dein#add('jemaw/vim-noctwo')
-call dein#add('tpope/vim-commentary')
-call dein#add('wellle/targets.vim')
-call dein#add('airblade/vim-gitgutter')
+Plug 'jemaw/vim-noctwo'
+Plug 'tpope/vim-commentary'
+Plug 'wellle/targets.vim'
+Plug 'airblade/vim-gitgutter'
 
-call dein#add('ludovicchabant/vim-gutentags')
+Plug 'ludovicchabant/vim-gutentags'
     let g:gutentags_ctags_tagfile = ".tags"
-call dein#add('MarcWeber/vim-addon-local-vimrc.git')
+Plug 'MarcWeber/vim-addon-local-vimrc'
     let g:local_vimrc = {'names':['.lvimrc']}
 " }}}
 
 " Autocompletion {{{
-call dein#add('Shougo/deoplete.nvim')
+Plug 'Shougo/deoplete.nvim'
     autocmd InsertLeave * if pumvisible() == 0 | pclose | endif
     let g:deoplete#enable_at_startup = 1
     let g:deoplete#enable_smart_case = 1
     let g:deoplete#auto_completion_start_length = 2
     inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 
-call dein#add('zchee/deoplete-jedi',{'on_ft' : 'python'})
+Plug 'zchee/deoplete-jedi',{'for' : 'python'}
     let deoplete#sources#jedi#show_docstring=1
 
-call dein#add('Shougo/neoinclude.vim')
+Plug 'Shougo/neoinclude.vim'
 if executable('clang')
     " use .lvimrc with let g:deoplete#sources#clang#flags = ['-I/path/to/include']
-    call dein#add('zchee/deoplete-clang',{'on_ft': ['cpp','c']} )
+    Plug 'zchee/deoplete-clang',{'for': ['cpp','c']} 
         let g:deoplete#sources#clang#libclang_path = '/usr/lib/libclang.so'
         let g:deoplete#sources#clang#clang_header = '/usr/lib/clang'
 endif
 
 if executable("gocode")
-    call dein#add("zchee/deoplete-go", {'build' : 'make'})
+    Plug 'zchee/deoplete-go', {'do' : 'make'}
 endif
 if executable("racer")
-    call dein#add("sebastianmarkow/deoplete-rust")
+    Plug 'sebastianmarkow/deoplete-rust'
     let g:deoplete#sources#rust#racer_binary='/usr/bin/racer'
     let g:deoplete#sources#rust#rust_source_path='/home/jean/packages/rust/src'
 endif
@@ -65,22 +60,22 @@ endif
 
 " Snippets  {{{
 
-call dein#add('SirVer/ultisnips', {'on_i':1})
+Plug 'SirVer/ultisnips' ", {'on_i':1}
     set rtp+=~/.config/nvim/snippets
     let g:UltiSnipsSnippetsDir="~/.config/nvim/snippets/UltiSnips"
     let g:UltiSnipsExpandTrigger="<c-l>"
     let g:UltiSnipsJumpForwardTrigger="<c-l>"
     let g:UltiSnipsJumpBackwardTrigger="<c-b>"
 
-call dein#add('honza/vim-snippets',{'on_i':1}) 
+Plug 'honza/vim-snippets' ", {'on_i':1}
 
 " }}}
 
 " Language Specific {{{
-call dein#add('google/vim-ft-bzl')
-call dein#add('octol/vim-cpp-enhanced-highlight',{'on_ft': 'cpp'})
-call dein#add('mitsuhiko/vim-python-combined', {'on_ft' : 'python'})
-call dein#add('fatih/vim-go', {'on_ft' : 'go'})
+Plug 'google/vim-ft-bzl'
+Plug 'octol/vim-cpp-enhanced-highlight',{'for': 'cpp'}
+Plug 'mitsuhiko/vim-python-combined', {'for' : 'python'}
+Plug 'fatih/vim-go', {'for' : 'go'}
     " let g:go_fmt_command = "goimports"
     let g:go_fmt_fail_silently = 1
     let g:go_fmt_experimental = 1
@@ -90,12 +85,12 @@ call dein#add('fatih/vim-go', {'on_ft' : 'go'})
     let g:go_metalinter_autosave_enabled = []
     let g:go_metalinter_enabled = []
     let g:go_asmfmt_autosave = 0
-call dein#add('rust-lang/rust.vim')
+Plug 'rust-lang/rust.vim'
 
 " }}}
 
 " Formatting {{{
-call dein#add('Chiel92/vim-autoformat')
+Plug 'Chiel92/vim-autoformat'
     let g:formatdef_clang = '"clang-format -style=\"{BasedOnStyle: llvm, IndentWidth: 4, PointerAlignment: Left}\""'
     let g:formatters_cpp = ['clang']
     nnoremap <buffer><Leader>af :<C-u>Autoformat<CR>
@@ -107,8 +102,8 @@ call dein#add('Chiel92/vim-autoformat')
 
 " file and buffer switching {{{
 
-call dein#add('junegunn/fzf', {'build': './install --all'})
-call dein#add('junegunn/fzf.vim')
+Plug 'junegunn/fzf', {'do': './install --all'}
+Plug 'junegunn/fzf.vim'
     nnoremap <Leader>o :FZF<CR>
     nnoremap <Leader>g :GFiles<CR>
     nnoremap <Leader>p :Buffer<CR>
@@ -123,13 +118,13 @@ call dein#add('junegunn/fzf.vim')
         highlight fzf3 ctermfg=7 ctermbg=None
         setlocal statusline=%#fzf1#\ >\ %#fzf2#fz%#fzf3#f
     endfunction
-    autocmd! User FzfStatusLine call <SID>fzf_statusline()
+    autocmd! User FzfStatusLine call <SID>fzf_statusline() 
 
 " }}}
 
 " Neomake {{{
 
-    call dein#add('w0rp/ale.git')
+    Plug 'w0rp/ale'
         " for cpp use .lvimrc to set include dirs with following variable
         " let g:ale_cpp_clang_options='-std=c++14 -Wall -I/folder/to/include'
         " let g:ale_lint_delay = 800
@@ -139,7 +134,7 @@ call dein#add('junegunn/fzf.vim')
 " }}}
 
 " Notes {{{
-call dein#add('vimwiki/vimwiki')
+Plug 'vimwiki/vimwiki'
     let g:vimwiki_table_mappings = 0
     let g:vimwiki_folding = 'expr'
     let g:vimwiki_list = [{
@@ -153,15 +148,10 @@ call dein#add('vimwiki/vimwiki')
 
 " }}}
 
-" dein end {{{
-if dein#check_install()
-  call dein#install()
-endif
-
-call dein#end()
-filetype plugin indent on
-endif " !empty(glob('~/.config/nvim/dein'))
+" plug end {{{
+call plug#end()
 endif " has ('nvim')
+filetype plugin indent on
 " }}}
 
 " }}}

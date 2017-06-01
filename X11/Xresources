@@ -19,8 +19,7 @@ Xft.rgba:           rgb
 #include </home/jean/.colors/xres/crayolo/colors/bulb>
 
 ! override
-#define bg #111314
-#define bblu #75919D
+#define bg #1F1F1F
 
 ! apply theme {{{
 *background:   bg
