@@ -138,8 +138,8 @@ Plug 'vimwiki/vimwiki'
     let g:vimwiki_table_mappings = 0
     let g:vimwiki_folding = 'expr'
     let g:vimwiki_list = [{
-                \ 'path': '$HOME/Dropbox/wiki',
-                \ 'template_path': '$HOME/Dropbox/wiki/templates',
+                \ 'path': '$HOME/Mega/wiki',
+                \ 'template_path': '$HOME/Mega/wiki/templates',
                 \ 'template_default': 'default',
                 \ 'template_ext': '.html',
                 \ 'auto_export': 1,
