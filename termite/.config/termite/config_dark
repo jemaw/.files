@@ -5,10 +5,11 @@ clickable_url = true
 cursor_blink = off
 
 [colors]
-foreground      = #c3b495
-foreground_bold = #c3b495
-cursor          = #c3b495
-background      = #121212
+foreground          = #c3b495
+foreground_bold     = #c3b495
+cursor              = #c3b495
+cursor_foreground   = #1f1f1f
+background          = #1f1f1f
 
 # Black
 color0  = #312e30

@@ -62,7 +62,7 @@ beautiful.init(os.getenv("HOME") .. "/.config/awesome/themes/dremod/theme.lua")
 -- common
 local modkey     = "Mod4"
 local altkey     = "Mod1"
-local terminal   = "st" or "urxv" or "xterm"
+local terminal   = "termite" or "st" or "urxv" or "xterm"
 local editor     = os.getenv("EDITOR") or "nano" or "vi"
 
 -- user defined
