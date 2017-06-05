@@ -100,6 +100,20 @@ RPROMPT='%b%B%F{black}%~'
 
 # }}}
 
+# termite colorscheme {{{
+
+if [ $TERM = "xterm-termite" ]
+then
+    if [ $(readlink -f $HOME/.config/termite/config) = $HOME/.files/termite/.config/termite/config_light ]
+    then
+        export TERM_BG=light
+    else 
+        export TERM_BG=dark
+    fi
+fi
+
+# }}}
+
 # global aliases {{{
 
 # Automatically Expanding Global Aliases (Space key to expand)
@@ -166,7 +180,7 @@ bindkey '^[[B' history-substring-search-down
 bindkey -M vicmd 'k' history-substring-search-up
 bindkey -M vicmd 'j' history-substring-search-down
 typeset -g HISTORY_SUBSTRING_SEARCH_ENSURE_UNIQUE=true
-typeset -g HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND='fg=white,bold'
+typeset -g HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND='fg=fg,bold'
 typeset -g HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_NOT_FOUND='fg=red,bold'
 
 # zsh-users/zsh-autosuggestions
@@ -178,6 +192,11 @@ fi
 # }}}
 
 # functions {{{ 
+switch () {
+    ln -sf "$HOME/.config/termite/config_$1" "$HOME/.config/termite/config"
+    killall -USR1 termite
+    export TERM_BG=$1
+}
 
 extract () {
     local remove_archive

@@ -99,7 +99,7 @@ remove() {
 symlink() {
     local targetfile
     for file in "${files[@]}";do
-        targetfile="$TARGETDIR/.$file"
+        targetfile="$TARGETDIR/$file"
         if [ "$(readlink "$targetfile")" == "$PWD/$file" ]; then
             echo "Correct Symlink already exists: $file"
             continue
@@ -120,7 +120,7 @@ makesubdirs() {
     local targetdir
     local targetfile
     for file in "${files[@]}";do
-        targetfile="$TARGETDIR/.$file"
+        targetfile="$TARGETDIR/$file"
         targetdir=$(dirname "$targetfile")
         mkdir -p "$targetdir"
     done
@@ -128,13 +128,14 @@ makesubdirs() {
 
 install(){
     for dot in "${dots[@]}";do
-        cd "$dot"
-        echo "$(tput bold)$dot$(tput sgr0)"
-        files=($(find * -type f) $(find * -type l))
-        makesubdirs
-        symlink
-        cd ..
-        echo ""
+        ( 
+            cd "$dot"
+            echo "$(tput bold)$dot$(tput sgr0)"
+            files=($(find . -type f) $(find . -type l))
+            makesubdirs
+            symlink
+            echo ""
+        )
     done
 }
 
