@@ -1,0 +1,43 @@
+[options]
+font = Misc Tamsyn 14px
+font = ypn Envypn 11px
+clickable_url = true
+cursor_blink = off
+
+[colors]
+foreground      = #c3b495
+foreground_bold = #c3b495
+cursor          = #c3b495
+background      = #121212
+
+# Black
+color0  = #312e30
+color8  = #4f4e4e
+
+# Red
+color1  = #ab6d4e
+color9  = #ab6d4e
+
+# Green
+color2  = #88885d
+color10 = #88885d
+
+# Yellow
+color3  = #c8a168
+color11 = #c8a168
+
+# Blue
+color4  = #45626e
+color12 = #45626e
+
+# Magenta
+color5  = #7c5545
+color13 = #7c5545
+
+# Cyan
+color6  = #456e66
+color14 = #456e66
+
+# White
+color7  = #c3b495
+color15 = #c3b495

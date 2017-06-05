@@ -17,6 +17,7 @@ call plug#begin('~/.local/share/nvim/plugged')
 " }}}
 
 " misc {{{
+Plug 'NLKNguyen/papercolor-theme'
 Plug 'jemaw/vim-noctwo'
 Plug 'tpope/vim-commentary'
 Plug 'wellle/targets.vim'
@@ -189,12 +190,22 @@ endif
 " Appearance {{{
 
 syntax on
-set background=dark
-try 
-    colorscheme noctwo
-catch
-    colorscheme desert
-endtry
+let term_profile=$TERM_BG
+if term_profile == "light"
+    set background=light
+    try
+        colorscheme PaperColor
+    catch
+        colorscheme ron
+    endtry
+else
+    set background=dark
+    try 
+        colorscheme noctwo
+    catch
+        colorscheme desert
+    endtry
+endif
 
 set number
 set relativenumber
