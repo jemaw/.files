@@ -130,7 +130,9 @@ Plug 'junegunn/fzf.vim'
         " let g:ale_cpp_clang_options='-std=c++14 -Wall -I/folder/to/include'
         " let g:ale_lint_delay = 800
         let g:ale_echo_msg_format = '%linter%: %s'
-        let g:ale_linters = {'cpp': ['clang']}
+        let g:ale_linters = {'cpp': ['clang'],
+                    \ 'python': ['pylint']}
+        let g:ale_set_highlights = 0
 
 " }}}
 
@@ -255,6 +257,7 @@ set sidescroll=1
 
 set ttimeoutlen=0
 inoremap kj <c-c>`^
+inoremap kjs <c-c>`^:w<CR>
 
 " terminal
 if has('nvim')
@@ -358,6 +361,9 @@ set tags=./tags;,tags;
 
 " automatically change working directory
 set autochdir
+
+" changes window title
+set title
 
 " }}}
 " gui {{{ 

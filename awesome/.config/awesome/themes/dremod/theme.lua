@@ -28,9 +28,11 @@ theme.bg_normal                                 = xrdb.background
 theme.bg_focus                                  = xrdb.background
 theme.fg_urgent                                 = "#CC9393"
 theme.bg_urgent                                 = "#2A1F1E"
-theme.border_width                              = "1"
+theme.border_width                              = "2"
 theme.border_normal                             = "#2F2F2F"
-theme.border_focus                              = "#4F4F4F"
+-- theme.border_focus                              = "#4F4F4F"
+-- theme.border_focus                              = "#6F6F6F"
+theme.border_focus                              = xrdb.color8
 theme.titlebar_bg_focus                         = "#292929"
 theme.taglist_fg_focus                          = "#dddcff"
 theme.taglist_bg_focus                          = xrdb.background
@@ -59,7 +61,7 @@ theme.layout_floating                           = theme.dir .. "/icons/floating.
 theme.tasklist_plain_task_name                  = true
 theme.tasklist_disable_icon                     = true
 
-theme.useless_gap                               = 0
+theme.useless_gap                               = -1
 
 theme.titlebar_close_button_focus               = theme.dir .. "/icons/titlebar/close_focus.png"
 theme.titlebar_close_button_normal              = theme.dir .. "/icons/titlebar/close_normal.png"

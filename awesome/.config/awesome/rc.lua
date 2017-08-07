@@ -62,7 +62,8 @@ beautiful.init(os.getenv("HOME") .. "/.config/awesome/themes/dremod/theme.lua")
 -- common
 local modkey     = "Mod4"
 local altkey     = "Mod1"
-local terminal   = "termite" or "st" or "urxv" or "xterm"
+local terminal   = "urxvt" or "xterm"
+local terminal2   = "termite" or "st"
 local editor     = os.getenv("EDITOR") or "nano" or "vi"
 
 -- user defined
@@ -76,7 +77,7 @@ local tag_icon_active = "◆"
 -- table of layouts to cover with awful.layout.inc, order matters.
 awful.layout.layouts = {
     awful.layout.suit.floating,
-    awful.layout.suit.tile.bottom,
+    -- awful.layout.suit.tile.bottom,
     awful.layout.suit.tile,
 }
 
@@ -446,6 +447,8 @@ globalkeys = awful.util.table.join(
     -- Standard program
     awful.key({ modkey,           }, "Return", function () awful.spawn(terminal) end,
               {description = "open a terminal", group = "launcher"}),
+    awful.key({ modkey, "Shift"   }, "Return", function () awful.spawn(terminal2) end,
+              {description = "open a terminal", group = "launcher"}),
     awful.key({ modkey, "Control" }, "r", awesome.restart,
               {description = "reload awesome", group = "awesome"}),
     awful.key({ modkey, "Shift"   }, "q", awesome.quit,
@@ -559,13 +562,6 @@ globalkeys = awful.util.table.join(
                   }
               end,
               {description = "lua execute prompt", group = "awesome"})
-
-    --[[ dmenu
-    awful.key({ modkey }, "x", function ()
-        awful.spawn(string.format("dmenu_run -i -fn 'Misc Tamsyn' -nb '%s' -nf '%s' -sb '%s' -sf '%s'",
-        beautiful.bg_normal, beautiful.fg_normal, beautiful.bg_focus, beautiful.fg_focus))
-		end)
-    --]]
 )
 
 clientkeys = awful.util.table.join(
@@ -575,7 +571,8 @@ clientkeys = awful.util.table.join(
     awful.key({ modkey },  "p",     function (c) handTiler.tp(c, 'left-top')     end),
     awful.key({ modkey },  ";",     function (c) handTiler.tp(c, 'left-bottom')  end),
     awful.key({ modkey },  "'",     function (c) handTiler.tp(c, 'right-bottom') end),
-    awful.key({ modkey },  "\\",    function (c) awful.placement.centered(c)     end),
+    awful.key({ modkey },  "\\",    function (c) handTiler.tp(c, 'middle')       end),
+    -- awful.key({ modkey },  "\\",    function (c) awful.placement.centered(c.focus)     end),
 
 
     awful.key({ altkey, "Shift"   }, "m",      lain.util.magnify_client                         ),
@@ -732,17 +729,11 @@ client.connect_signal("manage", function (c)
     -- dynamic_tagging()
     -- Set the windows at the slave,
     -- i.e. put it at the end of others instead of setting it master.
-    -- if not awesome.startup then awful.client.setslave(c) end
-    awful.client.setslave(c)
-
-    awful.placement.centered(c.focus)
-    awful.placement.no_overlap(c)
-    awful.placement.no_offscreen(c)
+    if not awesome.startup then awful.client.setslave(c) end
     if awesome.startup and
       not c.size_hints.user_position
       and not c.size_hints.program_position then
         -- Prevent clients from being unreachable after screen count changes.
-        awful.placement.centered(c.focus)
         awful.placement.no_offscreen(c)
     end
 end)
@@ -767,6 +758,7 @@ client.connect_signal("focus",
         end
     end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
+client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 -- }}}
 
 -- vim: fdm=marker
