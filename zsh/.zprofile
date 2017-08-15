@@ -3,7 +3,7 @@ export BROWSER=firefox
 
 # Editors
 export EDITOR='nvim'
-export VISUAL='vim'
+export VISUAL='nvim'
 export PAGER='less'
 
 # Language

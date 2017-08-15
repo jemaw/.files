@@ -53,3 +53,6 @@ alias sleeep="echo systemctl suspend | at now +"
 alias q=exit
 alias xres="xrdb merge ~/.Xresources"
 alias tekshot="screenfetch -o 'upload=1;uploadLoc=teknik;screenshot=1'"
+
+# latex
+alias lamk='latexmk -pvc -pdf -view=none'

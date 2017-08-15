@@ -18,6 +18,8 @@ call plug#begin('~/.local/share/nvim/plugged')
 
 " misc {{{
 Plug 'NLKNguyen/papercolor-theme'
+Plug 'w0ng/vim-hybrid'
+    let g:hybrid_custom_term_colors = 1
 Plug 'jemaw/vim-noctwo'
 Plug 'tpope/vim-commentary'
 Plug 'wellle/targets.vim'
@@ -125,14 +127,17 @@ Plug 'junegunn/fzf.vim'
 
 " Neomake {{{
 
-    Plug 'w0rp/ale'
+    " Plug 'w0rp/ale'
         " for cpp use .lvimrc to set include dirs with following variable
         " let g:ale_cpp_clang_options='-std=c++14 -Wall -I/folder/to/include'
         " let g:ale_lint_delay = 800
-        let g:ale_echo_msg_format = '%linter%: %s'
-        let g:ale_linters = {'cpp': ['clang'],
-                    \ 'python': ['pylint']}
-        let g:ale_set_highlights = 0
+        " let g:ale_echo_msg_format = '%linter%: %s'
+        " let g:ale_linters = {'cpp': ['clang'],
+        "             \ 'python': ['pylint']}
+        " let g:ale_set_highlights = 0
+    Plug 'neomake/neomake'
+        autocmd! BufWritePost * Neomake
+        let g:neomake_python_enabled_makers = ['pyflakes']
 
 " }}}
 
@@ -436,6 +441,13 @@ function! Reg()
     redraw
 endfunction
 
+" show highlight group https://gist.github.com/mattsacks/1544768
+function! Syn()
+  for id in synstack(line("."), col("."))
+    echo synIDattr(id, "name")
+  endfor
+endfunction
+
 " Foldtexts {{{
 function! FoldText()
     let l:lpadding = &fdc
@@ -498,6 +510,7 @@ function! MyFoldText()
     let fillcharcount = windowwidth - len(line) - len(foldedlinecount)
     return line . '…' . repeat(" ",fillcharcount) . foldedlinecount . '…' . ' '
 endfunction
+
 " }}}
 
 " }}}
