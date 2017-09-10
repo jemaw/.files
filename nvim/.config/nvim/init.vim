@@ -16,15 +16,22 @@ endif
 call plug#begin('~/.local/share/nvim/plugged')
 " }}}
 
-" misc {{{
+" Appearance {{{
 Plug 'NLKNguyen/papercolor-theme'
-Plug 'w0ng/vim-hybrid'
-    let g:hybrid_custom_term_colors = 1
 Plug 'jemaw/vim-noctwo'
+Plug 'w0ng/vim-hybrid'
+    let g:hybrid_custom_term_colors = 0
+
+" }}}
+
+" misc {{{
 Plug 'tpope/vim-commentary'
 Plug 'wellle/targets.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
+Plug 'jreybert/vimagit'
+    let g:magit_auto_foldopen=0
+
 Plug 'junegunn/goyo.vim'
 
 Plug 'ludovicchabant/vim-gutentags'
@@ -226,6 +233,26 @@ set noshowmode
 set guicursor=
 
 " }}}
+" {{{ Statusline
+" https://shapeshed.com/vim-statuslines/
+function! GitBranch()
+  return system("git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")
+endfunction
+
+function! StatuslineGit()
+  let l:branchname = GitBranch()
+  return strlen(l:branchname) > 0?'  '.l:branchname.' ':''
+endfunction
+
+set statusline=
+set statusline+=%{fugitive#head()}      " branch
+set statusline+=\ %f                    " filename
+set statusline+=%=                      " right side
+set statusline+=\ %y                    " filetype
+set statusline+=\ [%l/%L]               " line number/num lines
+set statusline+=\ 
+
+" " }}}
 " Folding {{{
 
 " no unfold on { movements

@@ -1,10 +1,10 @@
 [options]
 font = Misc Tamsyn 14px
-font = ypn Envypn 11px
 clickable_url = true
 cursor_blink = off
 
 [colors]
+# {{{ bulb
 foreground          = #c3b495
 foreground_bold     = #c3b495
 cursor              = #c3b495
@@ -42,3 +42,6 @@ color14 = #456e66
 # White
 color7  = #c3b495
 color15 = #c3b495
+
+# }}}
+! vi:syntax=xdefaults:fdm=marker:fdl=0
