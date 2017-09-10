@@ -24,6 +24,8 @@ Plug 'jemaw/vim-noctwo'
 Plug 'tpope/vim-commentary'
 Plug 'wellle/targets.vim'
 Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-fugitive'
+Plug 'junegunn/goyo.vim'
 
 Plug 'ludovicchabant/vim-gutentags'
     let g:gutentags_ctags_tagfile = ".tags"
@@ -214,8 +216,8 @@ else
     endtry
 endif
 
-set number
-set relativenumber
+set nonumber
+set norelativenumber
 
 set laststatus=2
 set noshowmode
@@ -322,8 +324,8 @@ nnoremap <leader>ss :so $MYVIMRC<CR>
 
 " }}}
 " {{{ Splits 
-set splitbelow
-set splitright
+" set splitbelow
+" set splitright
 " }}}
 " Buffers  {{{
 

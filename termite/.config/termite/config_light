@@ -6,8 +6,6 @@ cursor_blink = off
 [colors]
 foreground          = #4D4D4C
 foreground_bold     = #4D4D4C
-cursor              = #4D4D4C
-cursor_foreground   = #eeeeee
 background          = #eeeeee
 
 # black

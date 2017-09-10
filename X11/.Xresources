@@ -21,27 +21,138 @@ Xft.rgba:           rgb
 ! override
 #define bg #1F1F1F
 
-! apply theme {{{
-*background:   bg
-*foreground:   fg
+! Tomorrow Night {{{
 
-*color0:      blk
-*color8:      bblk
-*color1:      red
-*color9:      bred
-*color2:      grn
-*color10:     bgrn
-*color3:      ylw
-*color11:     bylw
-*color4:      blu
-*color12:     bblu
-*color5:      mag
-*color13:     bmag
-*color6:      cyn
-*color14:     bcyn
-*color7:      wht
-*color15:     bwht
+! special
+*.foreground:   #c5c8c6
+*.background:   #1d1f21
+*.cursorColor:  #c5c8c6
+
+! black
+*.color0:       #1d1f21
+*.color8:       #969896
+
+! red
+*.color1:       #cc6666
+*.color9:       #cc6666
+
+! green
+*.color2:       #b5bd68
+*.color10:      #b5bd68
+
+! yellow
+*.color3:       #f0c674
+*.color11:      #f0c674
+
+! blue
+*.color4:       #81a2be
+*.color12:      #81a2be
+
+! magenta
+*.color5:       #b294bb
+*.color13:      #b294bb
+
+! cyan
+*.color6:       #8abeb7
+*.color14:      #8abeb7
+
+! white
+*.color7:       #c5c8c6
+*.color15:      #ffffff
+
 ! }}}
+
+/* ! vacuous2 {{{ */
+
+/* ! special */
+/* *.foreground:   #d2c5bc */
+/* *.background:   #101010 */
+/* *.cursorColor:  #d2c5bc */
+
+/* ! black */
+/* *.color0:       #202020 */
+/* *.color8:       #606060 */
+
+/* ! red */
+/* *.color1:       #b91e2e */
+/* *.color9:       #d14548 */
+
+/* ! green */
+/* *.color2:       #81957c */
+/* *.color10:      #a7b79a */
+
+/* ! yellow */
+/* *.color3:       #f9bb80 */
+/* *.color11:      #fae3a0 */
+
+/* ! blue */
+/* *.color4:       #356579 */
+/* *.color12:      #7491a1 */
+
+/* ! magenta */
+/* *.color5:       #2d2031 */
+/* *.color13:      #87314e */
+
+/* ! cyan */
+/* *.color6:       #0b3452 */
+/* *.color14:      #0f829d */
+
+/* ! white */
+/* *.color7:       #909090 */
+/* *.color15:      #fff0f0 */
+
+/* ! }}} */
+/* ! apply theme {{{ */
+/* *background:   bg */
+/* *foreground:   fg */
+
+/* *color0:      blk */
+/* *color8:      bblk */
+/* *color1:      red */
+/* *color9:      bred */
+/* *color2:      grn */
+/* *color10:     bgrn */
+/* *color3:      ylw */
+/* *color11:     bylw */
+/* *color4:      blu */
+/* *color12:     bblu */
+/* *color5:      mag */
+/* *color13:     bmag */
+/* *color6:      cyn */
+/* *color14:     bcyn */
+/* *color7:      wht */
+/* *color15:     bwht */
+
+/* ! }}} */
+/* ! Oblivion {{{ */
+
+/* ! Black */
+/* *color0:  #2E3436 */
+/* *color8:  #555753 */
+/* ! Red */
+/* *color1:  #CC0000 */
+/* *color9:  #EF2929 */
+/* ! Green */
+/* *color2:  #4E9A06 */
+/* *color10: #8AE234 */
+/* ! Yellow */
+/* *color3:  #C4A000 */
+/* *color11: #FCE94F */
+/* ! Blue */
+/* *color4:  #3465A4 */
+/* *color12: #729FCF */
+/* ! Purple */
+/* *color5:  #75507B */
+/* *color13: #AD7FA8 */
+/* ! Cyan */
+/* *color6:  #06989A */
+/* *color14: #34E2E2 */
+/* ! White */
+/* *color7:  #D3D7CF */
+/* *color15: #EEEEEC */
+
+
+/* ! }}} */
 
 ! }}}
 ! Rofi {{{

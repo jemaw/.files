@@ -11,6 +11,9 @@ redshift -l 48.139:11.566 &
 # Megasync
 ( ( sleep 2 && /usr/bin/megasync ) & )
 
+# pulseaudio systray
+pasystray &
+
 xset -dpms &
 xset s 0 &
 xset r rate 220 30 &

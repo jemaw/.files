@@ -24,12 +24,14 @@ grep "Ubuntu" /etc/issue -i -q
 if [ $? = '0' ];
 then
 	export CUDA_HOME='/usr/local/cuda'
+    export CUDNN_HOME=$CUDA_HOME
 else
 	export CUDA_HOME='/opt/cuda'
+    export CUDNN_HOME='/opt/cudnn6'
 fi
 
 # ld_library_path
-export LD_LIBRARY_PATH=$CUDA_HOME/lib64:$LD_LIBRARY_PATH
+export LD_LIBRARY_PATH=$CUDNN_HOME/lib64:$CUDA_HOME/lib64:$LD_LIBRARY_PATH
 
 # Set the list of directories that Zsh searches for programs.
 path=(
