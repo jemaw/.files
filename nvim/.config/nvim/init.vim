@@ -246,7 +246,9 @@ endfunction
 
 set statusline=
 set statusline+=%{fugitive#head()}      " branch
-set statusline+=\ %f                    " filename
+set statusline+=\ %f\                   " filename
+set statusline+=\%m                     " modify
+set statusline+=\%r                     " read only
 set statusline+=%=                      " right side
 set statusline+=\ %y                    " filetype
 set statusline+=\ [%l/%L]               " line number/num lines
