@@ -134,6 +134,7 @@ bindkey -M isearch " " magic-space    # normal space during searches
 alias -g T='| tail'
 alias -g G='| grep'
 alias -g C='| wc -l'
+alias -g L='| less'
 
 # }}}
 
