@@ -103,25 +103,23 @@ Plug 'rust-lang/rust.vim'
 
 " Formatting {{{
 Plug 'Chiel92/vim-autoformat'
-    let g:formatdef_clang = '"clang-format -style=\"{BasedOnStyle: llvm, IndentWidth: 4, PointerAlignment: Left}\""'
-    let g:formatters_cpp = ['clang']
+    " let g:formatdef_clang = '"clang-format -style=\"{BasedOnStyle: llvm, IndentWidth: 4, PointerAlignment: Left}\""'
+    " let g:formatters_cpp = ['clang']
     nnoremap <buffer><Leader>af :<C-u>Autoformat<CR>
     vnoremap <buffer><Leader>af :Autoformat<CR>
     " only autoformat for Specific filetypes
-    let fts = ['cpp', 'go']
-    au BufWrite * if index(fts, &filetype) != -1 |:Autoformat| endif
+    " let fts = ['cpp', 'go']
+    " au BufWrite * if index(fts, &filetype) != -1 |:Autoformat| endif
 " }}}
 
 " file and buffer switching {{{
 
-Plug 'junegunn/fzf', {'do': './install --all'}
+Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
     nnoremap <Leader>o :FZF<CR>
     nnoremap <Leader>g :GFiles<CR>
     nnoremap <Leader>p :Buffer<CR>
     nnoremap <Leader>/ :Ag<CR>
-    autocmd FileType fzf tnoremap <buffer> <C-j> <Down>
-    autocmd FileType fzf tnoremap <buffer> <C-k> <Up>
 
     function! s:fzf_statusline()
         " Override statusline as you like
@@ -130,23 +128,30 @@ Plug 'junegunn/fzf.vim'
         highlight fzf3 ctermfg=7 ctermbg=None
         setlocal statusline=%#fzf1#\ >\ %#fzf2#fz%#fzf3#f
     endfunction
-    autocmd! User FzfStatusLine call <SID>fzf_statusline() 
+    augroup fzf
+        autocmd!
+        autocmd FileType fzf tnoremap <buffer> <C-j> <Down>
+        autocmd FileType fzf tnoremap <buffer> <C-k> <Up>
+        autocmd User FzfStatusLine call <SID>fzf_statusline() 
+    augroup END
 
 " }}}
 
 " Neomake {{{
 
-    " Plug 'w0rp/ale'
+    Plug 'w0rp/ale'
         " for cpp use .lvimrc to set include dirs with following variable
-        " let g:ale_cpp_clang_options='-std=c++14 -Wall -I/folder/to/include'
-        " let g:ale_lint_delay = 800
-        " let g:ale_echo_msg_format = '%linter%: %s'
-        " let g:ale_linters = {'cpp': ['clang'],
-        "             \ 'python': ['pylint']}
-        " let g:ale_set_highlights = 0
-    Plug 'neomake/neomake'
-        autocmd! BufWritePost * Neomake
-        let g:neomake_python_enabled_makers = ['pyflakes']
+        let g:ale_cpp_clang_options='-std=c++14 -Wall ' " -I/folder/to/include'
+        let g:ale_lint_delay = 800
+        let g:ale_echo_msg_format = '%linter%: %s'
+        let g:ale_linters = {'cpp': ['clang'],
+                    \ 'python': ['pyflakes']}
+        let g:ale_set_highlights = 0
+    " Plug 'neomake/neomake'
+    "     autocmd! BufWritePost * Neomake
+    "     let g:neomake_python_enabled_makers = ['pyflakes']
+    "     let g:neomake_cpp_enabled_makers = ['clang']
+
 
 " }}}
 
@@ -205,7 +210,9 @@ endif
 " }}}
 " Appearance {{{
 
-syntax on
+if !exists("g:syntax_on")
+    syntax enable
+endif
 let term_profile=$TERM_BG
 if term_profile == "light"
     set background=light
@@ -223,7 +230,7 @@ else
     endtry
 endif
 
-set nonumber
+set number
 set norelativenumber
 
 set laststatus=2
@@ -245,11 +252,17 @@ function! StatuslineGit()
 endfunction
 
 set statusline=
-set statusline+=%{fugitive#head()}      " branch
+if has('nvim')
+    set statusline+=%{fugitive#head()}
+else
+    set statusline+=%{StatuslineGit()}      " branch
+endif
 set statusline+=\ %f\                   " filename
 set statusline+=\%m                     " modify
 set statusline+=\%r                     " read only
+" set statusline+=%#Normal#
 set statusline+=%=                      " right side
+" set statusline+=%##
 set statusline+=\ %y                    " filetype
 set statusline+=\ [%l/%L]               " line number/num lines
 set statusline+=\ 
@@ -307,7 +320,6 @@ if has('nvim')
     tnoremap <C-l> <C-\><C-n><C-w>l
     " tnoremap <Leader>. <C-\><C-n>gt
     " tnoremap <Leader>, <C-\><C-n>gT
-    au BufWinEnter,WinEnter term://* startinsert
 endif
 
 nnoremap <Space> <NOP>
@@ -351,10 +363,16 @@ nnoremap <leader>f :find *
 " source vimrc
 nnoremap <leader>ss :so $MYVIMRC<CR>
 
+" split resizing
+nnoremap <up> :resize +5<CR>
+nnoremap <down> :resize -5<CR>
+nnoremap <left> :vertical resize -5<CR>
+nnoremap <right> :vertical resize +5<CR>
+
 " }}}
 " {{{ Splits 
-" set splitbelow
-" set splitright
+set splitbelow
+set splitright
 " }}}
 " Buffers  {{{
 
@@ -365,17 +383,26 @@ set hidden
 nnoremap <bs> <c-^>
 
 " }}}
-" Filetupe {{{
+" Autocommands {{{
 
-au FileType *       setlocal formatoptions-=c formatoptions-=r formatoptions-=o " Disable comment new line
-au FileType c       setlocal commentstring=//\ %s
-au FileType cpp     setlocal commentstring=//\ %s
-au FileType python  setlocal fdm=indent formatprg=autopep8\ -
-" au Filetype python    vnoremap <buffer> gq gq:%retab!<CR>
-au FileType vimwiki     setlocal nowrap
+augroup filetypes
+    au!
+    au FileType *       setlocal formatoptions-=c formatoptions-=r formatoptions-=o " Disable comment new line
+    au FileType c       setlocal commentstring=//\ %s
+    au FileType cpp     setlocal commentstring=//\ %s
+    au FileType python  setlocal fdm=indent formatprg=autopep8\ -
+    " au Filetype python    vnoremap <buffer> gq gq:%retab!<CR>
+    au FileType vimwiki     setlocal nowrap
 
-au FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
-au BufRead,BufNewFile *.tf setlocal ts=2 sts=2 sw=2 expandtab
+    au FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+    au BufRead,BufNewFile *.tf setlocal ts=2 sts=2 sw=2 expandtab
+augroup END
+
+augroup miscau
+    autocmd!
+    autocmd BufWinEnter,WinEnter term://* startinsert
+    autocmd TermOpen * setlocal nonumber norelativenumber
+augroup END
 
 " }}}
 " wildmenu {{{
@@ -400,6 +427,9 @@ set autochdir
 
 " changes window title
 set title
+
+" use * clipboard
+set clipboard+=unnamed
 
 " }}}
 " gui {{{ 
@@ -444,7 +474,7 @@ set directory=~/.config/nvim/swap//
 "}}}
 " Functions{{{
 
-"find include dir for cpp
+" find include dir for cpp
 function! Findinclude()
     let b:gitfolder = finddir('.git', ',;')
     echo "in findinclude"
