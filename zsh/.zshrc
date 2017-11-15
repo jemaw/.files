@@ -309,6 +309,16 @@ fe() {
     unset IFS
 }
 
+# fe [FUZZY PATTERN] - Open the selected file with the default editor
+dtf() {
+    cd ~/.files
+    IFS='
+    '
+    local declare files=($(fzf-tmux --query="$1" --select-1 --exit-0))
+    [[ -n "$files" ]] && ${EDITOR:-vim} "${files[@]}"
+    unset IFS
+}
+
 # fd - cd to selected directory
 fd() {
   local dir

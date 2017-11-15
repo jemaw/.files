@@ -20,6 +20,9 @@ Xft.rgba:           rgb
 
 ! override
 #define bg #1a1a1a
+#define bblu  #67839f
+#define bcyn  #578f88
+
 
 ! apply theme {{{
 *background:   bg
