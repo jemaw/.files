@@ -10,7 +10,7 @@ if has('nvim')
 if empty(glob('~/.local/share/nvim/site/autoload/plug.vim'))
     silent !curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs
                 \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+    autocmd! VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
 call plug#begin('~/.local/share/nvim/plugged')
@@ -25,6 +25,10 @@ Plug 'w0ng/vim-hybrid'
 " }}}
 
 " misc {{{
+Plug 'scrooloose/nerdtree'
+    autocmd! bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+    nnoremap <leader>nn :NERDTreeToggle<cr>
+    Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'tpope/vim-commentary'
 Plug 'wellle/targets.vim'
 Plug 'airblade/vim-gitgutter'
@@ -40,7 +44,7 @@ Plug 'MarcWeber/vim-addon-local-vimrc'
     let g:local_vimrc = {'names':['.lvimrc']}
 " }}}
 
-" Autocompletion {{{
+" Autocompletion deoplete {{{
 Plug 'Shougo/deoplete.nvim'
     autocmd InsertLeave * if pumvisible() == 0 | pclose | endif
     let g:deoplete#enable_at_startup = 1
@@ -51,7 +55,8 @@ Plug 'Shougo/deoplete.nvim'
 Plug 'zchee/deoplete-jedi',{'for' : 'python'}
     let deoplete#sources#jedi#show_docstring=1
 
-Plug 'Shougo/neoinclude.vim'
+" Plug 'Shougo/neoinclude.vim' " slows down cpp
+
 if executable('clang')
     " use .lvimrc with let g:deoplete#sources#clang#flags = ['-I/path/to/include']
     Plug 'zchee/deoplete-clang',{'for': ['cpp','c']} 
@@ -64,11 +69,35 @@ if executable("gocode")
 endif
 if executable("racer")
     Plug 'sebastianmarkow/deoplete-rust'
-    let g:deoplete#sources#rust#racer_binary='/usr/bin/racer'
-    let g:deoplete#sources#rust#rust_source_path='/home/jean/packages/rust/src'
+    let g:deoplete#sources#rust#racer_binary=$CARGO_BIN.'/racer'
+    let g:deoplete#sources#rust#rust_source_path=$RUST_SRC_PATH
 endif
 
 " }}}
+
+" " " Autocompletion completion manager {{{
+" Plug 'roxma/nvim-completion-manager'
+"     set shortmess+=c
+"     inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+
+" Plug 'zchee/deoplete-jedi',{'for' : 'python'}
+"     let deoplete#sources#jedi#show_docstring=1
+
+" Plug 'Shougo/neoinclude.vim' " slows down cpp
+
+" if executable('clang')
+"     Plug 'roxma/ncm-clang'
+" endif
+
+" if executable("gocode")
+"     Plug 'zchee/deoplete-go', {'do' : 'make'}
+" endif
+" if executable("racer")
+"     Plug 'roxma/nvim-cm-racer'
+"     Plug 'racer-rust/vim-racer'
+" endif
+
+" " " }}}
 
 " Snippets  {{{
 
@@ -156,7 +185,7 @@ Plug 'junegunn/fzf.vim'
 " }}}
 
 " Notes {{{
-Plug 'vimwiki/vimwiki'
+Plug 'vimwiki/vimwiki', {'branch' : 'dev'}
     let g:vimwiki_table_mappings = 0
     let g:vimwiki_folding = 'expr'
     let g:vimwiki_list = [{
@@ -312,7 +341,7 @@ inoremap kjs <c-c>`^:w<CR>
 if has('nvim')
     " jk conflitcts with ranger, esc conflicts with zsh vi mode
     " tnoremap kj <C-\><C-n>
-    nnoremap <leader>t :sp<cr>:resize 15<cr>:term<cr>
+    nnoremap <leader>t :sp<cr><C-w>j:resize 15<cr>:term<cr>
     tnoremap <C-\> <C-\><C-n>
     tnoremap <C-h> <C-\><C-n><C-w>h
     tnoremap <C-j> <C-\><C-n><C-w>j
@@ -369,10 +398,6 @@ nnoremap <down> :resize -5<CR>
 nnoremap <left> :vertical resize -5<CR>
 nnoremap <right> :vertical resize +5<CR>
 
-" }}}
-" {{{ Splits 
-set splitbelow
-set splitright
 " }}}
 " Buffers  {{{
 

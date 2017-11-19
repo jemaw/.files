@@ -16,6 +16,10 @@ fi
 #go
 export GOPATH=$HOME/Prog/go
 
+#rust
+export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
+export CARGO_BIN="$HOME/.cargo/bin"
+
 # Ensure path arrays do not contain duplicates.
 typeset -gU cdpath fpath mailpath path gopath
 

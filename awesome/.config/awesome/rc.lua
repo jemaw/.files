@@ -77,8 +77,6 @@ local tag_icon_active = "◆"
 -- table of layouts to cover with awful.layout.inc, order matters.
 awful.layout.layouts = {
     awful.layout.suit.floating,
-    lain.layout.centerwork,
-    awful.layout.suit.magnifier,
     awful.layout.suit.tile,
 }
 

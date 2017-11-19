@@ -184,8 +184,8 @@ typeset -g HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND='fg=fg,bold'
 typeset -g HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_NOT_FOUND='fg=red,bold'
 
 # zsh-users/zsh-autosuggestions
-bindkey '^ '  autosuggest-accept      # accept on ctrl space
-bindkey '^J'  autosuggest-execute     # execute on c-j
+bindkey '^ '  autosuggest-execute
+bindkey '^J'  autosuggest-execute
 
 fi
 
