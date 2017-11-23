@@ -25,7 +25,7 @@ setxkbmap eu -option caps:ctrl_modifier &
 numlockx &
 
 xrandr --output DVI-I-1 --mode 1920x1080 --rate 60.00 &
-xrandr --output DVI-D-0 --mode 1920x1080 --rate 119.98 --right-of DVI-I-1 &
+xrandr --output DP-1 --mode 1920x1080 --rate 119.98 --right-of DVI-D-0 &
 
 eval "$(ssh-agent)"
 

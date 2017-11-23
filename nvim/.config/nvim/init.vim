@@ -8,7 +8,7 @@ endif
 
 if has('nvim')
 if empty(glob('~/.local/share/nvim/site/autoload/plug.vim'))
-    silent !curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs
+    curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs
                 \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     autocmd! VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
@@ -29,14 +29,15 @@ Plug 'scrooloose/nerdtree'
     autocmd! bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
     nnoremap <leader>nn :NERDTreeToggle<cr>
     Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'dbakker/vim-projectroot'
+Plug 'junegunn/goyo.vim'
+Plug 'airblade/vim-gitgutter'
+Plug 'majutsushi/tagbar'
+    nmap <F8> :TagbarToggle<CR>
+
 Plug 'tpope/vim-commentary'
 Plug 'wellle/targets.vim'
-Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
-Plug 'jreybert/vimagit'
-    let g:magit_auto_foldopen=0
-
-Plug 'junegunn/goyo.vim'
 
 Plug 'ludovicchabant/vim-gutentags'
     let g:gutentags_ctags_tagfile = ".tags"
@@ -174,8 +175,10 @@ Plug 'junegunn/fzf.vim'
         let g:ale_lint_delay = 800
         let g:ale_echo_msg_format = '%linter%: %s'
         let g:ale_linters = {'cpp': ['clang'],
-                    \ 'python': ['pyflakes']}
+                    \ 'python': ['pyflakes'],
+                    \ 'go' : ['go build']}
         let g:ale_set_highlights = 0
+        let g:ale_set_quickfix = 1
     " Plug 'neomake/neomake'
     "     autocmd! BufWritePost * Neomake
     "     let g:neomake_python_enabled_makers = ['pyflakes']
