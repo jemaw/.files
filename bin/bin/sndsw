@@ -1,0 +1,23 @@
+#!/bin/bash
+# Simple script that moves all audio streams to a given sink
+# or if no sink is given tries to use a non running sink
+
+main(){
+    if [ "$1" ];then
+        newSink=$1
+    else
+        newSink=$(pactl list short sinks | cut -f1,5 | awk '{if ($2!="RUNNING")print $1 }')
+    fi
+    movestreams "$newSink"
+}
+
+movestreams(){
+    local newSink=$1
+    pactl list short sink-inputs|while read -r stream; do
+        streamId=$(echo "$stream"|cut '-d ' -f1)
+        echo "moving stream $streamId"
+        pactl move-sink-input "$streamId" "$newSink"
+    done
+}
+
+main "$@"
