@@ -1,0 +1,10 @@
+#!/bin/bash
+l=$(ps x | grep -c "compton --config")
+if [ "$l" -gt "1" ];
+then
+    killall compton
+    nvidia-settings -a '[gpu:0]/DigitalVibrance[DP-1]=1023' > /dev/null
+else
+    compton --config "$HOME/.config/compton/compton.conf" -b
+    nvidia-settings -a '[gpu:0]/DigitalVibrance[DP-1]=0' > /dev/null
+fi
