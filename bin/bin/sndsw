@@ -1,14 +1,24 @@
 #!/bin/bash
 # Simple script that moves all audio streams to a given sink
 # or if no sink is given tries to use a non running sink
+# TODO interactive mode
 
 main(){
     if [ "$1" ];then
         newSink=$1
     else
-        newSink=$(pactl list short sinks | cut -f1,5 | awk '{if ($2!="RUNNING")print $1 }')
+        newSink=$(findsink)
     fi
     movestreams "$newSink"
+}
+
+findsink(){
+    local newsink=$(pactl list short sinks | cut -f1,5 | awk '{if ($2!="RUNNING")print $1 }')
+    # if all sinks are running just move everything to one sink
+    if [ ! "$newsink" ];then
+        newsink=$(pactl list short sinks | cut -f1 | head -1)
+    fi
+    echo "$newsink"
 }
 
 movestreams(){

@@ -310,20 +310,10 @@ fe() {
     unset IFS
 }
 
-# fe [FUZZY PATTERN] - Open the selected file with the default editor
-dtf() {
-    cd ~/.files
-    IFS='
-    '
-    local declare files=($(fzf-tmux --query="$1" --select-1 --exit-0))
-    [[ -n "$files" ]] && ${EDITOR:-vim} "${files[@]}"
-    unset IFS
-}
-
 # fd - cd to selected directory
 fd() {
   local dir
-  dir=$(find ${1:-$HOME} -path '*/\.*' -prune \
+  dir=$(find ${1} -path '*/\.*' -prune \
                   -o -type d -print 2> /dev/null | fzf +m) &&
   cd "$dir"
 }
@@ -331,7 +321,7 @@ fd() {
 # fda - including hidden directories
 fda() {
     local dir
-    dir=$(find ${1:-$HOME} -type d 2> /dev/null | fzf +m) && cd "$dir"
+    dir=$(find ${1} -type d 2> /dev/null | fzf +m) && cd "$dir"
 }
 
 v() {

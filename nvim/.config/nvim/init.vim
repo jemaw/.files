@@ -21,6 +21,8 @@ Plug 'NLKNguyen/papercolor-theme'
 Plug 'jemaw/vim-noctwo'
 Plug 'w0ng/vim-hybrid'
     let g:hybrid_custom_term_colors = 0
+Plug 'drzel/vim-line-no-indicator'
+    let g:line_no_indicator_chars = ['▁', '▂', '▃', '▄', '▅', '▆', '▇']
 
 " }}}
 
@@ -38,6 +40,7 @@ Plug 'majutsushi/tagbar'
 Plug 'tpope/vim-commentary'
 Plug 'wellle/targets.vim'
 Plug 'tpope/vim-fugitive'
+    nnoremap <Leader>/ :Ggrep 
 
 Plug 'ludovicchabant/vim-gutentags'
     let g:gutentags_ctags_tagfile = ".tags"
@@ -149,7 +152,6 @@ Plug 'junegunn/fzf.vim'
     nnoremap <Leader>o :FZF<CR>
     nnoremap <Leader>g :GFiles<CR>
     nnoremap <Leader>p :Buffer<CR>
-    nnoremap <Leader>/ :Ag<CR>
 
     function! s:fzf_statusline()
         " Override statusline as you like
@@ -178,7 +180,7 @@ Plug 'junegunn/fzf.vim'
                     \ 'python': ['pyflakes'],
                     \ 'go' : ['go build']}
         let g:ale_set_highlights = 0
-        let g:ale_set_quickfix = 1
+        " let g:ale_set_quickfix = 1
     " Plug 'neomake/neomake'
     "     autocmd! BufWritePost * Neomake
     "     let g:neomake_python_enabled_makers = ['pyflakes']
@@ -198,6 +200,7 @@ Plug 'vimwiki/vimwiki', {'branch' : 'dev'}
                 \ 'template_ext': '.html',
                 \ 'auto_export': 1,
                 \ 'nested_syntaxes' : {'python': 'python', 'c++': 'cpp'} }]
+    nnoremap <leader>wss :VimwikiSearch 
 
 
 " }}}
@@ -284,10 +287,12 @@ function! StatuslineGit()
 endfunction
 
 set statusline=
+" TODO replave has nvim with exists function
+" TODO colors
 if has('nvim')
     set statusline+=%{fugitive#head()}
 else
-    set statusline+=%{StatuslineGit()}      " branch
+    set statusline+=%{StatuslineGit()}  " branch
 endif
 set statusline+=\ %f\                   " filename
 set statusline+=\%m                     " modify
@@ -295,8 +300,11 @@ set statusline+=\%r                     " read only
 " set statusline+=%#Normal#
 set statusline+=%=                      " right side
 " set statusline+=%##
+set statusline+=%{S_gitgutter()}
 set statusline+=\ %y                    " filetype
-set statusline+=\ [%l/%L]               " line number/num lines
+" set statusline+=\ [%l/%L]               " line number/num lines
+set statusline+=%#TabLine#
+set statusline+=\ %{LineNoIndicator()}
 set statusline+=\ 
 
 " " }}}
@@ -501,6 +509,17 @@ set directory=~/.config/nvim/swap//
 
 "}}}
 " Functions{{{
+
+" https://github.com/NerdyPepper/dotfiles/blob/master/vim/.vimrc
+function! S_gitgutter()  " formatted git hunk summary for statusline
+	if exists('b:gitgutter')
+		let l:summary = b:gitgutter.summary
+		if l:summary[0] != 0 || l:summary[1] != 0 || l:summary[2] != 0
+			return ' +'.l:summary[0].' ~'.l:summary[1].' -'.l:summary[2].' '
+		endif
+	endif
+	return ''
+endfunction
 
 " find include dir for cpp
 function! Findinclude()
