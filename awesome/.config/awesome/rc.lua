@@ -78,6 +78,7 @@ local tag_icon_active = "◆"
 awful.layout.layouts = {
     awful.layout.suit.floating,
     awful.layout.suit.tile,
+    awful.layout.suit.tile.bottom,
 }
 
 -- lain

@@ -8,7 +8,7 @@ endif
 
 if has('nvim')
 if empty(glob('~/.local/share/nvim/site/autoload/plug.vim'))
-    curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs
+    !curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs
                 \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     autocmd! VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
@@ -194,12 +194,13 @@ Plug 'vimwiki/vimwiki', {'branch' : 'dev'}
     let g:vimwiki_table_mappings = 0
     let g:vimwiki_folding = 'expr'
     let g:vimwiki_list = [{
-                \ 'path': '$HOME/Mega/wiki',
-                \ 'template_path': '$HOME/Mega/wiki/templates',
+                \ 'path': '$HOME/Mega/wiki/wiki',
+                \ 'template_path': '$HOME/Mega/wiki/wiki/templates',
                 \ 'template_default': 'default',
                 \ 'template_ext': '.html',
                 \ 'auto_export': 1,
-                \ 'nested_syntaxes' : {'python': 'python', 'c++': 'cpp'} }]
+                \ 'nested_syntaxes' : {'python': 'python', 'c++': 'cpp'},
+                \ 'auto_toc': 1}]
     nnoremap <leader>wss :VimwikiSearch 
 
 
@@ -401,7 +402,8 @@ nnoremap <leader>e :e **/*
 nnoremap <leader>f :find *
 
 " source vimrc
-nnoremap <leader>ss :so $MYVIMRC<CR>
+nnoremap <leader>cs :so $MYVIMRC<CR>
+nnoremap <leader>ce :tabe<CR>:e $MYVIMRC<CR>
 
 " split resizing
 nnoremap <up> :resize +5<CR>
@@ -427,8 +429,10 @@ augroup filetypes
     au FileType c       setlocal commentstring=//\ %s
     au FileType cpp     setlocal commentstring=//\ %s
     au FileType python  setlocal fdm=indent formatprg=autopep8\ -
+    au FileType tex     inoremap <buffer> <c-space> <esc>bi\<esc>ea
     " au Filetype python    vnoremap <buffer> gq gq:%retab!<CR>
     au FileType vimwiki     setlocal nowrap
+    au Filetype vimwiki     UltiSnipsAddFiletypes vimwiki.tex
 
     au FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
     au BufRead,BufNewFile *.tf setlocal ts=2 sts=2 sw=2 expandtab
