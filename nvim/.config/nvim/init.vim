@@ -191,18 +191,21 @@ Plug 'junegunn/fzf.vim'
 
 " Notes {{{
 Plug 'vimwiki/vimwiki', {'branch' : 'dev'}
+    let vimwiki_path = '$HOME/Mega/wiki/text/'
+    let vimwiki_export_path = vimwiki_path.'../export/'
     let g:vimwiki_table_mappings = 0
     let g:vimwiki_folding = 'expr'
     let g:vimwiki_list = [{
-                \ 'path': '$HOME/Mega/wiki/wiki',
-                \ 'template_path': '$HOME/Mega/wiki/wiki/templates',
+                \ 'path': vimwiki_path,
+                \ 'path_html': vimwiki_export_path,
+                \ 'template_path': vimwiki_export_path.'assets/',
                 \ 'template_default': 'default',
-                \ 'template_ext': '.html',
+                \ 'template_ext': '.tpl',
                 \ 'auto_export': 1,
                 \ 'nested_syntaxes' : {'python': 'python', 'c++': 'cpp'},
-                \ 'auto_toc': 1}]
-    nnoremap <leader>wss :VimwikiSearch 
+                \ 'auto_toc': 0}]
 
+    nnoremap <leader>wss :VimwikiSearch 
 
 " }}}
 
