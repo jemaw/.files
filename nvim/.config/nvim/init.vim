@@ -18,11 +18,10 @@ call plug#begin('~/.local/share/nvim/plugged')
 
 " Appearance {{{
 Plug 'NLKNguyen/papercolor-theme'
+Plug 'sonph/onehalf' " could like nice with darker background
 Plug 'jemaw/vim-noctwo'
 Plug 'w0ng/vim-hybrid'
     let g:hybrid_custom_term_colors = 0
-Plug 'drzel/vim-line-no-indicator'
-    let g:line_no_indicator_chars = ['▁', '▂', '▃', '▄', '▅', '▆', '▇']
 
 " }}}
 
@@ -178,7 +177,8 @@ Plug 'junegunn/fzf.vim'
         let g:ale_echo_msg_format = '%linter%: %s'
         let g:ale_linters = {'cpp': ['clang'],
                     \ 'python': ['pyflakes'],
-                    \ 'go' : ['go build']}
+                    \ 'go' : ['go build'],
+                    \ 'lua': ['luacheck']}
         let g:ale_set_highlights = 0
         " let g:ale_set_quickfix = 1
     " Plug 'neomake/neomake'
@@ -306,9 +306,8 @@ set statusline+=%=                      " right side
 " set statusline+=%##
 set statusline+=%{S_gitgutter()}
 set statusline+=\ %y                    " filetype
-" set statusline+=\ [%l/%L]               " line number/num lines
+set statusline+=\ [%l/%L]               " line number/num lines
 set statusline+=%#TabLine#
-set statusline+=\ %{LineNoIndicator()}
 set statusline+=\ 
 
 " " }}}
