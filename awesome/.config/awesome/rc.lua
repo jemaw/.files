@@ -518,22 +518,22 @@ globalkeys = awful.util.table.join(
     -- MPD control
     awful.key({ altkey, "Control" }, "Up",
         function ()
-            awful.spawn.with_shell("mpc toggle || ncmpc toggle || pms toggle")
+            awful.spawn.with_shell("cmus-remote --pause || mpc toggle || ncmpc toggle || pms toggle")
             mpdwidget.update()
         end),
     awful.key({ altkey, "Control" }, "Down",
         function ()
-            awful.spawn.with_shell("mpc stop || ncmpc stop || pms stop")
+            awful.spawn.with_shell("cmus-remote --stop || mpc stop || ncmpc stop || pms stop")
             mpdwidget.update()
         end),
     awful.key({ altkey, "Control" }, "Left",
         function ()
-            awful.spawn.with_shell("mpc prev || ncmpc prev || pms prev")
+            awful.spawn.with_shell("cmus-remote --prev || mpc prev || ncmpc prev || pms prev")
             mpdwidget.update()
         end),
     awful.key({ altkey, "Control" }, "Right",
         function ()
-            awful.spawn.with_shell("mpc next || ncmpc next || pms next")
+            awful.spawn.with_shell("cmus-remote --next || mpc next || ncmpc next || pms next")
             mpdwidget.update()
         end),
     --]]

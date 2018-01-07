@@ -4,6 +4,47 @@ autoload -Uz edit-command-line compinit vcs_info promptinit
 zmodload zsh/complist
 zle -N edit-command-line
 
+# Paths {{{
+
+#go
+export GOPATH=$HOME/Prog/go
+
+#rust
+export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
+export CARGO_BIN="$HOME/.cargo/bin"
+
+# Ensure path arrays do not contain duplicates.
+typeset -gU cdpath fpath mailpath path gopath
+
+# Cuda
+grep "Ubuntu" /etc/issue -i -q
+if [ $? = '0' ];
+then
+	export CUDA_HOME='/usr/local/cuda'
+    export CUDNN_HOME=$CUDA_HOME
+else
+	export CUDA_HOME='/opt/cuda'
+    export CUDNN_HOME=$CUDA_HOME
+fi
+
+# ld_library_path
+export LD_LIBRARY_PATH=$CUDNN_HOME/lib64:$CUDA_HOME/lib64:$LD_LIBRARY_PATH
+
+# spark
+export SPARK_BIN='/opt/apache-spark/bin'
+
+# Set the list of directories that Zsh searches for programs.
+path=(
+		~/bin
+		/usr/local/{bin,sbin}
+		$path
+		$CUDA_HOME/bin
+		$GOPATH/bin
+        $SPARK_BIN
+)
+
+# }}}
+
 # cd movement {{{
 
 # use cd -<TAB> and cd +<TAB> to navigate dir stack
