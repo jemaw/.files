@@ -407,12 +407,6 @@ nnoremap <leader>f :find *
 nnoremap <leader>cs :so $MYVIMRC<CR>
 nnoremap <leader>ce :tabe<CR>:e $MYVIMRC<CR>
 
-" split resizing
-nnoremap <up> :resize +5<CR>
-nnoremap <down> :resize -5<CR>
-nnoremap <left> :vertical resize -5<CR>
-nnoremap <right> :vertical resize +5<CR>
-
 " }}}
 " Buffers  {{{
 

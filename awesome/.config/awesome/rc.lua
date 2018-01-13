@@ -488,17 +488,17 @@ globalkeys = awful.util.table.join(
     awful.key({ altkey, }, "w", function () myweather.show(7) end),
 
     -- ALSA volume control
-    awful.key({ altkey }, "Up",
+    awful.key({ }, "XF86AudioRaiseVolume",
         function ()
             os.execute(string.format("amixer set %s 1%%+", volume.channel))
             volume.update()
         end),
-    awful.key({ altkey }, "Down",
+    awful.key({ }, "XF86AudioLowerVolume",
         function ()
             os.execute(string.format("amixer set %s 1%%-", volume.channel))
             volume.update()
         end),
-    awful.key({ altkey }, "m",
+    awful.key({ }, "XF86AudioMute",
         function ()
             os.execute(string.format("amixer set %s toggle", volume.togglechannel or volume.channel))
             volume.update()
@@ -509,31 +509,20 @@ globalkeys = awful.util.table.join(
             volume.update()
         end),
 
-		awful.key({ altkey, "Control" }, "0",
-				function ()
-						os.execute(string.format("amixer -q set %s 0%%", volume.channel))
-						volume.update()
-				end),
-
     -- MPD control
-    awful.key({ altkey, "Control" }, "Up",
+    awful.key({ }, "XF86AudioNext",
         function ()
-            awful.spawn.with_shell("cmus-remote --pause || mpc toggle || ncmpc toggle || pms toggle")
+            awful.spawn.with_shell("cmus-remote --next || mpc next || ncmpc next || pms next")
             mpdwidget.update()
         end),
-    awful.key({ altkey, "Control" }, "Down",
-        function ()
-            awful.spawn.with_shell("cmus-remote --stop || mpc stop || ncmpc stop || pms stop")
-            mpdwidget.update()
-        end),
-    awful.key({ altkey, "Control" }, "Left",
+    awful.key({ }, "XF86AudioPrev",
         function ()
             awful.spawn.with_shell("cmus-remote --prev || mpc prev || ncmpc prev || pms prev")
             mpdwidget.update()
         end),
-    awful.key({ altkey, "Control" }, "Right",
+    awful.key({ }, "XF86AudioPlay",
         function ()
-            awful.spawn.with_shell("cmus-remote --next || mpc next || ncmpc next || pms next")
+            awful.spawn.with_shell("cmus-remote --pause || mpc toggle || ncmpc toggle || pms toggle")
             mpdwidget.update()
         end),
     --]]
@@ -749,8 +738,7 @@ end)
 -- No border for maximized clients
 client.connect_signal("focus",
     function(c)
-        if (c.maximized_horizontal == true and c.maximized_vertical == true) or
-            #awful.client.visible(mouse.screen) == 1 then
+        if c.maximized then
             c.border_width = 0
         -- no borders if only 1 client visible
         elseif #awful.client.visible(mouse.screen) > 1 then
