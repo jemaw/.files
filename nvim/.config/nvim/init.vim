@@ -17,6 +17,7 @@ call plug#begin('~/.local/share/nvim/plugged')
 " }}}
 
 " Appearance {{{
+Plug 'chriskempson/base16-vim'
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'sonph/onehalf' " could like nice with darker background
 Plug 'jemaw/vim-noctwo'
@@ -65,6 +66,7 @@ if executable('clang')
     Plug 'zchee/deoplete-clang',{'for': ['cpp','c']} 
         let g:deoplete#sources#clang#libclang_path = '/usr/lib/libclang.so'
         let g:deoplete#sources#clang#clang_header = '/usr/lib/clang'
+    " Plug 'tweekmonster/deoplete-clang2'
 endif
 
 if executable("gocode")
@@ -201,11 +203,14 @@ Plug 'vimwiki/vimwiki', {'branch' : 'dev'}
                 \ 'template_path': vimwiki_export_path.'assets/',
                 \ 'template_default': 'default',
                 \ 'template_ext': '.tpl',
-                \ 'auto_export': 1,
+                \ 'auto_export': 0,
                 \ 'nested_syntaxes' : {'python': 'python', 'c++': 'cpp'},
                 \ 'auto_toc': 0}]
 
     nnoremap <leader>wss :VimwikiSearch 
+    imap <Plug>DisableNextS <Plug>VimwikiListNextSymbol
+    imap <Plug>DisablePrevS <Plug>VimwikiListPrevSymbol
+    imap <Plug>DisableToggle <Plug>VimwikiListToggle
 
 " }}}
 
@@ -425,9 +430,9 @@ augroup filetypes
     au FileType c       setlocal commentstring=//\ %s
     au FileType cpp     setlocal commentstring=//\ %s
     au FileType python  setlocal fdm=indent formatprg=autopep8\ -
+    au FileType python  nnoremap <leader>bp Oimport pdb; pdb.set_trace()<Esc>:w<CR>
     au FileType tex     inoremap <buffer> <c-space> <esc>bi\<esc>ea
     " au Filetype python    vnoremap <buffer> gq gq:%retab!<CR>
-    au FileType vimwiki     setlocal nowrap
     au Filetype vimwiki     UltiSnipsAddFiletypes vimwiki.tex
 
     au FileType yaml setlocal ts=2 sts=2 sw=2 expandtab

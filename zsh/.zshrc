@@ -28,7 +28,7 @@ else
 fi
 
 # ld_library_path
-export LD_LIBRARY_PATH=$CUDNN_HOME/lib64:$CUDA_HOME/lib64:$LD_LIBRARY_PATH
+export LD_LIBRARY_PATH=$CUDNN_HOME/lib64:$CUDA_HOME/lib64:$CUDA_HOME/extras/CUPTI/lib64:$LD_LIBRARY_PATH
 
 # spark
 export SPARK_BIN='/opt/apache-spark/bin'

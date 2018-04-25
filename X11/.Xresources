@@ -251,7 +251,7 @@ URxvt.scrollWithBuffer:  true
 URxvt.scrollTtyKeypress: true
 
 !internal Border
-urxvt.internalBorder: 15
+urxvt.internalBorder: 10
 
 ! Perl stuff
 URxvt.perl-ext-common: default,matcher,clipboard
