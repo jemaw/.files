@@ -38,6 +38,7 @@ Plug 'majutsushi/tagbar'
     nmap <F8> :TagbarToggle<CR>
 
 Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-surround'
 Plug 'wellle/targets.vim'
 Plug 'tpope/vim-fugitive'
     nnoremap <Leader>/ :Ggrep 
@@ -472,6 +473,9 @@ set title
 " use * clipboard
 set clipboard+=unnamed
 
+" somehow needed for gitgutter
+set updatetime=100
+
 " }}}
 " gui {{{ 
 
@@ -518,10 +522,12 @@ set directory=~/.config/nvim/swap//
 " https://github.com/NerdyPepper/dotfiles/blob/master/vim/.vimrc
 function! S_gitgutter()  " formatted git hunk summary for statusline
 	if exists('b:gitgutter')
-		let l:summary = b:gitgutter.summary
-		if l:summary[0] != 0 || l:summary[1] != 0 || l:summary[2] != 0
-			return ' +'.l:summary[0].' ~'.l:summary[1].' -'.l:summary[2].' '
-		endif
+        if has_key(b:gitgutter, 'summary')
+            let l:summary = b:gitgutter.summary
+            if l:summary[0] != 0 || l:summary[1] != 0 || l:summary[2] != 0
+                return ' +'.l:summary[0].' ~'.l:summary[1].' -'.l:summary[2].' '
+            endif
+        endif
 	endif
 	return ''
 endfunction
