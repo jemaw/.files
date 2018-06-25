@@ -23,6 +23,9 @@ Plug 'sonph/onehalf' " could like nice with darker background
 Plug 'jemaw/vim-noctwo'
 Plug 'w0ng/vim-hybrid'
     let g:hybrid_custom_term_colors = 0
+" Plug 'Yggdroot/indentLine'
+"     let g:indentLine_concealcursor=''
+"     let g:indentLine_setColors = 0
 
 " }}}
 
@@ -34,6 +37,12 @@ Plug 'scrooloose/nerdtree'
 Plug 'dbakker/vim-projectroot'
 Plug 'junegunn/goyo.vim'
 Plug 'airblade/vim-gitgutter'
+    let g:gitgutter_sign_added='┃'
+    let g:gitgutter_sign_modified='┃'
+    let g:gitgutter_sign_removed='◢'
+    let g:gitgutter_sign_removed_first_line='◥'
+    let g:gitgutter_sign_modified_removed='◢'
+
 Plug 'majutsushi/tagbar'
     nmap <F8> :TagbarToggle<CR>
 
@@ -44,10 +53,13 @@ Plug 'wellle/targets.vim'
 Plug 'tpope/vim-fugitive'
     nnoremap <Leader>/ :Ggrep 
 
-Plug 'ludovicchabant/vim-gutentags'
+Plug 'ludovicchabant/vim-gutentags', {'tag': 'v1.0.0'}
     let g:gutentags_ctags_tagfile = ".tags"
 Plug 'MarcWeber/vim-addon-local-vimrc'
     let g:local_vimrc = {'names':['.lvimrc']}
+" needed for latex syntax in vimwiki
+Plug 'vim-scripts/SyntaxRange'      
+Plug 'ryankuczka/vim-pyfold'
 " }}}
 
 " Autocompletion deoplete {{{
@@ -286,7 +298,7 @@ set noshowmode
 set guicursor=
 
 " }}}
-" {{{ Statusline
+" Statusline {{{ 
 " https://shapeshed.com/vim-statuslines/
 function! GitBranch()
   return system("git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")
@@ -324,9 +336,9 @@ set statusline+=\
 set foldopen=hor,mark,percent,quickfix,search,tag,undo
 set foldmethod=syntax
 set foldnestmax=1
-" set foldlevelstart=0
+set foldlevelstart=0
 " set foldminlines=1
-set foldtext=NeatFoldText()
+set foldtext=MyFoldText()
 
 " }}}
 " Indent options{{{
@@ -436,6 +448,7 @@ augroup filetypes
     au FileType tex     inoremap <buffer> <c-space> <esc>bi\<esc>ea
     " au Filetype python    vnoremap <buffer> gq gq:%retab!<CR>
     au Filetype vimwiki     UltiSnipsAddFiletypes vimwiki.tex
+    au Filetype vimwiki     call SyntaxRange#Include('\$', '\$', 'tex') " for inline math greek symbols
 
     au FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
     au BufRead,BufNewFile *.tf setlocal ts=2 sts=2 sw=2 expandtab
@@ -476,6 +489,9 @@ set clipboard+=unnamed
 
 " somehow needed for gitgutter
 set updatetime=100
+
+" conceallevel used e.g. in latex
+set conceallevel=2
 
 " }}}
 " gui {{{ 
