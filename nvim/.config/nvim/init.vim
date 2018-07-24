@@ -94,29 +94,47 @@ endif
 
 " }}}
 
-" " " Autocompletion completion manager {{{
-" Plug 'roxma/nvim-completion-manager'
-"     set shortmess+=c
-"     inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+ " Autocompletion completion manager {{{
+ " if executable("gocode")
+ "     Plug 'zchee/deoplete-go', {'do' : 'make'}
+ " endif
+ " if executable("racer")
+ "     Plug 'roxma/nvim-cm-racer'
+ "     Plug 'racer-rust/vim-racer'
+ " endif
 
-" Plug 'zchee/deoplete-jedi',{'for' : 'python'}
-"     let deoplete#sources#jedi#show_docstring=1
+ " ncm2 requires nvim-yarp
+" Plug 'roxma/nvim-yarp'
+" Plug 'ncm2/ncm2'
 
-" Plug 'Shougo/neoinclude.vim' " slows down cpp
+ " enable ncm2 for all buffers
+" autocmd BufEnter * call ncm2#enable_for_buffer()
 
-" if executable('clang')
-"     Plug 'roxma/ncm-clang'
-" endif
+ " :help Ncm2PopupOpen for more information
+ " set completeopt=noinsert,menuone,noselect
 
-" if executable("gocode")
-"     Plug 'zchee/deoplete-go', {'do' : 'make'}
-" endif
-" if executable("racer")
-"     Plug 'roxma/nvim-cm-racer'
-"     Plug 'racer-rust/vim-racer'
-" endif
+ " set shortmess+=c
 
-" " " }}}
+ " CTRL-C doesn't trigger the InsertLeave autocmd . map to <ESC> instead.
+ " inoremap <c-c> <ESC>
+
+ " When the <Enter> key is pressed while the popup menu is visible, it only
+ " hides the menu. Use this mapping to close the menu and also start a new
+ " line.
+ " inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
+
+ " Use <TAB> to select the popup menu:
+ " inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+ " inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
+ " Plug 'ncm2/ncm2-bufword'
+ " Plug 'ncm2/ncm2-path'
+ " Plug 'ncm2/ncm2-jedi'
+ " Plug 'filipekiss/ncm2-look.vim'
+ " Plug 'ncm2/ncm2-ultisnips'
+
+
+ " " " }}}
 
 " Snippets  {{{
 
@@ -146,6 +164,11 @@ Plug 'fatih/vim-go', {'for' : 'go'}
     let g:go_metalinter_enabled = []
     let g:go_asmfmt_autosave = 0
 Plug 'rust-lang/rust.vim'
+Plug 'lervag/vimtex'
+    if !exists('g:deoplete#omni#input_patterns')
+        let g:deoplete#omni#input_patterns = {}
+    endif
+    let g:vimtex_fold_enabled = 1
 
 " }}}
 
@@ -234,6 +257,12 @@ endif " has ('nvim')
 filetype plugin indent on
 " }}}
 
+" After plugin conf {{{
+" contains configuration of plugins that can only be done after all of them are loaded
+
+    " vimtex omnicompletion for deoplete
+    let g:deoplete#omni#input_patterns.tex = g:vimtex#re#deoplete
+" }}}
 " }}}
 " Line Wrap {{{
 
@@ -276,6 +305,7 @@ if term_profile == "light"
     set background=light
     try
         colorscheme PaperColor
+        hi Conceal ctermbg=None
     catch
         colorscheme ron
     endtry
