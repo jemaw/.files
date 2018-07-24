@@ -12,6 +12,11 @@ Xft.rgba:           rgb
 
 #define cjb_font     Misc Tamsyn 
 #define cjb_fontsize 14
+/* #define fallback_font DejaVu Sans */
+/* #define fallback_size 14 */
+#define fallback_font Fira Mono
+#define fallback_size 14
+
 
 ! }}}
 ! colors {{{
@@ -234,10 +239,10 @@ st.font: cjb_font:medium:pixelsize=cjb_fontsize
 ! urxvt settings {{{
 
 !Font
-URxvt*font: xft:cjb_font:medium:pixelsize=cjb_fontsize
-URxvt*boldFont: xft:cjb_font:bold:pixelsize=cjb_fontsize
-URxvt*italicFont: xft:cjb_font:italic:pixelsize=cjb_fontsize
-URxvt*boldItalicFont: xft:cjb_font:bold:italic:pixelsize=cjb_fontsize
+URxvt*font: xft:cjb_font:medium:pixelsize=cjb_fontsize, xft:fallback_font:medium:pixelsize=fallback_size
+URxvt*boldFont: xft:cjb_font:bold:pixelsize=cjb_fontsize, xft:fallback_font:bold:pixelsize=fallback_size
+URxvt*italicFont: xft:cjb_font:italic:pixelsize=cjb_fontsize, xft:fallback_font:italic:pixelsize=fallback_size
+URxvt*boldItalicFont: xft:cjb_font:bold:italic:pixelsize=cjb_fontsize, xft:fallback_font:bold:italic:pixelsize=fallback_size
 !URxvt.font :	-benis-uushi-medium-r-normal--11-90-75-75-p-58-iso10646-1
 !URxvt.boldFont :	
 

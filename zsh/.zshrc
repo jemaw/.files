@@ -36,6 +36,7 @@ export SPARK_BIN='/opt/apache-spark/bin'
 # Set the list of directories that Zsh searches for programs.
 path=(
 		~/bin
+        ~/.local/bin
 		/usr/local/{bin,sbin}
 		$path
 		$CUDA_HOME/bin

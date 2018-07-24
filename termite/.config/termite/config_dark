@@ -4,44 +4,86 @@ clickable_url = true
 cursor_blink = off
 
 [colors]
+
+# special
+foreground      = #c5c8c6
+foreground_bold = #c5c8c6
+#cursor          = #c5c8c6
+background      = #1d1f21
+
+# black
+color0  = #282a2e
+color8  = #373b41
+
+# red
+color1  = #a54242
+color9  = #cc6666
+
+# green
+color2  = #8c9440
+color10 = #b5bd68
+
+# yellow
+color3  = #de935f
+color11 = #f0c674
+
+# blue
+color4  = #5f819d
+color12 = #81a2be
+
+# magenta
+color5  = #85678f
+color13 = #b294bb
+
+# cyan
+color6  = #5e8d87
+color14 = #8abeb7
+
+# white
+color7  = #707880
+color15 = #c5c8c6
+
+
+
+# [colors]
 # {{{ bulb
-foreground          = #c3b495
-foreground_bold     = #c3b495
-cursor              = #c3b495
-cursor_foreground   = #1f1f1f
-background          = #1f1f1f
-
+# foreground          = #c3b495
+# foreground_bold     = #c3b495
+# cursor              = #c3b495
+# cursor_foreground   = #1f1f1f
+# background          = #1f1f1f
+# 
 # Black
-color0  = #312e30
-color8  = #4f4e4e
-
+# color0  = #312e30
+# color8  = #4f4e4e
+# 
 # Red
-color1  = #ab6d4e
-color9  = #ab6d4e
-
+# color1  = #ab6d4e
+# color9  = #ab6d4e
+# 
 # Green
-color2  = #88885d
-color10 = #88885d
-
+# color2  = #88885d
+# color10 = #88885d
+# 
 # Yellow
-color3  = #c8a168
-color11 = #c8a168
-
+# color3  = #c8a168
+# color11 = #c8a168
+# 
 # Blue
-color4  = #45626e
-color12 = #45626e
-
+# color4  = #45626e
+# color12 = #45626e
+# 
 # Magenta
-color5  = #7c5545
-color13 = #7c5545
-
+# color5  = #7c5545
+# color13 = #7c5545
+# 
 # Cyan
-color6  = #456e66
-color14 = #456e66
-
+# color6  = #456e66
+# color14 = #456e66
+# 
 # White
-color7  = #c3b495
-color15 = #c3b495
+# color7  = #c3b495
+# color15 = #c3b495
 
 # }}}
 ! vi:syntax=xdefaults:fdm=marker:fdl=0
