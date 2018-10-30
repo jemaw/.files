@@ -60,9 +60,12 @@ Plug 'MarcWeber/vim-addon-local-vimrc'
 " needed for latex syntax in vimwiki
 Plug 'vim-scripts/SyntaxRange'      
 Plug 'ryankuczka/vim-pyfold'
+
+Plug 'editorconfig/editorconfig-vim'
 " }}}
 
 " Autocompletion deoplete {{{
+set shortmess+=c
 Plug 'Shougo/deoplete.nvim'
     autocmd InsertLeave * if pumvisible() == 0 | pclose | endif
     let g:deoplete#enable_at_startup = 1
@@ -74,6 +77,9 @@ Plug 'zchee/deoplete-jedi',{'for' : 'python'}
     let deoplete#sources#jedi#show_docstring=1
 
 " Plug 'Shougo/neoinclude.vim' " slows down cpp
+
+Plug 'carlitux/deoplete-ternjs'
+
 
 if executable('clang')
     " use .lvimrc with let g:deoplete#sources#clang#flags = ['-I/path/to/include']
@@ -261,7 +267,11 @@ filetype plugin indent on
 " contains configuration of plugins that can only be done after all of them are loaded
 
     " vimtex omnicompletion for deoplete
-    let g:deoplete#omni#input_patterns.tex = g:vimtex#re#deoplete
+    try
+        let g:deoplete#omni#input_patterns.tex = g:vimtex#re#deoplete
+    catch
+        echo "Setting deoplete omni pattern for tex failed, vimtex not installed or g:vimtex#re#deoplete not set"
+    endtry
 " }}}
 " }}}
 " Line Wrap {{{
@@ -305,7 +315,7 @@ if term_profile == "light"
     set background=light
     try
         colorscheme PaperColor
-        hi Conceal ctermbg=None
+        hi Conceal ctermfg=7 ctermbg=None
     catch
         colorscheme ron
     endtry
@@ -475,6 +485,7 @@ augroup filetypes
     au FileType cpp     setlocal commentstring=//\ %s
     au FileType python  setlocal fdm=indent formatprg=autopep8\ -
     au FileType python  nnoremap <leader>bp Oimport pdb; pdb.set_trace()<Esc>:w<CR>
+    au FileType python  setlocal foldnestmax=10                                     " assumes good folding plugins
     au FileType tex     inoremap <buffer> <c-space> <esc>bi\<esc>ea
     " au Filetype python    vnoremap <buffer> gq gq:%retab!<CR>
     au Filetype vimwiki     UltiSnipsAddFiletypes vimwiki.tex
