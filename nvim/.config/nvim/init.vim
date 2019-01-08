@@ -59,88 +59,109 @@ Plug 'MarcWeber/vim-addon-local-vimrc'
     let g:local_vimrc = {'names':['.lvimrc']}
 " needed for latex syntax in vimwiki
 Plug 'vim-scripts/SyntaxRange'      
-Plug 'ryankuczka/vim-pyfold'
 
 Plug 'editorconfig/editorconfig-vim'
 " }}}
 
 " Autocompletion deoplete {{{
-set shortmess+=c
-Plug 'Shougo/deoplete.nvim'
-    autocmd InsertLeave * if pumvisible() == 0 | pclose | endif
-    let g:deoplete#enable_at_startup = 1
-    let g:deoplete#enable_smart_case = 1
-    let g:deoplete#auto_completion_start_length = 2
-    inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+" if executable('languageclient')
+"     Plug 'autozimu/LanguageClient-neovim', {'branch': 'next'}
+"         let g:LanguageClient_serverCommands = {
+"             \ 'python': ['/usr/bin/pyls'],
+"             \ }
+"         nnoremap <F5> :call LanguageClient_contextMenu()<CR>
+" endif
 
-Plug 'zchee/deoplete-jedi',{'for' : 'python'}
-    let deoplete#sources#jedi#show_docstring=1
+" set shortmess+=c
+" Plug 'Shougo/deoplete.nvim'
+"     autocmd InsertLeave * if pumvisible() == 0 | pclose | endif
+"     let g:deoplete#enable_at_startup = 1
+"     let g:deoplete#enable_smart_case = 1
+"     let g:deoplete#auto_completion_start_length = 2
+"     inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+
+
+" Plug 'zchee/deoplete-jedi',{'for' : 'python'}
+"     let deoplete#sources#jedi#show_docstring=1
 
 " Plug 'Shougo/neoinclude.vim' " slows down cpp
 
-Plug 'carlitux/deoplete-ternjs'
+" Plug 'carlitux/deoplete-ternjs'
 
 
-if executable('clang')
-    " use .lvimrc with let g:deoplete#sources#clang#flags = ['-I/path/to/include']
-    Plug 'zchee/deoplete-clang',{'for': ['cpp','c']} 
-        let g:deoplete#sources#clang#libclang_path = '/usr/lib/libclang.so'
-        let g:deoplete#sources#clang#clang_header = '/usr/lib/clang'
-    " Plug 'tweekmonster/deoplete-clang2'
-endif
+" if executable('clang')
+"     " use .lvimrc with let g:deoplete#sources#clang#flags = ['-I/path/to/include']
+"     Plug 'zchee/deoplete-clang',{'for': ['cpp','c']} 
+"         let g:deoplete#sources#clang#libclang_path = '/usr/lib/libclang.so'
+"         let g:deoplete#sources#clang#clang_header = '/usr/lib/clang'
+"     " Plug 'tweekmonster/deoplete-clang2'
+" endif
 
-if executable("gocode")
-    Plug 'zchee/deoplete-go', {'do' : 'make'}
-endif
-if executable("racer")
-    Plug 'sebastianmarkow/deoplete-rust'
-    let g:deoplete#sources#rust#racer_binary=$CARGO_BIN.'/racer'
-    let g:deoplete#sources#rust#rust_source_path=$RUST_SRC_PATH
-endif
+" if executable("gocode")
+"     Plug 'zchee/deoplete-go', {'do' : 'make'}
+" endif
+" if executable("racer")
+"     Plug 'sebastianmarkow/deoplete-rust'
+"     let g:deoplete#sources#rust#racer_binary=$CARGO_BIN.'/racer'
+"     let g:deoplete#sources#rust#rust_source_path=$RUST_SRC_PATH
+" endif
 
 " }}}
 
  " Autocompletion completion manager {{{
- " if executable("gocode")
- "     Plug 'zchee/deoplete-go', {'do' : 'make'}
- " endif
- " if executable("racer")
- "     Plug 'roxma/nvim-cm-racer'
- "     Plug 'racer-rust/vim-racer'
- " endif
 
  " ncm2 requires nvim-yarp
-" Plug 'roxma/nvim-yarp'
-" Plug 'ncm2/ncm2'
+Plug 'roxma/nvim-yarp'
+Plug 'ncm2/ncm2'
 
  " enable ncm2 for all buffers
-" autocmd BufEnter * call ncm2#enable_for_buffer()
+autocmd BufEnter * call ncm2#enable_for_buffer()
 
- " :help Ncm2PopupOpen for more information
- " set completeopt=noinsert,menuone,noselect
+" :help Ncm2PopupOpen for more information
+set completeopt=noinsert,menuone,noselect
 
- " set shortmess+=c
+" set shortmess+=c
 
- " CTRL-C doesn't trigger the InsertLeave autocmd . map to <ESC> instead.
- " inoremap <c-c> <ESC>
+" CTRL-C doesn't trigger the InsertLeave autocmd . map to <ESC> instead.
+inoremap <c-c> <ESC>
 
- " When the <Enter> key is pressed while the popup menu is visible, it only
- " hides the menu. Use this mapping to close the menu and also start a new
- " line.
- " inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
+" When the <Enter> key is pressed while the popup menu is visible, it only
+" hides the menu. Use this mapping to close the menu and also start a new
+" line.
+inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
 
- " Use <TAB> to select the popup menu:
- " inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
- " inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+" Use <TAB> to select the popup menu:
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
- " Plug 'ncm2/ncm2-bufword'
- " Plug 'ncm2/ncm2-path'
- " Plug 'ncm2/ncm2-jedi'
- " Plug 'filipekiss/ncm2-look.vim'
- " Plug 'ncm2/ncm2-ultisnips'
+Plug 'ncm2/ncm2-bufword'
+Plug 'ncm2/ncm2-path'
+Plug 'ncm2/ncm2-jedi'
+Plug 'ncm2/ncm2-tern'
+Plug 'filipekiss/ncm2-look.vim'
+Plug 'ncm2/ncm2-ultisnips'
+" Plug 'ncm2/ncm2-match-highlight'
 
 
- " " " }}}
+" latex support
+au User Ncm2Plugin call ncm2#register_source({
+        \ 'name' : 'vimtex',
+        \ 'priority': 1,
+        \ 'subscope_enable': 1,
+        \ 'complete_length': 1,
+        \ 'scope': ['tex'],
+        \ 'matcher': {'name': 'combine',
+        \           'matchers': [
+        \               {'name': 'abbrfuzzy', 'key': 'menu'},
+        \               {'name': 'prefix', 'key': 'word'},
+        \           ]},
+        \ 'mark': 'tex',
+        \ 'word_pattern': '\w+',
+        \ 'complete_pattern': g:vimtex#re#ncm,
+        \ 'on_complete': ['ncm2#on_complete#omni', 'vimtex#complete#omnifunc'],
+        \ })
+
+" }}}
 
 " Snippets  {{{
 
@@ -156,6 +177,8 @@ Plug 'honza/vim-snippets' ", {'on_i':1}
 " }}}
 
 " Language Specific {{{
+Plug 'ryankuczka/vim-pyfold'
+    let g:pyfold_enabled = 1
 Plug 'google/vim-ft-bzl'
 Plug 'octol/vim-cpp-enhanced-highlight',{'for': 'cpp'}
 Plug 'mitsuhiko/vim-python-combined', {'for' : 'python'}
@@ -184,6 +207,7 @@ Plug 'Chiel92/vim-autoformat'
     " let g:formatters_cpp = ['clang']
     nnoremap <buffer><Leader>af :<C-u>Autoformat<CR>
     vnoremap <buffer><Leader>af :Autoformat<CR>
+    let g:formatters_python = ['yapf']
     " only autoformat for Specific filetypes
     " let fts = ['cpp', 'go']
     " au BufWrite * if index(fts, &filetype) != -1 |:Autoformat| endif
@@ -221,7 +245,7 @@ Plug 'junegunn/fzf.vim'
         let g:ale_lint_delay = 800
         let g:ale_echo_msg_format = '%linter%: %s'
         let g:ale_linters = {'cpp': ['clang'],
-                    \ 'python': ['pyflakes'],
+                    \ 'python': ['pyflakes', 'pylint'],
                     \ 'go' : ['go build'],
                     \ 'lua': ['luacheck']}
         let g:ale_set_highlights = 0
@@ -267,11 +291,11 @@ filetype plugin indent on
 " contains configuration of plugins that can only be done after all of them are loaded
 
     " vimtex omnicompletion for deoplete
-    try
-        let g:deoplete#omni#input_patterns.tex = g:vimtex#re#deoplete
-    catch
-        echo "Setting deoplete omni pattern for tex failed, vimtex not installed or g:vimtex#re#deoplete not set"
-    endtry
+    " try
+    "     let g:deoplete#omni#input_patterns.tex = g:vimtex#re#deoplete
+    " catch
+    "     echo "Setting deoplete omni pattern for tex failed, vimtex not installed or g:vimtex#re#deoplete not set"
+    " endtry
 " }}}
 " }}}
 " Line Wrap {{{
@@ -406,6 +430,7 @@ set sidescroll=1
 " }}}
 " Mappings {{{
 
+set timeoutlen=300
 set ttimeoutlen=0
 inoremap kj <c-c>`^
 inoremap kjs <c-c>`^:w<CR>
@@ -485,7 +510,8 @@ augroup filetypes
     au FileType cpp     setlocal commentstring=//\ %s
     au FileType python  setlocal fdm=indent formatprg=autopep8\ -
     au FileType python  nnoremap <leader>bp Oimport pdb; pdb.set_trace()<Esc>:w<CR>
-    au FileType python  setlocal foldnestmax=10                                     " assumes good folding plugins
+    au FileType python PyFoldEnable 
+    au FileType python setlocal foldnestmax=10
     au FileType tex     inoremap <buffer> <c-space> <esc>bi\<esc>ea
     " au Filetype python    vnoremap <buffer> gq gq:%retab!<CR>
     au Filetype vimwiki     UltiSnipsAddFiletypes vimwiki.tex
