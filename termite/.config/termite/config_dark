@@ -2,6 +2,7 @@
 font = Misc Tamsyn 14px
 clickable_url = true
 cursor_blink = off
+scrollback_lines = 1000
 
 [colors]
 
