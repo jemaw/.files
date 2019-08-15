@@ -30,9 +30,16 @@ Plug 'w0ng/vim-hybrid'
 " }}}
 
 " misc {{{
+Plug 'romainl/vim-cool'
+Plug 'ap/vim-buftabline'
+    let g:buftabline_show = 1
 Plug 'scrooloose/nerdtree'
     autocmd! bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
     nnoremap <leader>nn :NERDTreeToggle<cr>
+    let NERDTreeMinimalUI = 0
+    let g:NERDTreeDirArrowExpandable = ' '
+    let g:NERDTreeDirArrowCollapsible = ' '
+    let NERDTreeIgnore = ['\.pyc$', '^__pycache__$']
     Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'dbakker/vim-projectroot'
 Plug 'junegunn/goyo.vim'
@@ -108,7 +115,7 @@ Plug 'editorconfig/editorconfig-vim'
 
 " }}}
 
- " Autocompletion completion manager {{{
+" Autocompletion completion manager {{{
 
  " ncm2 requires nvim-yarp
 Plug 'roxma/nvim-yarp'
@@ -120,15 +127,14 @@ autocmd BufEnter * call ncm2#enable_for_buffer()
 " :help Ncm2PopupOpen for more information
 set completeopt=noinsert,menuone,noselect
 
-" set shortmess+=c
+set shortmess+=c
 
 " CTRL-C doesn't trigger the InsertLeave autocmd . map to <ESC> instead.
 inoremap <c-c> <ESC>
 
 " When the <Enter> key is pressed while the popup menu is visible, it only
-" hides the menu. Use this mapping to close the menu and also start a new
-" line.
-inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
+" hides the menu. 
+" inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
 
 " Use <TAB> to select the popup menu:
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
@@ -140,6 +146,9 @@ Plug 'ncm2/ncm2-jedi'
 Plug 'ncm2/ncm2-tern'
 Plug 'filipekiss/ncm2-look.vim'
 Plug 'ncm2/ncm2-ultisnips'
+Plug 'ncm2/ncm2-racer'
+Plug 'ncm2/float-preview.nvim' " when neovim has floating window feature enable this and add set completopt+=preview
+    let g:float_preview#docked = 0
 " Plug 'ncm2/ncm2-match-highlight'
 
 
@@ -168,9 +177,10 @@ au User Ncm2Plugin call ncm2#register_source({
 Plug 'SirVer/ultisnips' ", {'on_i':1}
     set rtp+=~/.config/nvim/snippets
     let g:UltiSnipsSnippetsDir="~/.config/nvim/snippets/UltiSnips"
-    let g:UltiSnipsExpandTrigger="<c-l>"
-    let g:UltiSnipsJumpForwardTrigger="<c-l>"
-    let g:UltiSnipsJumpBackwardTrigger="<c-b>"
+    " inoremap <silent> <expr> <CR> ncm2_ultisnips#expand_or("\<CR>", 'n')
+    let g:UltiSnipsExpandTrigger = "<c-l>"
+    let g:UltiSnipsJumpForwardTrigger	= "<c-l>"
+    let g:UltiSnipsJumpBackwardTrigger	= "<c-h>"
 
 Plug 'honza/vim-snippets' ", {'on_i':1}
 
@@ -320,7 +330,7 @@ set incsearch
 set ignorecase
 set smartcase
 " This unsets the last search pattern register by hitting return
-nnoremap <CR> :noh<CR><CR> 
+" nnoremap <CR> :noh<CR><CR> 
 
 " preview effects of substitute command
 if has('nvim')
