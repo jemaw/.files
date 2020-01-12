@@ -30,6 +30,8 @@ Plug 'w0ng/vim-hybrid'
 " }}}
 
 " misc {{{
+Plug 'liuchengxu/vim-which-key'
+    nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
 Plug 'romainl/vim-cool'
 Plug 'ap/vim-buftabline'
     let g:buftabline_show = 1
@@ -42,7 +44,6 @@ Plug 'scrooloose/nerdtree'
     let NERDTreeIgnore = ['\.pyc$', '^__pycache__$']
     Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'dbakker/vim-projectroot'
-Plug 'junegunn/goyo.vim'
 Plug 'airblade/vim-gitgutter'
     let g:gitgutter_sign_added='┃'
     let g:gitgutter_sign_modified='┃'
@@ -52,6 +53,8 @@ Plug 'airblade/vim-gitgutter'
 
 Plug 'majutsushi/tagbar'
     nmap <F8> :TagbarToggle<CR>
+
+Plug 'psliwka/vim-smoothie'
 
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
@@ -187,11 +190,12 @@ Plug 'honza/vim-snippets' ", {'on_i':1}
 " }}}
 
 " Language Specific {{{
+Plug 'numirias/semshi'
 Plug 'ryankuczka/vim-pyfold'
     let g:pyfold_enabled = 1
 Plug 'google/vim-ft-bzl'
 Plug 'octol/vim-cpp-enhanced-highlight',{'for': 'cpp'}
-Plug 'mitsuhiko/vim-python-combined', {'for' : 'python'}
+" Plug 'mitsuhiko/vim-python-combined', {'for' : 'python'}
 Plug 'fatih/vim-go', {'for' : 'go'}
     " let g:go_fmt_command = "goimports"
     let g:go_fmt_fail_silently = 1
@@ -410,7 +414,7 @@ set statusline+=\
 set foldopen=hor,mark,percent,quickfix,search,tag,undo
 set foldmethod=syntax
 set foldnestmax=1
-set foldlevelstart=0
+set foldlevelstart=4
 " set foldminlines=1
 set foldtext=MyFoldText()
 
@@ -459,7 +463,7 @@ if has('nvim')
     " tnoremap <Leader>, <C-\><C-n>gT
 endif
 
-nnoremap <Space> <NOP>
+" nnoremap <Space> <NOP>
 
 " easy saving
 inoremap <c-s> <esc>:w<cr>
@@ -507,6 +511,8 @@ nnoremap <leader>ce :tabe<CR>:e $MYVIMRC<CR>
 set hidden
 " buffer switching
 " nnoremap <leader>p :b <C-d>
+nnoremap <a-right> :bn<CR>
+nnoremap <a-left> :bp<CR>
 " quickswitch
 nnoremap <bs> <c-^>
 

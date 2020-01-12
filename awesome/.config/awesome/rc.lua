@@ -298,7 +298,7 @@ awful.screen.connect_for_each_screen(function(s)
     s.mytasklist = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, tasklist_buttons)
 
     -- Create the wibox
-    s.mywibox = awful.wibar({ position = "top", screen = s, height = 18 })
+    s.mywibox = awful.wibar({ position = "top", screen = s, height = 18}) -- bg="#000000000"
 
     -- Add widgets to the wibox
     s.mywibox:setup {
@@ -374,8 +374,8 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey,"Shift" }, "l", move_or_swap(c,20,"right")),
 
 	-- resize
-	awful.key({ modkey }, "Next",  function (c) awful.client.moveresize( 0,  0, -40, -40) end), 
-	awful.key({ modkey }, "Prior", function (c) awful.client.moveresize( 0, 0,  40,  40) end),  
+	awful.key({ modkey }, "Next",  function (c) awful.client.moveresize( 20,  20, -40, -40) end), 
+	awful.key({ modkey }, "Prior", function (c) awful.client.moveresize( -20, -20,  40,  40) end),  
 
 	awful.key({ altkey }, "j", function (c) awful.client.moveresize( 0,   0,   0,   20) end),  
 	awful.key({ altkey }, "k", function (c) awful.client.moveresize( 0,   0,   0,   -20) end),  
@@ -388,10 +388,10 @@ globalkeys = awful.util.table.join(
 	awful.key({ altkey,"Shift" }, "h", function (c) awful.client.moveresize( 0,   0,  -40,   0) end),  
 
     -- Non-empty tag browsing
-    awful.key({ altkey }, "Left", function () lain.util.tag_view_nonempty(-1) end,
-              {description = "view  previous nonempty", group = "tag"}),
-    awful.key({ altkey }, "Right", function () lain.util.tag_view_nonempty(1) end,
-              {description = "view  previous nonempty", group = "tag"}),
+    -- awful.key({ altkey }, "Left", function () lain.util.tag_view_nonempty(-1) end,
+    --           {description = "view  previous nonempty", group = "tag"}),
+    -- awful.key({ altkey }, "Right", function () lain.util.tag_view_nonempty(1) end,
+    --           {description = "view  previous nonempty", group = "tag"}),
 
     -- By direction client focus
     awful.key({ modkey }, "j",
@@ -667,7 +667,7 @@ awful.rules.rules = {
                      keys = clientkeys,
                      buttons = clientbuttons,
                      screen = awful.screen.preferred,
-                     placement = awful.placement.no_overlap+awful.placement.no_offscreen,
+                     placement = awful.placement.centered+awful.placement.no_overlap+awful.placement.no_offscreen,
                      size_hints_honor = false
      }
     },

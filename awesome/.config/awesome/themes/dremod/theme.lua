@@ -21,8 +21,10 @@ theme.delta = 10
 theme.padding = 00
 theme.useless_gap = 8
 
-theme.font                                      = "Misc Tamsyn 10.5"
-theme.taglist_font                              = "Misc Tamsyn 10.5"
+-- theme.font                                      = "Misc Tamsyn 10.5"
+-- theme.taglist_font                              = "Misc Tamsyn 10.5"
+theme.font                                      = "Terminus 9"
+theme.taglist_font                              = "Terminus 9"
 theme.fg_normal                                 = "#747474"
 theme.fg_focus                                  = "#DDDCFF"
 theme.bg_normal                                 = xrdb.background
@@ -38,7 +40,7 @@ theme.border_focus                              = "#12abe2"
 -- theme.border_focus                              = "#FFFFFF" --xrdb.color0
 theme.titlebar_bg_focus                         = "#292929"
 theme.taglist_fg_focus                          = "#dddcff"
-theme.taglist_bg_focus                          = xrdb.background
+theme.taglist_bg_focus                          = xrdb.background --"#00000000" --
 
 theme.menu_height                               = 16
 theme.menu_width                                = 130
