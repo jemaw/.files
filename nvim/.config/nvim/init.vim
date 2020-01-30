@@ -17,6 +17,7 @@ call plug#begin('~/.local/share/nvim/plugged')
 " }}}
 
 " Appearance {{{
+Plug 'morhetz/gruvbox'
 Plug 'chriskempson/base16-vim'
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'sonph/onehalf' " could like nice with darker background
@@ -201,6 +202,11 @@ Plug 'honza/vim-snippets' ", {'on_i':1}
 
 " Language Specific {{{
 Plug 'numirias/semshi'
+    function SemshiHighlights()
+        hi semshiUnresolved ctermfg=200 cterm=underline
+    endfunction
+    autocmd FileType python call SemshiHighlights()
+
 Plug 'ryankuczka/vim-pyfold'
     let g:pyfold_enabled = 1
 Plug 'google/vim-ft-bzl'
