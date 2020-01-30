@@ -121,8 +121,18 @@ Plug 'editorconfig/editorconfig-vim'
 " Autocompletion completion manager {{{
 
  " ncm2 requires nvim-yarp
+Plug 'ncm2/float-preview.nvim'
+    function! DisableExtras()
+      call nvim_win_set_option(g:float_preview#win, 'number', v:false)
+      call nvim_win_set_option(g:float_preview#win, 'relativenumber', v:false)
+      call nvim_win_set_option(g:float_preview#win, 'cursorline', v:false)
+    endfunction
+
+    autocmd User FloatPreviewWinOpen call DisableExtras()
+
 Plug 'roxma/nvim-yarp'
 Plug 'ncm2/ncm2'
+
 
  " enable ncm2 for all buffers
 autocmd BufEnter * call ncm2#enable_for_buffer()
@@ -253,11 +263,12 @@ Plug 'junegunn/fzf.vim'
 
 " Neomake {{{
 
-    Plug 'w0rp/ale'
+    Plug 'dense-analysis/ale'
         " for cpp use .lvimrc to set include dirs with following variable
         let g:ale_cpp_clang_options='-std=c++14 -Wall ' " -I/folder/to/include'
         let g:ale_lint_delay = 800
         let g:ale_echo_msg_format = '%linter%: %s'
+        let g:ale_python_pylint_options = '--extension-pkg-whitelist=cv2'
         let g:ale_linters = {'cpp': ['clang'],
                     \ 'python': ['pyflakes', 'pylint'],
                     \ 'go' : ['go build'],
@@ -366,7 +377,7 @@ else
     endtry
 endif
 
-set number
+set nonumber
 set norelativenumber
 
 set laststatus=2
