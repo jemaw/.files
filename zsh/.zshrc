@@ -30,6 +30,9 @@ fi
 # ld_library_path
 export LD_LIBRARY_PATH=$CUDNN_HOME/lib64:$CUDA_HOME/lib64:$CUDA_HOME/extras/CUPTI/lib64:$LD_LIBRARY_PATH
 
+# ml virtual env
+export ML_ENV='/mnt/data/virtualenvs/ml'
+
 # spark
 export SPARK_BIN='/opt/apache-spark/bin'
 
@@ -153,6 +156,15 @@ then
         export TERM_BG=dark
     fi
 fi
+if [ $TERM = "alacritty" ]
+then
+    if [ $(readlink -f $HOME/.config/alacritty/alacritty.yml) = $HOME/.files/alacritty/.config/alacritty/light.yml ]
+    then
+        export TERM_BG=light
+    else 
+        export TERM_BG=dark
+    fi
+fi
 
 # }}}
 
@@ -237,7 +249,8 @@ fi
 # functions {{{ 
 switch () {
     ln -sf "$HOME/.config/termite/config_$1" "$HOME/.config/termite/config"
-    killall -USR1 termite
+    ln -sf "$HOME/.config/alacritty/$1.yml" "$HOME/.config/alacritty/alacritty.yml"
+    # killall -USR1 termite
     export TERM_BG=$1
 }
 
