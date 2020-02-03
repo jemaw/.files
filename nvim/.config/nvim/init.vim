@@ -17,6 +17,7 @@ call plug#begin('~/.local/share/nvim/plugged')
 " }}}
 
 " Appearance {{{
+Plug 'arecarn/vim-clean-fold'
 Plug 'morhetz/gruvbox'
 Plug 'chriskempson/base16-vim'
 Plug 'NLKNguyen/papercolor-theme'
@@ -207,8 +208,12 @@ Plug 'numirias/semshi'
     endfunction
     autocmd FileType python call SemshiHighlights()
 
-Plug 'ryankuczka/vim-pyfold'
+Plug 'jemaw/vim-pyfold'
     let g:pyfold_enabled = 1
+    let g:pyfold_brackets = 0
+    let g:pyfold_braces = 0
+    let g:pyfold_empty_lines = 0
+    let g:pyfold_text = 0
 Plug 'google/vim-ft-bzl'
 Plug 'octol/vim-cpp-enhanced-highlight',{'for': 'cpp'}
 " Plug 'mitsuhiko/vim-python-combined', {'for' : 'python'}
@@ -433,7 +438,12 @@ set foldmethod=syntax
 set foldnestmax=1
 set foldlevelstart=4
 " set foldminlines=1
-set foldtext=MyFoldText()
+
+if &rtp =~ 'vim-clean-fold'
+    set foldtext=clean_fold#fold_text('\ ')
+else
+    set foldtext=MyFoldText()
+endif
 
 " }}}
 " Indent options{{{
