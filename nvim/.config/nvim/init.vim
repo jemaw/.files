@@ -63,7 +63,7 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'wellle/targets.vim'
 Plug 'tpope/vim-fugitive'
-    nnoremap <Leader>/ :Ggrep 
+    " nnoremap <Leader>// :Ggrep 
 
 Plug 'ludovicchabant/vim-gutentags', {'tag': 'v1.0.0'}
     let g:gutentags_ctags_tagfile = ".tags"
@@ -208,12 +208,8 @@ Plug 'numirias/semshi'
     endfunction
     autocmd FileType python call SemshiHighlights()
 
-Plug 'jemaw/vim-pyfold'
-    let g:pyfold_enabled = 1
-    let g:pyfold_brackets = 0
-    let g:pyfold_braces = 0
-    let g:pyfold_empty_lines = 0
-    let g:pyfold_text = 0
+Plug 'kalekundert/vim-coiled-snake'
+    let g:coiled_snake_set_foldtext = 0
 Plug 'google/vim-ft-bzl'
 Plug 'octol/vim-cpp-enhanced-highlight',{'for': 'cpp'}
 " Plug 'mitsuhiko/vim-python-combined', {'for' : 'python'}
@@ -269,6 +265,13 @@ Plug 'junegunn/fzf.vim'
         autocmd FileType fzf tnoremap <buffer> <C-k> <Up>
         autocmd User FzfStatusLine call <SID>fzf_statusline() 
     augroup END
+
+
+    command! -bang -nargs=* GGrep
+    \ call fzf#vim#grep(
+    \   'git grep --line-number '.shellescape(<q-args>), 0,
+    \   fzf#vim#with_preview({'dir': systemlist('git rev-parse --show-toplevel')[0]}), <bang>0)
+    nnoremap <Leader>/ :GGrep<CR>
 
 " }}}
 
@@ -551,10 +554,11 @@ augroup filetypes
     au FileType *       setlocal formatoptions-=c formatoptions-=r formatoptions-=o " Disable comment new line
     au FileType c       setlocal commentstring=//\ %s
     au FileType cpp     setlocal commentstring=//\ %s
-    au FileType python  setlocal fdm=indent formatprg=autopep8\ -
+    " au FileType python  setlocal fdm=indent formatprg=autopep8\ -
+    au FileType python  setlocal formatprg=autopep8\ -
     au FileType python  nnoremap <leader>bp Oimport pdb; pdb.set_trace()<Esc>:w<CR>
-    au FileType python PyFoldEnable 
-    au FileType python setlocal foldnestmax=10
+    " au FileType python PyFoldEnable 
+    " au FileType python setlocal foldnestmax=10
     au FileType tex     inoremap <buffer> <c-space> <esc>bi\<esc>ea
     " au Filetype python    vnoremap <buffer> gq gq:%retab!<CR>
     au Filetype vimwiki     UltiSnipsAddFiletypes vimwiki.tex
