@@ -190,12 +190,11 @@ au User Ncm2Plugin call ncm2#register_source({
 " Snippets  {{{
 
 Plug 'SirVer/ultisnips' ", {'on_i':1}
-    set rtp+=~/.config/nvim/snippets
-    let g:UltiSnipsSnippetsDir="~/.config/nvim/snippets/UltiSnips"
     " inoremap <silent> <expr> <CR> ncm2_ultisnips#expand_or("\<CR>", 'n')
     let g:UltiSnipsExpandTrigger = "<c-l>"
     let g:UltiSnipsJumpForwardTrigger	= "<c-l>"
     let g:UltiSnipsJumpBackwardTrigger	= "<c-h>"
+    let g:ultisnips_python_style = "google"
 
 Plug 'honza/vim-snippets' ", {'on_i':1}
 
@@ -413,7 +412,9 @@ if term_profile == "light"
 else
     set background=dark
     try 
-        colorscheme noctwo
+        " colorscheme noctwo
+        set termguicolors
+        colorscheme base16-chalk
     catch
         colorscheme desert
     endtry
