@@ -237,7 +237,7 @@ Plug 'Chiel92/vim-autoformat'
     " let g:formatters_cpp = ['clang']
     nnoremap <buffer><Leader>af :<C-u>Autoformat<CR>
     vnoremap <buffer><Leader>af :Autoformat<CR>
-    let g:formatters_python = ['black']
+    let g:formatters_python = ['yapf']
     " only autoformat for Specific filetypes
     let fts = ['go', 'python']
     au BufWrite * if index(fts, &filetype) != -1 |:Autoformat| endif
