@@ -211,7 +211,7 @@ Plug 'kalekundert/vim-coiled-snake'
     let g:coiled_snake_set_foldtext = 0
 Plug 'google/vim-ft-bzl'
 Plug 'octol/vim-cpp-enhanced-highlight',{'for': 'cpp'}
-" Plug 'mitsuhiko/vim-python-combined', {'for' : 'python'}
+Plug 'mitsuhiko/vim-python-combined', {'for' : 'python'} 
 Plug 'fatih/vim-go', {'for' : 'go'}
     " let g:go_fmt_command = "goimports"
     let g:go_fmt_fail_silently = 1
@@ -239,7 +239,8 @@ Plug 'Chiel92/vim-autoformat'
     vnoremap <buffer><Leader>af :Autoformat<CR>
     let g:formatters_python = ['yapf']
     " only autoformat for Specific filetypes
-    let fts = ['go', 'python']
+    let fts = ['go']
+    " let fts = ['go', 'python']
     au BufWrite * if index(fts, &filetype) != -1 |:Autoformat| endif
 " }}}
 
