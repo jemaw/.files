@@ -34,3 +34,7 @@ nnoremap Y y$
 " toglle folds does not work
 " nnoremap <Leader><Leader> za
 " vnoremap <Leader><Leader> za
+
+nnoremap <Leader>p :action RecentFiles<CR>
+nnoremap <Leader>g :action SearchEverywhere<CR>
+nnoremap <Leader>/ :action FindInPath<CR>
