@@ -1,7 +1,7 @@
 let mapleader = "\<Space>"
 " plugins {{{
 
-" plug begin{{{
+" plug begin {{{
 if &compatible
   set nocompatible
 endif
@@ -32,6 +32,12 @@ Plug 'w0ng/vim-hybrid'
 " }}}
 
 " misc {{{
+Plug 'voldikss/vim-floaterm'
+    let g:floaterm_position = 'center'
+    let g:floaterm_keymap_prev   = '<F9>'
+    let g:floaterm_keymap_next   = '<F10>'
+    let g:floaterm_keymap_toggle = '<F11>'
+    let g:floaterm_keymap_new = '<F12>'
 Plug 'liuchengxu/vim-which-key'
     nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
 Plug 'romainl/vim-cool'
@@ -73,51 +79,6 @@ Plug 'MarcWeber/vim-addon-local-vimrc'
 Plug 'vim-scripts/SyntaxRange'      
 
 Plug 'editorconfig/editorconfig-vim'
-" }}}
-
-" Autocompletion deoplete {{{
-" if executable('languageclient')
-"     Plug 'autozimu/LanguageClient-neovim', {'branch': 'next'}
-"         let g:LanguageClient_serverCommands = {
-"             \ 'python': ['/usr/bin/pyls'],
-"             \ }
-"         nnoremap <F5> :call LanguageClient_contextMenu()<CR>
-" endif
-
-" set shortmess+=c
-" Plug 'Shougo/deoplete.nvim'
-"     autocmd InsertLeave * if pumvisible() == 0 | pclose | endif
-"     let g:deoplete#enable_at_startup = 1
-"     let g:deoplete#enable_smart_case = 1
-"     let g:deoplete#auto_completion_start_length = 2
-"     inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-
-
-" Plug 'zchee/deoplete-jedi',{'for' : 'python'}
-"     let deoplete#sources#jedi#show_docstring=1
-
-" Plug 'Shougo/neoinclude.vim' " slows down cpp
-
-" Plug 'carlitux/deoplete-ternjs'
-
-
-" if executable('clang')
-"     " use .lvimrc with let g:deoplete#sources#clang#flags = ['-I/path/to/include']
-"     Plug 'zchee/deoplete-clang',{'for': ['cpp','c']} 
-"         let g:deoplete#sources#clang#libclang_path = '/usr/lib/libclang.so'
-"         let g:deoplete#sources#clang#clang_header = '/usr/lib/clang'
-"     " Plug 'tweekmonster/deoplete-clang2'
-" endif
-
-" if executable("gocode")
-"     Plug 'zchee/deoplete-go', {'do' : 'make'}
-" endif
-" if executable("racer")
-"     Plug 'sebastianmarkow/deoplete-rust'
-"     let g:deoplete#sources#rust#racer_binary=$CARGO_BIN.'/racer'
-"     let g:deoplete#sources#rust#rust_source_path=$RUST_SRC_PATH
-" endif
-
 " }}}
 
 " Autocompletion completion manager {{{
@@ -236,6 +197,8 @@ Plug 'Chiel92/vim-autoformat'
     " let g:formatdef_clang = '"clang-format -style=\"{BasedOnStyle: llvm, IndentWidth: 4, PointerAlignment: Left}\""'
     " let g:formatters_cpp = ['clang']
     nnoremap <buffer><Leader>af :<C-u>Autoformat<CR>
+    nnoremap <buffer><F3> :<C-u>Autoformat<CR>
+    vnoremap <buffer><F3> :Autoformat<CR>
     vnoremap <buffer><Leader>af :Autoformat<CR>
     let g:formatters_python = ['yapf']
     " only autoformat for Specific filetypes
@@ -305,23 +268,18 @@ Plug 'junegunn/fzf.vim'
 
 " Neomake {{{
 
-    Plug 'dense-analysis/ale'
-        " for cpp use .lvimrc to set include dirs with following variable
-        let g:ale_cpp_clang_options='-std=c++14 -Wall ' " -I/folder/to/include'
-        let g:ale_lint_delay = 800
-        let g:ale_echo_msg_format = '%linter%: %s'
-        let g:ale_python_pylint_options = '--extension-pkg-whitelist=cv2'
-        let g:ale_linters = {'cpp': ['clang'],
-                    \ 'python': ['pyflakes', 'pylint'],
-                    \ 'go' : ['go build'],
-                    \ 'lua': ['luacheck']}
-        let g:ale_set_highlights = 0
-        " let g:ale_set_quickfix = 1
-    " Plug 'neomake/neomake'
-    "     autocmd! BufWritePost * Neomake
-    "     let g:neomake_python_enabled_makers = ['pyflakes']
-    "     let g:neomake_cpp_enabled_makers = ['clang']
-
+Plug 'dense-analysis/ale'
+    " for cpp use .lvimrc to set include dirs with following variable
+    let g:ale_cpp_clang_options='-std=c++14 -Wall ' " -I/folder/to/include'
+    let g:ale_lint_delay = 800
+    let g:ale_echo_msg_format = '%linter%: %s'
+    let g:ale_python_pylint_options = '--extension-pkg-whitelist=cv2'
+    let g:ale_linters = {'cpp': ['clang'],
+                \ 'python': ['pyflakes', 'pylint'],
+                \ 'go' : ['go build'],
+                \ 'lua': ['luacheck']}
+    let g:ale_set_highlights = 0
+    " let g:ale_set_quickfix = 1
 
 " }}}
 
@@ -330,6 +288,7 @@ Plug 'vimwiki/vimwiki', {'branch' : 'dev'}
     let vimwiki_path = '$HOME/Mega/wiki/text/'
     let vimwiki_export_path = vimwiki_path.'../export/'
     let g:vimwiki_table_mappings = 0
+    let g:vimwiki_global_ext = 0
     let g:vimwiki_folding = 'expr'
     let g:vimwiki_list = [{
                 \ 'path': vimwiki_path,
@@ -355,16 +314,9 @@ filetype plugin indent on
 " }}}
 
 " After plugin conf {{{
-" contains configuration of plugins that can only be done after all of them are loaded
+" }}}
+" }}}
 
-    " vimtex omnicompletion for deoplete
-    " try
-    "     let g:deoplete#omni#input_patterns.tex = g:vimtex#re#deoplete
-    " catch
-    "     echo "Setting deoplete omni pattern for tex failed, vimtex not installed or g:vimtex#re#deoplete not set"
-    " endtry
-" }}}
-" }}}
 " Line Wrap {{{
 
 " Soft wraps lines without editing file
@@ -373,10 +325,8 @@ set wrap
 " Stops words from being cut off during linebreak
 set linebreak
 
-" Set textwidth to 80 characters
-"set textwidth=80
-
 " }}}
+
 " Searching{{{
 
  "highlight search
@@ -396,6 +346,7 @@ endif
 
 
 " }}}
+
 " Appearance {{{
 
 if !exists("g:syntax_on")
@@ -413,9 +364,9 @@ if term_profile == "light"
 else
     set background=dark
     try 
-        " colorscheme noctwo
-        set termguicolors
-        colorscheme base16-chalk
+        colorscheme noctwo
+        " set termguicolors
+        " colorscheme hybrid
     catch
         colorscheme desert
     endtry
@@ -431,6 +382,7 @@ set noshowmode
 set guicursor=
 
 " }}}
+
 " Statusline {{{ 
 " https://shapeshed.com/vim-statuslines/
 function! GitBranch()
@@ -463,6 +415,7 @@ set statusline+=%#TabLine#
 set statusline+=\ 
 
 " " }}}
+
 " Folding {{{
 
 " no unfold on { movements
@@ -479,7 +432,8 @@ else
 endif
 
 " }}}
-" Indent options{{{
+
+" Indent options {{{
 
 set ts=4 sts=4 sw=4 expandtab
 
@@ -489,6 +443,7 @@ set cino=i0,N-s,g0
 set list lcs=tab:\ \ ,extends:›,precedes:‹,nbsp:·,trail:·
 
 " }}}
+
 " Movement {{{
 set mouse=a
 
@@ -502,6 +457,7 @@ set so=10
 set sidescroll=1
 
 " }}}
+
 " Mappings {{{
 
 set timeoutlen=300
@@ -566,6 +522,7 @@ nnoremap <leader>cs :so $MYVIMRC<CR>
 nnoremap <leader>ce :tabe<CR>:e $MYVIMRC<CR>
 
 " }}}
+
 " Buffers  {{{
 
 set hidden
@@ -577,6 +534,7 @@ nnoremap <a-left> :bp<CR>
 nnoremap <bs> <c-^>
 
 " }}}
+
 " Autocommands {{{
 
 augroup filetypes
@@ -605,6 +563,7 @@ augroup miscau
 augroup END
 
 " }}}
+
 " wildmenu {{{
 
 set wildmenu 
@@ -617,6 +576,7 @@ set wildignore+=node_modules/*
 set wildignorecase
 
 " }}}
+
 " Misc {{{
 
 " tag file name
@@ -638,6 +598,7 @@ set updatetime=100
 set conceallevel=2
 
 " }}}
+
 " gui {{{ 
 
 set guioptions-=m  "remove menu bar
@@ -662,6 +623,7 @@ if has('gui_gtk') && has('gui_running')
 endif
 
 " }}}
+
 " Backup {{{
 
 "ensure directories exist
@@ -678,7 +640,8 @@ set directory=~/.config/nvim/swap//
 " set undofile
 
 "}}}
-" Functions{{{
+
+" Functions {{{
 
 " https://github.com/NerdyPepper/dotfiles/blob/master/vim/.vimrc
 function! S_gitgutter()  " formatted git hunk summary for statusline
@@ -794,6 +757,7 @@ endfunction
 " }}}
 
 " }}}
+
 " Commands {{{
 
 "Reg paste
@@ -802,4 +766,5 @@ command! -nargs=0 Reg call Reg()
 cnoremap w!! w !sudo tee % >/dev/null
 
 " }}}
+
 " vim: fdm=marker:fdl=0:fml=1
