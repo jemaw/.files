@@ -143,10 +143,10 @@ Plug 'lervag/vimtex'
 Plug 'Chiel92/vim-autoformat'
     " let g:formatdef_clang = '"clang-format -style=\"{BasedOnStyle: llvm, IndentWidth: 4, PointerAlignment: Left}\""'
     " let g:formatters_cpp = ['clang']
-    nnoremap <buffer><Leader>af :<C-u>Autoformat<CR>
-    nnoremap <buffer><F3> :<C-u>Autoformat<CR>
-    vnoremap <buffer><F3> :Autoformat<CR>
-    vnoremap <buffer><Leader>af :Autoformat<CR>
+    nnoremap <Leader>af :<C-u>Autoformat<CR>
+    nnoremap <F3> :<C-u>Autoformat<CR>
+    vnoremap <F3> :Autoformat<CR>
+    vnoremap <Leader>af :Autoformat<CR>
     let g:formatters_python = ['yapf']
     " only autoformat for Specific filetypes
     let fts = ['go']
