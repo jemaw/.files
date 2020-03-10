@@ -1,11 +1,12 @@
 window:
   padding:
-    x: 9
-    y: 9
+    x: 4
+    y: 4
 
 # Font configuration
 font:
   # Normal (roman) font face
+  size: 11
   normal:
     # Font family
     #
@@ -14,16 +15,17 @@ font:
     #   - (Linux/BSD) monospace
     #   - (Windows) Consolas
     family: Misc Tamsyn
-    # family: Fira Mono
+    # family: GoMono
+    # family: Fira Code
 
     # The `style` can be specified to pick a specific face.
-    style: Regular
+    # style: Regular
 
 # Colors (Base16 Default Dark)
 colors:
   # Default colors
   primary:
-    background: '#181818'
+    background: '#131313'
     foreground: '#d8d8d8'
 
   # Normal colors

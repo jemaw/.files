@@ -17,6 +17,7 @@ call plug#begin('~/.local/share/nvim/plugged')
 " }}}
 
 " Appearance {{{
+Plug 'ryanoasis/vim-devicons'
 Plug 'arecarn/vim-clean-fold'
 Plug 'morhetz/gruvbox'
 Plug 'chriskempson/base16-vim'

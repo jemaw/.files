@@ -12,12 +12,12 @@ Plug 'Shougo/deoplete.nvim'
     " autocmd InsertLeave * if pumvisible() == 0 | pclose | endif
     let g:deoplete#enable_at_startup = 1
     let g:deoplete#enable_smart_case = 1
-    let g:deoplete#auto_completion_start_length = 2
+    " let g:deoplete#auto_completion_start_length = 2
     inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 
 
-Plug 'zchee/deoplete-jedi',{'for' : 'python'}
-    let deoplete#sources#jedi#show_docstring=1
+" Plug 'zchee/deoplete-jedi',{'for' : 'python'}
+"     let deoplete#sources#jedi#show_docstring=1
 
 Plug 'Shougo/neoinclude.vim' " slows down cpp
 
