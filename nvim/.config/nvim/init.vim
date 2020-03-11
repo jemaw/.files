@@ -33,6 +33,7 @@ Plug 'w0ng/vim-hybrid'
 " }}}
 
 " misc {{{
+Plug 'lilydjwg/colorizer'
 Plug 'voldikss/vim-floaterm'
     let g:floaterm_position = 'center'
     let g:floaterm_keymap_prev   = '<F9>'
@@ -111,9 +112,16 @@ Plug 'honza/vim-snippets' ", {'on_i':1}
 " Language Specific {{{
 Plug 'numirias/semshi'
     function SemshiHighlights()
-        hi semshiUnresolved ctermfg=200 cterm=underline
+        if &background == "light"
+            hi semshiParameterUnused ctermfg=12 guifg=#3e999f cterm=underline
+            hi semshiSelf            ctermfg=None guifg=None
+            hi semshiBuiltin         ctermfg=6 guifg=#0087af
+            hi semshiImported        ctermfg=None cterm=bold guifg=None 
+            hi semshiParameter ctermfg=12 guifg=#4271ae
+        endif
     endfunction
     autocmd FileType python call SemshiHighlights()
+    " autocmd FileType * hi Normal guibg=None
 
 Plug 'kalekundert/vim-coiled-snake'
     let g:coiled_snake_set_foldtext = 0
@@ -306,6 +314,7 @@ let term_profile=$TERM_BG
 if term_profile == "light"
     set background=light
     try
+        set termguicolors
         colorscheme PaperColor
         hi Conceal ctermfg=7 ctermbg=None
     catch
