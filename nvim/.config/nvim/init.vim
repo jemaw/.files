@@ -33,7 +33,7 @@ Plug 'w0ng/vim-hybrid'
 " }}}
 
 " misc {{{
-Plug 'lilydjwg/colorizer'
+" Plug 'lilydjwg/colorizer'
 Plug 'voldikss/vim-floaterm'
     let g:floaterm_position = 'center'
     let g:floaterm_keymap_prev   = '<F9>'
@@ -334,7 +334,7 @@ endif
 set nonumber
 set norelativenumber
 
-set laststatus=2
+set laststatus=0
 set noshowmode
 
 " use normal block curosr
@@ -372,6 +372,8 @@ set statusline+=\ %y                    " filetype
 set statusline+=\ [%l/%L]               " line number/num lines
 set statusline+=%#TabLine#
 set statusline+=\ 
+
+set rulerformat=%44(%=%{S_gitgutter()}\ %#Label#%{fugitive#head()}\ %#Identifier#%t%#Normal#\ %m\ [%l/%L]\ %y\ %)
 
 " " }}}
 
