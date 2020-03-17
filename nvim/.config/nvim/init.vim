@@ -91,7 +91,8 @@ Plug 'editorconfig/editorconfig-vim'
 
 " Autocompletion {{{
 
-source ~/.config/nvim/completion_ncm2.vim
+" source ~/.config/nvim/completion_ncm2.vim
+source ~/.config/nvim/completion_coc.vim
 " source ~/.config/nvim/completion_deoplete.vim
 
 " }}}
@@ -123,6 +124,7 @@ Plug 'numirias/semshi'
     autocmd FileType python call SemshiHighlights()
     " autocmd FileType * hi Normal guibg=None
 
+" python folding
 Plug 'kalekundert/vim-coiled-snake'
     let g:coiled_snake_set_foldtext = 0
 Plug 'google/vim-ft-bzl'
@@ -383,7 +385,7 @@ set rulerformat=%44(%=%{S_gitgutter()}\ %#Label#%{fugitive#head()}\ %#Identifier
 set foldopen=hor,mark,percent,quickfix,search,tag,undo
 set foldmethod=syntax
 set foldnestmax=1
-set foldlevelstart=4
+set foldlevelstart=0
 " set foldminlines=1
 
 if &rtp =~ 'vim-clean-fold'
