@@ -373,7 +373,7 @@ set statusline+=\ [%l/%L]               " line number/num lines
 set statusline+=%#TabLine#
 set statusline+=\ 
 
-set rulerformat=%44(%=%{S_gitgutter()}\ %#Label#%{fugitive#head()}\ %#Identifier#%t%#Normal#\ %m\ [%l/%L]\ %y\ %)
+set rulerformat=%60(%=%{S_gitgutter()}\ %#Label#%{fugitive#head()}\ %#Identifier#%t%#Normal#\ %m\ [%l/%L]\ %y\ %)
 
 " " }}}
 
