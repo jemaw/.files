@@ -73,7 +73,7 @@ Plug 'wellle/targets.vim'
 Plug 'tpope/vim-fugitive'
     " nnoremap <Leader>// :Ggrep 
 
-Plug 'ludovicchabant/vim-gutentags', {'tag': 'v1.0.0'}
+Plug 'ludovicchabant/vim-gutentags'
     let g:gutentags_ctags_tagfile = ".tags"
     let g:gutentags_file_list_command = {
      \ 'markers': {
@@ -126,10 +126,43 @@ Plug 'numirias/semshi'
 
 " python folding
 Plug 'kalekundert/vim-coiled-snake'
-    let g:coiled_snake_set_foldtext = 0
-Plug 'google/vim-ft-bzl'
+    " let g:coiled_snake_set_foldtext = 0
+    function! g:CoiledSnakeConfigureFold(fold)
+
+        " Don't fold nested classes.
+        if a:fold.type == 'class'
+            let a:fold.max_level = 1
+        
+        elseif a:fold.type == 'doc'
+            let a:fold.min_lines = 15
+
+        " Don't fold nested functions, but do fold methods (i.e. functions 
+        " nested inside a class).
+        elseif a:fold.type == 'function'
+            let a:fold.max_level = 1
+            if get(a:fold.parent, 'type', '') == 'class'
+                let a:fold.max_level = 2
+            endif
+
+        " Only fold imports if there are 3 or more of them.
+        elseif a:fold.type == 'import'
+            let a:fold.min_lines = 5
+        endif
+
+        " Don't fold anything if the whole program is shorter than 30 lines.
+        if line('$') < 30
+            let a:fold.ignore = 1
+        endif
+
+    endfunction
+
+
+
+
+" Plug 'google/vim-ft-bzl'
 Plug 'octol/vim-cpp-enhanced-highlight',{'for': 'cpp'}
-Plug 'mitsuhiko/vim-python-combined', {'for' : 'python'} 
+" Plug 'mitsuhiko/vim-python-combined', {'for' : 'python'} 
+Plug 'Vimjas/vim-python-pep8-indent'
 Plug 'fatih/vim-go', {'for' : 'go'}
     " let g:go_fmt_command = "goimports"
     let g:go_fmt_fail_silently = 1
@@ -140,7 +173,8 @@ Plug 'fatih/vim-go', {'for' : 'go'}
     let g:go_metalinter_autosave_enabled = []
     let g:go_metalinter_enabled = []
     let g:go_asmfmt_autosave = 0
-Plug 'rust-lang/rust.vim'
+" Plug 'rust-lang/rust.vim'
+Plug 'gabrielelana/vim-markdown'
 Plug 'lervag/vimtex'
     if !exists('g:deoplete#omni#input_patterns')
         let g:deoplete#omni#input_patterns = {}
@@ -385,7 +419,7 @@ set rulerformat=%60(%=%{S_gitgutter()}\ %#Label#%{fugitive#head()}\ %#Identifier
 set foldopen=hor,mark,percent,quickfix,search,tag,undo
 set foldmethod=syntax
 set foldnestmax=1
-set foldlevelstart=0
+" set foldlevelstart=1
 " set foldminlines=1
 
 if &rtp =~ 'vim-clean-fold'
