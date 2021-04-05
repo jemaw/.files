@@ -175,7 +175,7 @@ Plug 'fatih/vim-go', {'for' : 'go'}
     let g:go_metalinter_enabled = []
     let g:go_asmfmt_autosave = 0
 " Plug 'rust-lang/rust.vim'
-Plug 'gabrielelana/vim-markdown'
+" Plug 'gabrielelana/vim-markdown' " very slow
 Plug 'lervag/vimtex'
     if !exists('g:deoplete#omni#input_patterns')
         let g:deoplete#omni#input_patterns = {}

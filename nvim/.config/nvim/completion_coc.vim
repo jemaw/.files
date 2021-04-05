@@ -38,4 +38,7 @@ function! s:show_documentation()
   endif
 endfunction
 
+" Add `:Format` command to format current buffer.
+command! -nargs=0 CocFormat :call CocAction('format')
+
 " Extensions coc-python, coc-snippets, coc-json, coc-vimtex
