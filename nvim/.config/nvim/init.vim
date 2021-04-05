@@ -92,8 +92,8 @@ Plug 'editorconfig/editorconfig-vim'
 
 " Autocompletion {{{
 
-" source ~/.config/nvim/completion_ncm2.vim
-source ~/.config/nvim/completion_coc.vim
+source ~/.config/nvim/completion_ncm2.vim
+" source ~/.config/nvim/completion_coc.vim
 " source ~/.config/nvim/completion_deoplete.vim
 
 " }}}
