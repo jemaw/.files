@@ -24,8 +24,9 @@ Plug 'chriskempson/base16-vim'
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'sonph/onehalf' " could like nice with darker background
 Plug 'jemaw/vim-noctwo'
+Plug 'kristijanhusak/vim-hybrid-material'
 Plug 'w0ng/vim-hybrid'
-    let g:hybrid_custom_term_colors = 0
+    let g:hybrid_custom_term_colors = 1
 " Plug 'Yggdroot/indentLine'
 "     let g:indentLine_concealcursor=''
 "     let g:indentLine_setColors = 0
@@ -360,8 +361,9 @@ else
     set background=dark
     try 
         colorscheme noctwo
+        " let g:enable_bold_font = 1
         " set termguicolors
-        " colorscheme hybrid
+        " colorscheme hybrid_material
     catch
         colorscheme desert
     endtry
