@@ -62,7 +62,7 @@ beautiful.init(os.getenv("HOME") .. "/.config/awesome/themes/dremod/theme.lua")
 -- common
 local modkey     = "Mod4"
 local altkey     = "Mod1"
-local terminal   = "termite" or "xterm"
+local terminal   = "kitty" or "alacritty" or "xterm"
 local terminal2   = "urxvt" or "st"
 local editor     = os.getenv("EDITOR") or "nano" or "vi"
 
@@ -488,17 +488,17 @@ globalkeys = awful.util.table.join(
     awful.key({ altkey, }, "w", function () myweather.show(7) end),
 
     -- ALSA volume control
-    awful.key({ }, "XF86AudioRaiseVolume",
+    awful.key({altkey }, "Up",
         function ()
             os.execute(string.format("amixer set %s 1%%+", volume.channel))
             volume.update()
         end),
-    awful.key({ }, "XF86AudioLowerVolume",
+    awful.key({altkey }, "Down",
         function ()
             os.execute(string.format("amixer set %s 1%%-", volume.channel))
             volume.update()
         end),
-    awful.key({ }, "XF86AudioMute",
+    awful.key({ altkey }, "m",
         function ()
             os.execute(string.format("amixer set %s toggle", volume.togglechannel or volume.channel))
             volume.update()

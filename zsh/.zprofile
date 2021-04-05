@@ -1,5 +1,5 @@
 # Browser
-export BROWSER=firefox
+export BROWSER=firefox-developer-edition
 
 # Editors
 export EDITOR='nvim'

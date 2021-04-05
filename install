@@ -5,7 +5,7 @@
 
 set -e
 
-defaultdots=(bin awesome termite ranger nvim vim zsh aliases vimperator qutebrowser)
+defaultdots=(alacritty)
 TARGETDIR="$HOME"
 
 main(){

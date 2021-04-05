@@ -7,13 +7,13 @@ alias ra=ranger-cd
 # python
 alias py=python
 alias py2=python2
-alias tf=python3.6
+
+# activate ml virtualenv
+alias ml='source $ML_ENV/bin/activate'
 
 # arch
 alias pacu="sudo pacman -Syu"
 alias paci="sudo pacman -S" 
-alias aup="yaourt -Syu --aur"
-alias aui="yaourt"
 
 # ls
 alias ls='ls --color=auto'
