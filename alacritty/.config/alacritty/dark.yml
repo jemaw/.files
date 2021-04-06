@@ -6,7 +6,7 @@ window:
 # Font configuration
 font:
   # Normal (roman) font face
-  size: 11
+  size: 12
   normal:
     # Font family
     #
@@ -14,7 +14,7 @@ font:
     #   - (macOS) Menlo
     #   - (Linux/BSD) monospace
     #   - (Windows) Consolas
-    family: Misc Tamsyn
+    family: Tamsyn
     # family: GoMono
     # family: Fira Code
 
