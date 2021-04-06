@@ -33,13 +33,6 @@ Plug 'w0ng/vim-hybrid'
 " }}}
 
 " misc {{{
-" Plug 'lilydjwg/colorizer'
-Plug 'voldikss/vim-floaterm'
-    let g:floaterm_position = 'center'
-    let g:floaterm_keymap_prev   = '<F9>'
-    let g:floaterm_keymap_next   = '<F10>'
-    let g:floaterm_keymap_toggle = '<F11>'
-    let g:floaterm_keymap_new = '<F12>'
 Plug 'liuchengxu/vim-which-key'
     nnoremap <silent> <leader> :WhichKey '<Space>'<CR>
 Plug 'romainl/vim-cool'
@@ -163,6 +156,11 @@ Plug 'kalekundert/vim-coiled-snake'
 Plug 'octol/vim-cpp-enhanced-highlight',{'for': 'cpp'}
 " Plug 'mitsuhiko/vim-python-combined', {'for' : 'python'} 
 Plug 'Vimjas/vim-python-pep8-indent'
+Plug 'ryankuczka/vim-pyfold'
+    let g:pyfold_enabled = 1
+Plug 'google/vim-ft-bzl'
+Plug 'octol/vim-cpp-enhanced-highlight',{'for': 'cpp'}
+" Plug 'mitsuhiko/vim-python-combined', {'for' : 'python'}
 Plug 'fatih/vim-go', {'for' : 'go'}
     " let g:go_fmt_command = "goimports"
     let g:go_fmt_fail_silently = 1
@@ -175,11 +173,11 @@ Plug 'fatih/vim-go', {'for' : 'go'}
     let g:go_asmfmt_autosave = 0
 " Plug 'rust-lang/rust.vim'
 " Plug 'gabrielelana/vim-markdown' " very slow
-Plug 'lervag/vimtex'
-    if !exists('g:deoplete#omni#input_patterns')
-        let g:deoplete#omni#input_patterns = {}
-    endif
-    let g:vimtex_fold_enabled = 1
+" Plug 'lervag/vimtex'
+"     if !exists('g:deoplete#omni#input_patterns')
+"         let g:deoplete#omni#input_patterns = {}
+"     endif
+"     let g:vimtex_fold_enabled = 1
 
 " }}}
 

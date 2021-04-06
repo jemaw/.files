@@ -4,14 +4,17 @@ autoload -Uz edit-command-line compinit vcs_info promptinit
 zmodload zsh/complist
 zle -N edit-command-line
 
+export EDITOR='nvim'
+
 # Paths {{{
 
 #go
-export GOPATH=$HOME/Prog/go
+export GOPATH=$HOME/Projects/go
+export GOROOT=/usr/local/go
 
 #rust
-export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
-export CARGO_BIN="$HOME/.cargo/bin"
+#export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
+#export CARGO_BIN="$HOME/.cargo/bin"
 
 # Ensure path arrays do not contain duplicates.
 typeset -gU cdpath fpath mailpath path gopath
@@ -28,7 +31,10 @@ else
 fi
 
 # ld_library_path
-export LD_LIBRARY_PATH=$CUDNN_HOME/lib64:$CUDA_HOME/lib64:$CUDA_HOME/extras/CUPTI/lib64:$LD_LIBRARY_PATH
+export TENSORRT_PATH=$HOME/Packages/TensorRT-7.1.3.4/lib
+export CUBLAS_PATH=/usr/lib/x86_64-linux-gnu
+export CUPTI_PATH=$CUDA_HOME/extras/CUPTI/lib64
+export LD_LIBRARY_PATH=$CUDNN_HOME/lib64:$CUDA_HOME/lib64:$TENSORRT_PATH:$CUBLAS_PATH:$CUPTI_PATH:$LD_LIBRARY_PATH
 
 # ml virtual env
 export ML_ENV='/mnt/data/virtualenvs/ml'
@@ -44,6 +50,7 @@ path=(
 		$path
 		$CUDA_HOME/bin
 		$GOPATH/bin
+        $GOROOT/bin
         $SPARK_BIN
 )
 
@@ -71,6 +78,9 @@ SAVEHIST=10000
 # completion {{{
 
 compinit
+
+# file paths are copmleted for command line arguments if there is an = in front: command -option=./file/..
+setopt magicequalsubst
 
 # enable menu completion
 zstyle ':completion:*' menu select
@@ -166,6 +176,17 @@ then
     fi
 fi
 
+
+if [ $TERM = "xterm-256color" ]
+then
+    if [ $(readlink -f $HOME/.config/alacritty/alacritty.yml) = $HOME/.config/dotfiles/alacritty/.config/alacritty/light.yml ]
+    then
+        export TERM_BG=light
+    else 
+        export TERM_BG=dark
+    fi
+fi
+
 # }}}
 
 # global aliases {{{
@@ -220,7 +241,7 @@ EOPLUGINS
 
     # completions
     zgen load zsh-users/zsh-completions src
-    zgen load bazelbuild/bazel scripts/zsh_completion/
+    #zgen load bazelbuild/bazel scripts/zsh_completion/
 
     # save all to init script
     zgen save
@@ -418,3 +439,19 @@ kda() {
 # vim: fdm=marker:fdl=0
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+# __conda_setup="$('/home/jean/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+# if [ $? -eq 0 ]; then
+#     eval "$__conda_setup"
+# else
+#     if [ -f "/home/jean/anaconda3/etc/profile.d/conda.sh" ]; then
+#         . "/home/jean/anaconda3/etc/profile.d/conda.sh"
+#     else
+#         export PATH="/home/jean/anaconda3/bin:$PATH"
+#     fi
+# fi
+# unset __conda_setup
+# <<< conda initialize <<<
+

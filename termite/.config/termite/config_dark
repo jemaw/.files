@@ -1,5 +1,5 @@
 [options]
-font = Terminus 10
+font = Tamsyn 12
 clickable_url = true
 cursor_blink = off
 scrollback_lines = 10000
@@ -10,7 +10,8 @@ scrollback_lines = 10000
 foreground      = #c5c8c6
 foreground_bold = #c5c8c6
 #cursor          = #c5c8c6
-background      = #1d1f21
+/* background      = #1d1f21 */
+background      = #151515
 
 # black
 color0  = #282a2e

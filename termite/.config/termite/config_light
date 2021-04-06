@@ -1,5 +1,5 @@
 [options]
-font = Fira Mono 11
+font = Fira Mono 14
 clickable_url = true
 cursor_blink = off
 scrollback_lines = 10000

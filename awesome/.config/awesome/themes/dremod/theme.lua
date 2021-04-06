@@ -19,19 +19,19 @@ theme.wallpaper                                 = theme.dir .. "/wall.png"
 
 theme.delta = 10
 theme.padding = 00
-theme.useless_gap = 8
+theme.useless_gap = 0
 
 -- theme.font                                      = "Misc Tamsyn 10.5"
 -- theme.taglist_font                              = "Misc Tamsyn 10.5"
-theme.font                                      = "Terminus 9"
-theme.taglist_font                              = "Terminus 9"
+theme.font                                      = "Terminus 10"
+theme.taglist_font                              = "Terminus 10"
 theme.fg_normal                                 = "#747474"
 theme.fg_focus                                  = "#DDDCFF"
 theme.bg_normal                                 = xrdb.background
 theme.bg_focus                                  = xrdb.background
 theme.fg_urgent                                 = "#CC9393"
 theme.bg_urgent                                 = "#2A1F1E"
-theme.border_width                              = 4 --"2"
+theme.border_width                              = 2 --"2"
 theme.border_normal                             = xrdb.background --"#2F2F2F"
 -- theme.border_focus                              = "#4F4F4F"
 -- theme.border_focus                              = "#6F6F6F"

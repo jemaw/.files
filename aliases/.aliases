@@ -5,7 +5,7 @@ alias vi=nvim
 alias ra=ranger-cd
 
 # python
-alias py=python
+alias py=python3
 alias py2=python2
 alias tf=python3.6
 

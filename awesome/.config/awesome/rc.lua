@@ -53,6 +53,7 @@ end
 
 run_once("urxvtd")
 run_once("unclutter -root")
+awful.spawn.with_shell('~/bin/locker.sh')
 -- }}}
 
 -- {{{ Variable definitions
@@ -62,7 +63,7 @@ beautiful.init(os.getenv("HOME") .. "/.config/awesome/themes/dremod/theme.lua")
 -- common
 local modkey     = "Mod4"
 local altkey     = "Mod1"
-local terminal   = "termite" or "xterm"
+local terminal   = "alacritty" or "xterm"
 local terminal2   = "urxvt" or "st"
 local editor     = os.getenv("EDITOR") or "nano" or "vi"
 
@@ -70,7 +71,7 @@ local editor     = os.getenv("EDITOR") or "nano" or "vi"
 local browser    = "firefox"
 local launcher   = "rofi -show run"
 -- local tagnames   = { "ƀ", "Ƅ", "Ɗ", "ƈ", "ƙ" }
-local tagnames   = { "one","two","three","four","five"}
+local tagnames   = { "one","two","three","four","five", "six"}
 
 local tag_icon 		= "◊"
 local tag_icon_active = "◆"
@@ -146,15 +147,26 @@ local mytextclock = wibox.widget.textclock(markup(gray, " %a")
 mytextclock.font = beautiful.font
 
 -- Calendar
-lain.widget.calendar({
-    cal = "/usr/bin/cal --color=always",
-    attach_to = {mytextclock},
-    followtag =  true ,
+-- lain.widget.calendar({
+--     cal = "/usr/bin/cal --color=always",
+--     attach_to = {mytextclock},
+--     followtag =  true ,
+--     notification_preset = {
+--         font = beautiful.font,
+--         fg   = white,
+--         bg   = beautiful.bg_normal
+-- }})
+
+
+cal = lain.widget.cal({
+    attach_to = { mytextclock },
     notification_preset = {
         font = beautiful.font,
-        fg   = white,
+        fg   = beautiful.fg_focus,
         bg   = beautiful.bg_normal
-}})
+    }
+})
+
 
 -- MPD
 local mpdwidget = lain.widget.mpd({
@@ -270,12 +282,13 @@ end
 -- Re-set wallpaper when a screen's geometry changes (e.g. different resolution)
 -- screen.connect_signal("property::geometry", set_wallpaper)
 
-awful.screen.connect_for_each_screen(function(s)
+awful.screen.connect_for_each_screen(
+function(s)
     -- Quake application
     s.quake = lain.util.quake({ app = terminal })
 
     -- Wallpaper
-    -- set_wallpaper(s)
+    set_wallpaper(s)
 
     -- Tags
     awful.tag(tagnames, s, awful.layout.layouts[1])
@@ -460,10 +473,10 @@ globalkeys = awful.util.table.join(
               {description = "decrease master width factor", group = "layout"}),
     awful.key({ altkey, "Control"   }, "h",     function () awful.tag.incnmaster( 1, nil, true) end,
               {description = "increase the number of master clients", group = "layout"}),
-    awful.key({ altkey, "Control"   }, "l",     function () awful.tag.incnmaster(-1, nil, true) end,
-              {description = "decrease the number of master clients", group = "layout"}),
-    awful.key({ modkey, "Control" }, "h",     function () awful.tag.incncol( 1, nil, true)    end,
-              {description = "increase the number of columns", group = "layout"}),
+    -- awful.key({ altkey, "Control"   }, "l",     function () awful.tag.incnmaster(-1, nil, true) end,
+    --           {description = "decrease the number of master clients", group = "layout"}),
+    -- awful.key({ modkey, "Control" }, "h",     function () awful.tag.incncol( 1, nil, true)    end,
+    --           {description = "increase the number of columns", group = "layout"}),
     awful.key({ modkey, "Control" }, "l",     function () awful.tag.incncol(-1, nil, true)    end,
               {description = "decrease the number of columns", group = "layout"}),
     awful.key({ modkey,           }, "space", function () awful.layout.inc( 1)                end,
@@ -483,7 +496,7 @@ globalkeys = awful.util.table.join(
               {description = "restore minimized", group = "client"}),
 
     -- Widgets popups
-    awful.key({ altkey, }, "c", function () lain.widget.calendar.show(7) end),
+    awful.key({ altkey, }, "c", function () cal.show(7) end),
     -- awful.key({ altkey, }, "h", function () fshome.show(7) end),
     awful.key({ altkey, }, "w", function () myweather.show(7) end),
 
@@ -682,7 +695,9 @@ awful.rules.rules = {
     { rule = { class = "Steam"},
           properties = { floating = true},},
     { rule = { name = "TeamSpeak*"},
-          properties = { floating = true},}
+          properties = { floating = true},},
+    { rule = { name = "Hellsicht*"},
+          properties = { floating = true, placement = awful.placement.under_mouse},}
 }
 -- }}}
 
@@ -746,8 +761,8 @@ client.connect_signal("focus",
             c.border_color = beautiful.border_focus
         end
     end)
-client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
-client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
+-- client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
+-- client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 -- }}}
 
 -- vim: fdm=marker
