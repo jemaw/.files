@@ -24,6 +24,7 @@ Plug 'chriskempson/base16-vim'
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'sonph/onehalf' " could like nice with darker background
 Plug 'jemaw/vim-noctwo'
+Plug 'kristijanhusak/vim-hybrid-material'
 Plug 'w0ng/vim-hybrid'
 Plug  'kristijanhusak/vim-hybrid-material'
     let g:hybrid_custom_term_colors = 1
@@ -92,8 +93,8 @@ Plug 'editorconfig/editorconfig-vim'
 
 " Autocompletion {{{
 
-" source ~/.config/nvim/completion_ncm2.vim
-source ~/.config/nvim/completion_coc.vim
+source ~/.config/nvim/completion_ncm2.vim
+" source ~/.config/nvim/completion_coc.vim
 " source ~/.config/nvim/completion_deoplete.vim
 
 " }}}
