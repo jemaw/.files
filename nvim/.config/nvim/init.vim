@@ -24,8 +24,10 @@ Plug 'chriskempson/base16-vim'
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'sonph/onehalf' " could like nice with darker background
 Plug 'jemaw/vim-noctwo'
+Plug 'kristijanhusak/vim-hybrid-material'
 Plug 'w0ng/vim-hybrid'
-    let g:hybrid_custom_term_colors = 0
+Plug  'kristijanhusak/vim-hybrid-material'
+    let g:hybrid_custom_term_colors = 1
 " Plug 'Yggdroot/indentLine'
 "     let g:indentLine_concealcursor=''
 "     let g:indentLine_setColors = 0
@@ -84,8 +86,8 @@ Plug 'editorconfig/editorconfig-vim'
 
 " Autocompletion {{{
 
-" source ~/.config/nvim/completion_ncm2.vim
-source ~/.config/nvim/completion_coc.vim
+source ~/.config/nvim/completion_ncm2.vim
+" source ~/.config/nvim/completion_coc.vim
 " source ~/.config/nvim/completion_deoplete.vim
 
 " }}}
@@ -173,11 +175,12 @@ Plug 'fatih/vim-go', {'for' : 'go'}
     let g:go_asmfmt_autosave = 0
 " Plug 'rust-lang/rust.vim'
 " Plug 'gabrielelana/vim-markdown' " very slow
-" Plug 'lervag/vimtex'
-"     if !exists('g:deoplete#omni#input_patterns')
-"         let g:deoplete#omni#input_patterns = {}
-"     endif
-"     let g:vimtex_fold_enabled = 1
+Plug 'lervag/vimtex'
+    if !exists('g:deoplete#omni#input_patterns')
+        let g:deoplete#omni#input_patterns = {}
+    endif
+    let g:vimtex_fold_enabled = 1
+    let g:tex_flavor = 'latex'
 
 " }}}
 
@@ -357,9 +360,9 @@ if term_profile == "light"
 else
     set background=dark
     try 
-        colorscheme noctwo
-        " set termguicolors
-        " colorscheme hybrid
+        " colorscheme noctwo
+        set termguicolors
+        colorscheme hybrid_reverse
     catch
         colorscheme desert
     endtry

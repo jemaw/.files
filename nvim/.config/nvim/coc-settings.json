@@ -1,5 +1,5 @@
 {
     "coc.preferences.extensionUpdateCheck": "never",
-    "python.formatting.provider": "black",
-    "python.linting.pylintArgs": ["--extension-pkg-whitelist=cv2"]
+    "python.linting.pylintArgs": ["--generated-members=cv2"],
+    "python.formatting.provider": "black"
 }
