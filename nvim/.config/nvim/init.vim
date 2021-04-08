@@ -26,6 +26,7 @@ Plug 'sonph/onehalf' " could like nice with darker background
 Plug 'jemaw/vim-noctwo'
 Plug 'kristijanhusak/vim-hybrid-material'
 Plug 'w0ng/vim-hybrid'
+Plug  'kristijanhusak/vim-hybrid-material'
     let g:hybrid_custom_term_colors = 1
 " Plug 'Yggdroot/indentLine'
 "     let g:indentLine_concealcursor=''
@@ -181,6 +182,7 @@ Plug 'lervag/vimtex'
         let g:deoplete#omni#input_patterns = {}
     endif
     let g:vimtex_fold_enabled = 1
+    let g:tex_flavor = 'latex'
 
 " }}}
 
@@ -360,10 +362,9 @@ if term_profile == "light"
 else
     set background=dark
     try 
-        colorscheme noctwo
-        " let g:enable_bold_font = 1
-        " set termguicolors
-        " colorscheme hybrid_material
+        " colorscheme noctwo
+        set termguicolors
+        colorscheme hybrid_reverse
     catch
         colorscheme desert
     endtry
