@@ -1,0 +1,2 @@
+#!/bin/bash
+echo -n "$(date +'%Y-%m-%d')"| xclip -selection clipboard
