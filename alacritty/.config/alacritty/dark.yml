@@ -15,9 +15,9 @@ font:
     #   - (Linux/BSD) monospace
     #   - (Windows) Consolas
     # family: monospace
-    family: Misc Tamsyn
+    # family: Misc Tamsyn
     # family: SF Mono
-    # family: GoMono
+    family: GoMono
     # family: Fira Code
 
     # The `style` can be specified to pick a specific face.
