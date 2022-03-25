@@ -696,6 +696,8 @@ awful.rules.rules = {
           properties = { floating = true},},
     { rule = { name = "TeamSpeak*"},
           properties = { floating = true},},
+    { rule = { name = "labelImg*"},
+          properties = { floating = true, placement = awful.placement.under_mouse},},
     { rule = { name = "Hellsicht*"},
           properties = { floating = true, placement = awful.placement.under_mouse},}
 }

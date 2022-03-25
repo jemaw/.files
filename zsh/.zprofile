@@ -35,4 +35,5 @@ fi
 
 TMPPREFIX="${TMPDIR%/}/zsh"
 
+eval "$(pyenv init -)"
 # vim: fdm=marker:fdl=0

@@ -31,10 +31,10 @@ else
 fi
 
 # ld_library_path
-export TENSORRT_PATH=$HOME/Packages/TensorRT-7.1.3.4/lib
+export TENSORRT_PATH=$HOME/Packages/TensorRT-7.2.3.4/lib
 export CUBLAS_PATH=/usr/lib/x86_64-linux-gnu
 export CUPTI_PATH=$CUDA_HOME/extras/CUPTI/lib64
-export LD_LIBRARY_PATH=$CUDNN_HOME/lib64:$CUDA_HOME/lib64:$TENSORRT_PATH:$CUBLAS_PATH:$CUPTI_PATH:$LD_LIBRARY_PATH
+export LD_LIBRARY_PATH=$CUDNN_HOME/lib64:$CUDA_HOME/lib64:$TENSORRT_PATH:$CUBLAS_PATH:$CUPTI_PATH:$LD_LIBRARY_PATH:/usr/local/cuda-11.1/lib64
 
 # ml virtual env
 export ML_ENV='/mnt/data/virtualenvs/ml'
@@ -455,3 +455,9 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+eval "$(pyenv init --path)"
+
+export PATH="$HOME/.poetry/bin:$PATH"
