@@ -65,7 +65,7 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'wellle/targets.vim'
-Plug 'tpope/vim-fugitive'
+" Plug 'tpope/vim-fugitive'
     " nnoremap <Leader>// :Ggrep 
 
 Plug 'ludovicchabant/vim-gutentags'
