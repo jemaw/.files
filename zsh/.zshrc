@@ -139,9 +139,8 @@ zstyle ':vcs_info:*' stagedstr '+'
 PROMPT_SIGN='»'
 
 precmd () { vcs_info }
-# PROMPT='%F{white}${vcs_info_msg_0_} % $PROMPT_SIGN %f%b'
-PROMPT='${vcs_info_msg_0_} % $PROMPT_SIGN %f%b'
-RPROMPT='%b%B%F{black}%~'
+RPROMPT='${vcs_info_msg_0_}'
+PROMPT='%~ $PROMPT_SIGN %f %b'
 
 # }}}
 
