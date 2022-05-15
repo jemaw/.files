@@ -61,10 +61,11 @@ DIRSTACKSIZE=5
 
 # no duplicates in history
 setopt histignorealldups
+setopt INC_APPEND_HISTORY
 
 HISTFILE=~/.zhistory
-HISTSIZE=10000
-SAVEHIST=10000
+HISTSIZE=100000
+SAVEHIST=100000
 
 # }}}
 
@@ -110,6 +111,8 @@ zstyle ':completion:*:killall:*' force-list always
 
 #vim mode
 bindkey -v
+bindkey "^A" beginning-of-line
+bindkey "^E" end-of-line
 
 # Open in editor.
 bindkey -M vicmd 'v' edit-command-line
@@ -141,7 +144,7 @@ PROMPT_SIGN='»'
 precmd () { vcs_info }
 # PROMPT='%F{white}${vcs_info_msg_0_} % $PROMPT_SIGN %f%b'
 PROMPT='${vcs_info_msg_0_} % $PROMPT_SIGN %f%b'
-RPROMPT='%b%B%F{black}%~'
+RPROMPT='%~'
 
 # }}}
 
@@ -194,36 +197,37 @@ alias -g L='| less'
 
 # zgen {{{
 
-# install zgen
-if [[ ! -d "${HOME}/.zgen" ]]; then
-    echo -n "cloning and sourcing github.com/tarjoilija/zgen.git (y/n)? "
+# install zgenom
+if [[ ! -d "${HOME}/.zgenom" ]]; then
+    echo -n "cloning and sourcing github.com/jandamm/zgenom.git (y/n)? "
     read answer
     if echo "$answer" | grep -iq "^y" ; then
-        git clone https://github.com/tarjoilija/zgen.git "${HOME}/.zgen"
+        git clone https://github.com/jandamm/zgenom.git "${HOME}/.zgenom"
     fi
 fi
 
-if [[ -d "${HOME}/.zgen" ]]; then
+if [[ -d "${HOME}/.zgenom" ]]; then
 
-source "${HOME}/.zgen/zgen.zsh"
+source "${HOME}/.zgenom/zgenom.zsh"
 
 # if the init scipt doesn't exist
-if ! zgen saved; then
-    echo "Creating a zgen save"
+if ! zgenom saved; then
+    echo "Creating a zgenom save"
 
-    # bulk load
-    zgen loadall <<EOPLUGINS
-        zsh-users/zsh-history-substring-search
-        zsh-users/zsh-autosuggestions
-EOPLUGINS
-    # ^ can't indent this EOPLUGINS
+    zgenom load zsh-users/zsh-history-substring-search
+    zgenom load zsh-users/zsh-autosuggestions
+    zgenom load mafredri/zsh-async
 
     # completions
+<<<<<<< HEAD
     zgen load zsh-users/zsh-completions src
+=======
+    zgenom load zsh-users/zsh-completions src
+>>>>>>> master
     # zgen load bazelbuild/bazel scripts/zsh_completion/
     # zgen load esc/conda-zsh-completion 
     # save all to init script
-    zgen save
+    zgenom save
 fi
 
 
@@ -340,18 +344,6 @@ function ranger-cd {
 
 # }}}
 
-# fasd {{{
-if [ $commands[fasd] ]; then # check if fasd is installed
-  fasd_cache="$HOME/.zgen/fasd-init-cache"
-  if [ "$(command -v fasd)" -nt "$fasd_cache" -o ! -s "$fasd_cache" ]; then
-    fasd --init posix-alias zsh-hook >| "$fasd_cache"
-  fi
-  source "$fasd_cache"
-  unset fasd_cache
-fi
-
-# }}}
-
 # fzf {{{
 
 export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
@@ -379,16 +371,6 @@ fda() {
     dir=$(find ${1} -type d 2> /dev/null | fzf +m) && cd "$dir"
 }
 
-v() {
-  local file
-  file="$(fasd -Rfl "$1" | fzf -1 -0 --no-sort +m)" && vi "${file}" || return 1
-}
-
-unalias z
-z() {
-  local dir
-  dir="$(fasd -Rdl "$1" | fzf -1 -0 --no-sort +m)" && cd "${dir}" || return 1
-}
 
 #}}}
 
@@ -415,24 +397,5 @@ kda() {
 
 #}}}
 
-
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/opt/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/opt/miniconda3/etc/profile.d/conda.sh" ]; then
-        . "/opt/miniconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/opt/miniconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
-
-
 # vim: fdm=marker:fdl=0
-
