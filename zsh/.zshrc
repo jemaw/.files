@@ -219,11 +219,7 @@ if ! zgenom saved; then
     zgenom load mafredri/zsh-async
 
     # completions
-<<<<<<< HEAD
-    zgen load zsh-users/zsh-completions src
-=======
     zgenom load zsh-users/zsh-completions src
->>>>>>> master
     # zgen load bazelbuild/bazel scripts/zsh_completion/
     # zgen load esc/conda-zsh-completion 
     # save all to init script
